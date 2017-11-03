@@ -4,5 +4,6 @@ from exam import views
 urlpatterns = [
 
 url(r'^$',views.index,name='index'),
+url(r'^userinfo/$',views.userInfoInsert,name='user_info'),
 
 ]

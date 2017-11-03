@@ -31,7 +31,7 @@
                     <div id="user" class="tab-pane fade">
                         <h3>User</h3>
                         <p>Admin can update User Info in this section...</p>
-                        <form class="form-horizontal" enctype="multipart/form-data" method="POST">
+                        <form class="form-horizontal" action="{% url 'user_info'%}" enctype="multipart/form-data" method="POST">
                           {% csrf_token %}
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="userID">User ID</label>
