@@ -1,5 +1,5 @@
 from django.db import models
-from exam.allmodels import TestModel
+from exam.allModels import TestModel
 from django.core.validators import MaxLengthValidator, MinLengthValidator
 
 class McqQuestion(models.Model):

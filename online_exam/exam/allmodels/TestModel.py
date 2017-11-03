@@ -1,5 +1,5 @@
 from django.db import models
-from exam.allmodels import SubjectModel
+from exam.allModels import SubjectModel
 from django.core.validators import MaxLengthValidator,MinLengthValidator
 
 class Test(models.Model):

@@ -1,5 +1,5 @@
 from django.db import models
-from exam.allmodels import UserModel,TestModel
+from exam.allModels import UserModel,TestModel
 
 class UserEssayAnswer(models.Model):
 

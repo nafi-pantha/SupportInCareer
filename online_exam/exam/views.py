@@ -5,4 +5,4 @@ DetailView,CreateView,UpdateView,DeleteView)
 
 # Create your views here.
 def index(request):
-    return  HttpResponse("<h1>Hail Yeah!!</h1>")
+    return render(request,'exam/onlineExam.html',{})
