@@ -34,7 +34,7 @@ def userInfoInsert(request):
             user.save()
             registered=True
         else:
-            print("No Data")    
+            print("No Data")
 
     else:
         return HttpResponse("Problem")
