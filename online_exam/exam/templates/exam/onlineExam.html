@@ -10,7 +10,7 @@
                     <li><a data-toggle="pill" href="#profile"><i class="fa fa-male fa-fw"></i>Profile</a></li>
                     <li><a data-toggle="pill" href="#user"><i class="fa fa-user fa-fw"></i>User Section</a></li>
                     <li><a data-toggle="pill" href="#subject"><i class="fa fa-book fa-fw"></i>Subject Section</a></li>
-                    <li><a data-toggle="pill" href="#test"><i class="fa fa-file-o fa-fw"></i>Test Section</a></li>
+                    <li><a data-toggle="pill" href="#test" id="testLink"><i class="fa fa-file-o fa-fw"></i>Test Section</a></li>
                     <li><a data-toggle="pill" href="#mcq"><i class="fa fa-question fa-fw"></i>MCQ Section</a></li>
                     <li><a data-toggle="pill" href="#essay"><i class="fa fa-question fa-fw"></i>Essay Section</a></li>
                     <li><a data-toggle="pill" href="#review"><i class="fa fa-check fa-fw"></i>Review</a></li>
@@ -191,7 +191,7 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="subject">Subject</label>
                                 <div class="col-sm-6">
-                                    <select class="form-control" id="subject">
+                                    <select class="form-control" id="subjectList">
                                         <option>---Please Select---</option>
                                     </select>
                                 </div>
@@ -201,13 +201,15 @@
                                 <div class="col-sm-6">
                                     <select class="form-control" id="testType">
                                         <option>---Please Select---</option>
+                                        <option value="1">MCQ</option>
+                                        <option value="2">Essay</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="testID">Test ID</label>
+                                <label class="control-label col-sm-2" for="testIDList">Test ID</label>
                                 <div class="col-sm-6">
-                                    <select class="form-control" id="testID">
+                                    <select class="form-control" id="testIDList">
                                         <option>---Please Select---</option>
                                     </select>
                                 </div>
@@ -216,6 +218,14 @@
                                 <label class="control-label col-sm-2" for="testName">Test Name</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control" id="testName" placeholder="Test Name" name="testName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="testTotalQues">Test Total Questions</label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" id="testTotalQues">
+                                        <option>---Please Select---</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">

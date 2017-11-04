@@ -8,5 +8,6 @@ class Test(models.Model):
     test_totalmarks = models.IntegerField()
     test_totaltimes = models.IntegerField()
     test_type = models.IntegerField()
+    test_total_questions = models.IntegerField()
     approver = models.CharField(max_length=50,null=True,blank=True)
     datetime = models.DateTimeField()
