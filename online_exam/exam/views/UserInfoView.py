@@ -13,7 +13,12 @@ def userInfoInsert(request):
         userID = request.POST.get('userID')
         userName = request.POST.get('userName')
         userContact = request.POST.get('userContact')
-        # img
+
+        if(request.FILES['pic']):
+            user_image = request.FILES['pic']
+        else:
+            print("File is not Found")    
+
         email = request.POST.get('email')
         pwd = request.POST.get('pwd')
         confirm_pwd = request.POST.get('confirm_pwd')
@@ -23,13 +28,11 @@ def userInfoInsert(request):
         if(pwd == confirm_pwd):
             print("inside the if condition")
             user = UserInfo.objects.create(
-            user_id = userID,user_name=userName,user_contact=userContact,user_email=email,
+            user_id = userID,user_name=userName,user_contact=userContact,
+            user_image=user_image,user_email=email,
             user_password=pwd,user_status=status,is_admin=userType,approver="Null",
             datetime=datetime.datetime.now()
             )
-            if('user_image' in request.FILES):
-                user.user_image = request.FILES['user_image']
-                user.save()
 
             user.save()
             registered=True

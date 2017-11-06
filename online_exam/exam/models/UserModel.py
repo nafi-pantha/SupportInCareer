@@ -1,11 +1,12 @@
 from django.db import models
+from PIL import Image
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 class UserInfo(models.Model):
     user_id = models.IntegerField(validators=[MaxValueValidator(7),MinValueValidator(7)],primary_key=True)
     user_name = models.CharField(max_length=50)
     user_contact = models.CharField(max_length=11,validators=[MaxValueValidator(7),MinValueValidator(7)])
-    user_image = models.ImageField(upload_to='profile_pics',blank=True,null=True)
+    user_image = models.FileField(upload_to='profile_pics',blank=True,null=True)
     user_email = models.EmailField()
     user_status = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
