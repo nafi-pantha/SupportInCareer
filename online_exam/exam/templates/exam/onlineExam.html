@@ -221,65 +221,7 @@
                     <div id="test" class="tab-pane fade">
                         <h3>Test</h3>
                         <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                        <form class="form-horizontal" action="/action_page.php">
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="subject">Subject</label>
-                                <div class="col-sm-6">
-                                    <select class="form-control" id="subjectList">
-                                        <option>---Please Select---</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="testType">Test Type</label>
-                                <div class="col-sm-6">
-                                    <select class="form-control" id="testType">
-                                        <option>---Please Select---</option>
-                                        <option value="1">MCQ</option>
-                                        <option value="2">Essay</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="testIDList">Test ID</label>
-                                <div class="col-sm-6">
-                                    <select class="form-control" id="testIDList">
-                                        <option>---Please Select---</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="testName">Test Name</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="testName" placeholder="Test Name" name="testName">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="testTotalQues">Test Total Questions</label>
-                                <div class="col-sm-6">
-                                    <select class="form-control" id="testTotalQues">
-                                        <option>---Please Select---</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="totalMarks">Total Marks</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="totalMarks" placeholder="Total Marks" name="totalMarks">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="totalTime">Total Time</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="totalTime" placeholder="Total Time" name="totalTime">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-default">Save</button>
-                                </div>
-                            </div>
-                        </form>
+                        {% include "testSection.html" %}
                     </div>
                     <!--Test Section End-->
 
@@ -450,7 +392,6 @@
             </div>
         </div>
     </div>
-
 
 
 </body>
