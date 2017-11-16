@@ -12,3 +12,6 @@ class McqQuestion(models.Model):
     mcq_right_answer = models.IntegerField()
     approver = models.CharField(max_length=50,null=True,blank=True)
     datetime = models.DateTimeField()
+
+    def __str__(self):
+        return '%s' % (self.test_id)

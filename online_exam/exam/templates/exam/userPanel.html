@@ -1,0 +1,15 @@
+{% include "header.html" %}
+
+<body>
+  {% if messages %}
+  {% for message in messages %}
+      <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+      <a class="close" data-dismiss="alert" href="#">&times;</a>
+      <h4 style="text-align:center;">{{ message }}</h4>
+      </div>
+  {% endfor %}
+  {% endif %}
+  <div class="container">
+    <h1>You are in User Panle</h1>
+  </div>
+</body>
