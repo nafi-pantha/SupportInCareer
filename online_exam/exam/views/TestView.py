@@ -61,6 +61,6 @@ def testAvailableCheck(request):
         if(testAvailableList):
             return JsonResponse({'results': list(testAvailableList)})
         else:
-            return JsonResponse({'results': 0})
+            return JsonResponse({'results': '2'})
     else:
         return HttpResponse("Problem")

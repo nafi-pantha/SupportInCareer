@@ -1,0 +1,135 @@
+<form class="form-horizontal" id="mcqSectionForm">
+    {% csrf_token %}
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="mcqSubjectList">Subject</label>
+        <div class="col-sm-6">
+            <select class="form-control" id="mcqSubjectList">
+                <option>---Please Select---</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="mcqTestList">Test</label>
+        <div class="col-sm-6">
+            <select class="form-control" id="mcqTestList">
+                <option>---Please Select---</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="mcqMaxQuesNo">Max. MCQ Ques: </label>
+        <div class="col-sm-6"><span id="mcqMaxQuesNo"></span></div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="mcqExamTime">MCQ Exam Time: </label>
+        <div class="col-sm-6"><span id="mcqExamTime"></span></div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="mcqTotalMarks">Total Marks: </label>
+        <div class="col-sm-6"><span id="mcqTotalMarks"></span></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-3"><button type="button" class="btn btn-primary" id="mcqQuesSubBtn">Generate Question Submit Form</button></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2"><button type="button" id="mcqEditBtn" class="btn btn-primary" disabled="true">Edit</button></div>
+
+    </div>
+    <div class="form-group">
+        <div class="table-responsive">
+            <table class="table table-striped" id="mcqQuesTbl">
+                <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Question</th>
+                        <th class="text-center">Option 1</th>
+                        <th class="text-center">Option 2</th>
+                        <th class="text-center">Option 3</th>
+                        <th class="text-center">Option 4</th>
+                        <th class="text-center">Right Answer</th>
+                        <!--<th class="text-center hidden">ID</th>-->
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="table-responsive">
+            <table class="table table-striped" id="mcqQuesEditTbl">
+                <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Question</th>
+                        <th class="text-center">Option 1</th>
+                        <th class="text-center">Option 2</th>
+                        <th class="text-center">Option 3</th>
+                        <th class="text-center">Option 4</th>
+                        <th class="text-center">Right Answer</th>
+                        <!--<th class="text-center hidden">ID</th>-->
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="reset" id="mcqResetBtn" class="btn btn-default">Reset</button>
+            <button type="button" class="btn btn-default" id="mcqSubmitBtn">Save</button>
+        </div>
+    </div>
+</form>
+
+<div class="modal fade" id="quesEditModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Edit Question</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="quesIDEdit">Ques ID: </label>
+                            <div class="col-sm-6"><input type="text" class="form-control input-sm" id="quesIDEdit" disabled/></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="mcqQuesEdit">Question: </label>
+                            <div class="col-sm-6"><input type="text" class="form-control input-sm" id="mcqQuesEdit"/></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="mcqOptionOneEdit">Option 1: </label>
+                            <div class="col-sm-6"><input type="text" class="form-control input-sm" id="mcqOptionOneEdit"/></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="mcqOptionTwoEdit">Option 2: </label>
+                            <div class="col-sm-6"><input type="text" class="form-control input-sm" id="mcqOptionTwoEdit"/></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="mcqOptionThreeEdit">Option 3: </label>
+                            <div class="col-sm-6"><input type="text" class="form-control input-sm" id="mcqOptionThreeEdit"/></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="mcqOptionFourEdit">Option 4: </label>
+                            <div class="col-sm-6"><input type="text" class="form-control input-sm" id="mcqOptionFourEdit"/></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="mcqRightAnswerEdit">Right Answer: </label>
+                            <div class="col-sm-6"><input type="text" class="form-control input-sm" id="mcqRightAnswerEdit"/></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="mcqQuesEditBtn">Save changes</button>
+            </div>
+        </div>
+  </div>
+</div>

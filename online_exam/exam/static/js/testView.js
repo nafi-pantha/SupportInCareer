@@ -1,6 +1,7 @@
 $(document).ready(function(){
     $('#editBtn').prop('disabled',true);
     $('#testLink').on('click',function(){
+        console.log("Test");
         $.ajax({
             url: "/test/",
             type: "GET",
@@ -66,8 +67,11 @@ $(document).ready(function(){
             data:{'test_id':$('#testIDList').val()},
             dataType:"JSON",
             success: function(response) {
-                if(response!=0){
-                    console.log(response.results[0].test_name);
+                if(response.results[0]=='2'){
+                    console.log("Ok");
+                }
+                else{
+
                     $("#subjectList").prop('disabled',true);
                     $("#testTypeList").prop('disabled',true);
                     $("#testIDList").prop('disabled',true);
