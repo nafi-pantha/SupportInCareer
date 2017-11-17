@@ -7,12 +7,12 @@ $(document).ready(function(){
             type: "GET",
             dataType:"JSON",
             success: function(response) {
-                console.log(response);
+                //console.log(response);
                 $("#mcqSubjectList").find('option').not(':first').remove();
                 if(response.length!=0){
                     $.each(response,function(index,row){
                         $.each(row, function(k, v){
-                            console.log(v.subject_id);
+                            //console.log(v.subject_id);
                             $("#mcqSubjectList")
                             .append(
                                 $("<option></option>")
@@ -27,6 +27,7 @@ $(document).ready(function(){
     });
     $('#mcqSubjectList').on('change',function(){
         $("#mcqQuesTbl").find('tr').not(':first').remove();
+        //console.log("Test");
         $.ajax({
             url: "/test_list/",
             type: "GET",
@@ -105,7 +106,7 @@ $(document).ready(function(){
             'test_id':$('#mcqTestList').val()},
             dataType:"JSON",
             success: function(response) {
-                console.log(response);
+                //console.log(response);
                 if(response.status==1){
                     swal("Success!", "Successfully Updated!", "success");
                 }
@@ -187,7 +188,7 @@ $(document).ready(function(){
             data: {'test_id': $('#mcqTestList').val()},
             dataType:"JSON",
             success: function(response) {
-                console.log(response.status);
+                //console.log(response.status);
                 if(response.status==0){
                     $('#mcqEditBtn').prop('disabled',true);
                     $('#mcqQuesSubBtn').prop('disabled',false);

@@ -6,10 +6,6 @@ from exam.models import Subject
 from exam.models import Test
 
 
-def index(request):
-
-    return render(request,'exam/onlineExam.html',{})
-
 def getAllSubjectList(request):
     if (request.method == "GET"):
         subjectList = Subject.objects.values('subject_id','subject_name','mcq_total_test','essay_total_test')

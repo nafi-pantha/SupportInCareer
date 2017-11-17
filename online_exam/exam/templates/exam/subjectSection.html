@@ -1,0 +1,61 @@
+<form class="form-horizontal" id="subjectSectionForm">
+    {% csrf_token %}
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="subjectID">Subject ID</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="subjectID" placeholder="Subject ID" name="subjectID" disabled>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="subjectName">Subject Name</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="subjectName" placeholder="Subject Name" name="subjectName">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="mcqTotalQues">MCQ Total Test.</label>
+        <div class="col-sm-6">
+            <select class="form-control" id="mcqTotalQues" name="mcqTotalQues">
+                <option>---Please Select---</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="50">50</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="essayTotalQues">Essay Total Test.</label>
+        <div class="col-sm-6">
+            <select class="form-control" id="essayTotalQues" name="essayTotalQues">
+                <option>---Please Select---</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="50">50</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="button" class="btn btn-default" id="subjectSaveBtn">Save</button>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="table-responsive">
+            <table class="table table-striped text-center" id="subjectEditTbl">
+                <thead>
+                    <tr>
+                        <th class="text-center">Subject ID</th>
+                        <th class="text-center">Subject Name</th>
+                        <th class="text-center">MCQ Total Test.</th>
+                        <th class="text-center">Essay Total Test.</th>
+                        <!--<th class="text-center hidden">ID</th>-->
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>
