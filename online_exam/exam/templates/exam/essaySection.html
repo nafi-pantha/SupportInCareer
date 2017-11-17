@@ -1,0 +1,114 @@
+<form class="form-horizontal" id="essaySectionForm">
+    {% csrf_token %}
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="essaySubjectList">Subject</label>
+        <div class="col-sm-6">
+            <select class="form-control" id="essaySubjectList">
+                <option>---Please Select---</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="essayTestList">Test</label>
+        <div class="col-sm-6">
+            <select class="form-control" id="essayTestList">
+                <option>---Please Select---</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="essayMaxQuesNo">Max. Essay Ques: </label>
+        <div class="col-sm-6"><span id="essayMaxQuesNo"></span></div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="essayExamTime">Essay Exam Time: </label>
+        <div class="col-sm-6"><span id="essayExamTime"></span></div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="essayTotalMarks">Total Marks: </label>
+        <div class="col-sm-6"><span id="essayTotalMarks"></span></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-3"><button type="button" class="btn btn-primary" id="essayQuesSubBtn">Generate Question Submit Form</button></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2"><button type="button" id="essayEditBtn" class="btn btn-primary" disabled="true">Edit</button></div>
+
+    </div>
+
+    <div class="form-group">
+        <div class="table-responsive">
+            <table class="table table-striped" id="essayQuesTbl">
+                <thead>
+                    <tr>
+                      <th class="text-center">Ques ID</th>
+                      <th class="text-center">Question</th>
+                      <th class="text-center">Mark</th>
+                        <!--<th class="text-center hidden">ID</th>-->
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="table-responsive">
+            <table class="table table-striped text-center" id="essayQuesEditTbl">
+                <thead>
+                    <tr>
+                      <th class="text-center">Ques ID</th>
+                      <th class="text-center">Question</th>
+                      <th class="text-center">Mark</th>
+                        <!--<th class="text-center hidden">ID</th>-->
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="button" class="btn btn-default" id="essaySubmitBtn">Save</button>
+        </div>
+    </div>
+</form>
+
+<div class="modal fade" id="quesEditModalforEditSection">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Edit Question</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="essayQuesIDEdit">Ques ID: </label>
+                            <div class="col-sm-6"><input type="text" class="form-control input-sm" id="essayQuesIDEdit" disabled/></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="essayQuesEdit">Question: </label>
+                            <div class="col-sm-6"><input type="text" class="form-control input-sm" id="essayQuesEdit"/></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="questionMarkEdit">Question Marks: </label>
+                            <div class="col-sm-6"><input type="text" class="form-control input-sm" id="questionMarkEdit"/></div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="essayQuesEditBtn">Save changes</button>
+            </div>
+        </div>
+  </div>
+</div>

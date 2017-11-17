@@ -2,7 +2,7 @@ from django.db import models
 from django.core.validators import MaxLengthValidator, MinLengthValidator
 
 class McqQuestion(models.Model):
-    mcq_question_id = models.IntegerField(validators=[MaxLengthValidator(2),MinLengthValidator(2)],primary_key=True)
+    mcq_question_id = models.IntegerField(validators=[MaxLengthValidator(2),MinLengthValidator(2)])
     test_id = models.ForeignKey('exam.Test')
     mcq_question = models.CharField(max_length=100)
     mcq_option1 = models.CharField(max_length=50)

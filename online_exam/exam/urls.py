@@ -25,5 +25,10 @@ urlpatterns = [
     url(r'^mcq_ques_edit/$',views.mcqQuesEdit,name='mcq_ques_edit'),
     url(r'^test_list/$',views.getAllTestList,name='test_list'),
     url(r'^mcq_paper_submit/$',views.mcqQuesPaperSubmit,name='mcq_paper_submit'),
-    url(r'^getMcqQues/$',views.isMcqQuesAvailable,name='getMcqQues'),
+
+    # Essay section
+    url(r'^essay_paper_submit/$',views.essayQuesPaperSubmit,name='essay_paper_submit'),
+    url(r'^essay_available_check/$',views.isEssayQuesAvailable,name='essay_available_check'),
+    url(r'^get_essay_ques_data/$',views.getEssayQuesData,name='get_essay_ques_data'),
+    url(r'^essay_ques_edit/$',views.essayQuesEdit,name='essay_ques_edit'),
 ]
