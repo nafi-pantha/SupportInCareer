@@ -46,7 +46,8 @@ def mcqQuesPaperSubmit(request):
                         mcq_option3=value['option3'],mcq_option4=value['option4'],
                         mcq_right_answer=value['rightAnswer'],test_id=Test.objects.get(pk=test_id),approver="Null",
                         datetime=datetime.datetime.now()).save()
-        return JsonResponse({'status': 1})
+
+        return JsonResponse({'status': '1'})
     else:
         return HttpResponse("Problem")
 

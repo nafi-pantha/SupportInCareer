@@ -77,7 +77,7 @@ $(document).ready(function(){
         var quesLimit=$("#mcqMaxQuesNo").text();
         var trHTML = '';
         for(var i=1;i<=quesLimit;i++){
-            trHTML+= '<tr id='+i+'><td><span>'+i+'</span><input type="text" class="form-control hidden" id="qid" name="qid" value="'+i+'"></td><td><input type="text" class="form-control" id="ques" name="ques" placeholder="Question" name="question"></td>'+
+            trHTML+= '<tr id='+i+'><td><span>'+i+'</span><input type="text" class="form-control hidden" id="qid" name="qid" value="'+i+'"></td><td><input type="text" class="form-control" id="ques" name="ques" placeholder="Question"></td>'+
             '<td><input type="text" class="form-control" id="option1" name="option1" placeholder="Option 1"></td>'+
             '<td><input type="text" class="form-control" id="option2" name="option2" placeholder="Option 2"></td>'+
             '<td><input type="text" class="form-control" id="option3" name="option3" placeholder="Option 3"></td>'+
@@ -107,7 +107,9 @@ $(document).ready(function(){
             dataType:"JSON",
             success: function(response) {
                 //console.log(response);
-                if(response.status==1){
+
+                console.log(response.status);
+                if(response.status=='1'){
                     swal("Success!", "Successfully Updated!", "success");
                 }
                 else{
@@ -200,6 +202,7 @@ $(document).ready(function(){
             }
         });
     }
+
     $('#mcqEditBtn').on('click',function(){
         $('#mcqQuesEditTbl').show();
         $('#mcqQuesTbl').hide();
