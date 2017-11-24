@@ -1,16 +1,16 @@
 <form class="form-horizontal" id="essaySectionForm">
     {% csrf_token %}
     <div class="form-group">
-        <label class="control-label col-sm-2" for="essaySubjectList">Subject</label>
-        <div class="col-sm-6">
+        <label class="control-label col-sm-3" for="essaySubjectList">Subject</label>
+        <div class="col-sm-4">
             <select class="form-control" id="essaySubjectList">
                 <option>---Please Select---</option>
             </select>
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-sm-2" for="essayTestList">Test</label>
-        <div class="col-sm-6">
+        <label class="control-label col-sm-3" for="essayTestList">Test</label>
+        <div class="col-sm-4">
             <select class="form-control" id="essayTestList">
                 <option>---Please Select---</option>
             </select>
@@ -18,19 +18,19 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label col-sm-2" for="essayMaxQuesNo">Max. Essay Ques: </label>
-        <div class="col-sm-6"><span id="essayMaxQuesNo"></span></div>
+        <label class="control-label col-sm-3" for="essayMaxQuesNo">Max. Essay Ques: </label>
+        <div class="col-sm-4"><span id="essayMaxQuesNo"></span></div>
     </div>
     <div class="form-group">
-        <label class="control-label col-sm-2" for="essayExamTime">Essay Exam Time: </label>
-        <div class="col-sm-6"><span id="essayExamTime"></span></div>
+        <label class="control-label col-sm-3" for="essayExamTime">Essay Exam Time: </label>
+        <div class="col-sm-4"><span id="essayExamTime"></span></div>
     </div>
     <div class="form-group">
-        <label class="control-label col-sm-2" for="essayTotalMarks">Total Marks: </label>
-        <div class="col-sm-6"><span id="essayTotalMarks"></span></div>
+        <label class="control-label col-sm-3" for="essayTotalMarks">Total Marks: </label>
+        <div class="col-sm-4"><span id="essayTotalMarks"></span></div>
     </div>
     <div class="form-group">
-        <div class="col-sm-2"></div>
+        <div class="col-sm-3"></div>
         <div class="col-sm-3"><button type="button" class="btn btn-primary" id="essayQuesSubBtn">Generate Question Submit Form</button></div>
         <div class="col-sm-1"></div>
         <div class="col-sm-2"><button type="button" id="essayEditBtn" class="btn btn-primary" disabled="true">Edit</button></div>

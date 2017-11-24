@@ -1,267 +1,166 @@
 ﻿{% include "header.html" %}
 
 <body>
-  {% if messages %}
-  {% for message in messages %}
-      <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
-      <a class="close" data-dismiss="alert" href="#">&times;</a>
-      <h4 style="text-align:center;">{{ message }}</h4>
-      </div>
-  {% endfor %}
-  {% endif %}
+{% if messages %}
+{% for message in messages %}
+<div
+{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+<a class="close" data-dismiss="alert" href="#">&times;</a>
+<h4 style="text-align:center;">{{ message }}</h4>
+</div>
+{% endfor %}
+{% endif %}
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a data-toggle="pill" href="#home"><i class="fa fa-home fa-fw"></i>Home</a></li>
-                    <li><a data-toggle="pill" href="#profile"><i class="fa fa-male fa-fw"></i>Profile</a></li>
-                    <li><a data-toggle="pill" href="#user"><i class="fa fa-user fa-fw"></i>User Section</a></li>
-                    <li><a data-toggle="pill" href="#subject" id="subjectLink"><i class="fa fa-book fa-fw"></i>Subject Section</a></li>
-                    <li><a data-toggle="pill" href="#test" id="testLink"><i class="fa fa-file-o fa-fw"></i>Test Section</a></li>
-                    <li><a data-toggle="pill" href="#mcq" id="mcqLink"><i class="fa fa-question fa-fw"></i>MCQ Section</a></li>
-                    <li><a data-toggle="pill" href="#essay" id="essayLink"><i class="fa fa-question fa-fw"></i>Essay Section</a></li>
-                    <li><a data-toggle="pill" href="#review"><i class="fa fa-check fa-fw"></i>Review</a></li>
-                </ul>
-            </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 main_menu">
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a data-toggle="pill" href="#home"><i class="fa fa-home fa-fw"></i>Home</a></li>
+                <li><a data-toggle="pill" href="#profile"><i class="fa fa-male fa-fw"></i>Profile</a></li>
+                <li><a data-toggle="pill" href="#user" id="userLink"><i class="fa fa-user fa-fw"></i>User Section</a>
+                </li>
+                <li><a data-toggle="pill" href="#subject" id="subjectLink"><i class="fa fa-book fa-fw"></i>Subject
+                    Section</a></li>
+                <li><a data-toggle="pill" href="#test" id="testLink"><i class="fa fa-file-o fa-fw"></i>Test Section</a>
+                </li>
+                <li><a data-toggle="pill" href="#mcq" id="mcqLink"><i class="fa fa-question fa-fw"></i>MCQ Section</a>
+                </li>
+                <li><a data-toggle="pill" href="#essay" id="essayLink"><i class="fa fa-question fa-fw"></i>Essay Section</a>
+                </li>
+                <li><a data-toggle="pill" href="#review"><i class="fa fa-check fa-fw"></i>Review</a></li>
+            </ul>
+        </div>
 
-            <div class="col-md-9">
-                <div class="tab-content">
+        <div class="col-md-8">
+            <div class="tab-content">
 
-                   <!--Home Section Start-->
-                    <div id="home" class="tab-pane fade in active">
-                        <h3>Home</h3>
-                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    </div>
-                    <!--Home Section End-->
-
-                    <!--User Section Start-->
-                    <div id="user" class="tab-pane fade">
-                        <h3>User</h3>
-                        <p>Admin can update User Info in this section...</p>
-                        <form class="form-horizontal" enctype="multipart/form-data" method="POST">
-                          {% csrf_token %}
-
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="userName">User Name</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="userName" placeholder="User Name" name="userName">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="userContact">User Contact</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="userContact" placeholder="User Contact" name="userContact">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="userImage">User Image</label>
-                                <div class="col-sm-6">
-                                    <input type="file" name="pic" accept="image/*">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="email">Email</label>
-                                <div class="col-sm-6">
-                                    <input type="email" class="form-control" id="email" placeholder="Email" name="email">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="pwd">Password</label>
-                                <div class="col-sm-6">
-                                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="confirm_pwd">Confirm Password</label>
-                                <div class="col-sm-6">
-                                    <input type="password" class="form-control" id="confirm_pwd" placeholder="Confirm password" name="confirm_pwd">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="status">Status</label>
-                                <div class="col-sm-6">
-                                    <select class="form-control" id="status" name="status">
-                                        <option>---Please Select---</option>
-                                        <option value="1">active</option>
-                                        <option value="0">inactive</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="userType">User Type</label>
-                                <div class="col-sm-6">
-                                    <select class="form-control" id="userType" name="userType">
-                                        <option>---Please Select---</option>
-                                        <option value="1">admin</option>
-                                        <option value="0">user</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-default">Save</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <!--User Section End-->
-
-                    <!--Profile Section Start-->
-                    <div id="profile" class="tab-pane fade">
-                        <h3>Profile</h3>
-                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <form class="form-horizontal">
-                          {% csrf_token %}
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="userID">User ID</label>
-                                <div class="col-sm-6">
-
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="userName">User Name</label>
-                                <div class="col-sm-6">
-
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="userContact">User Contact</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control"  id="userContact" placeholder="User Contact" name="userContact">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="userImage">User Image</label>
-                                <div class="col-sm-6">
-                                    <img src="{{ obj.user_image.url }}" width="200" height="200" alt="Image Not Found">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="email">Email</label>
-                                <div class="col-sm-6">
-                                    <input type="email" class="form-control"  id="email" placeholder="Email" name="email">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="pwd">Password</label>
-                                <div class="col-sm-6">
-                                    <input type="password" class="form-control"  id="pwd" placeholder="Enter password" name="pwd">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="confirm_pwd">Confirm Password</label>
-                                <div class="col-sm-6">
-                                    <input type="password" class="form-control" id="confirm_pwd" placeholder="Confirm password" name="confirm_pwd">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="userType">User Type</label>
-                                <div class="col-sm-6">
-                                    Admin
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-default">Save</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <!--Profile Section End-->
-
-                    <!--Subject Section Start-->
-                    <div id="subject" class="tab-pane fade">
-                        <h3>Subject</h3>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-                        {% include "subjectSection.html" %}
-
-                    </div>
-                    <!--Subject Section End-->
-
-                    <!--Test Section Start-->
-                    <div id="test" class="tab-pane fade">
-                        <h3>Test</h3>
-                        <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                        {% include "testSection.html" %}
-                    </div>
-                    <!--Test Section End-->
-
-                    <!--MCQ Section Start-->
-                    <div id="mcq" class="tab-pane fade">
-                        <h3>MCQ</h3>
-                        <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                        {% include "mcqSection.html" %}
-                    </div>
-                    <!--MCQ Section End-->
-
-                    <!--Essay Section Start-->
-                    <div id="essay" class="tab-pane fade">
-                        <h3>Essay</h3>
-                        <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                        {% include "essaySection.html" %}
-                    </div>
-                    <!--Essay Section End-->
-
-                    <!--Review Section Start-->
-                    <div id="review" class="tab-pane fade">
-                        <h3>Review</h3>
-                        <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                        <form class="form-horizontal" action="/action_page.php">
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="user">User</label>
-                                <div class="col-sm-6">
-                                    <select class="form-control" id="user">
-                                        <option>---Please Select---</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="test">Test</label>
-                                <div class="col-sm-6">
-                                    <select class="form-control" id="test">
-                                        <option>---Please Select---</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center">Ques ID</th>
-                                                <th class="text-center">Question</th>
-                                                <th class="text-center">Answer</th>
-                                                <th class="text-center">Mark</th>
-                                                <th class="text-center">Suggestions</th>
-                                                <th class="text-center">Reviewed?</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Question: Test?</td>
-                                                <td>Answer: Test Test Test</td>
-                                                <td><input type="text" class="form-control" id="mark" placeholder="Mark" name="mark"></td>
-                                                <td><input type="text" class="form-control" id="suggestions" placeholder="Suggestions" name="suggestions"></td>
-                                                <td><input type="checkbox"></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-default">Save</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <!--Review Section End-->
+                <!--Home Section Start-->
+                <div id="home" class="tab-pane fade in active">
+                    <h3>Home</h3>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.</p>
+                    {% for info in userInfoList %}
+                    Name: {{ info.user.username }}
+                    {% endfor %}
                 </div>
+                <!--Home Section End-->
+
+                <!--User Section Start-->
+                <div id="user" class="tab-pane fade">
+                    <h3>User</h3>
+                    <p>Admin can update User Info in this section...</p>
+                    {% include "userSection.html" %}
+                </div>
+                <!--User Section End-->
+
+                <!--Profile Section Start-->
+                <div id="profile" class="tab-pane fade">
+                    <h3>Profile</h3>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.</p>
+                    {% include "profileSection.html" %}
+                </div>
+                <!--Profile Section End-->
+
+                <!--Subject Section Start-->
+                <div id="subject" class="tab-pane fade">
+                    <h3>Subject</h3>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                        totam rem aperiam.</p>
+                    {% include "subjectSection.html" %}
+
+                </div>
+                <!--Subject Section End-->
+
+                <!--Test Section Start-->
+                <div id="test" class="tab-pane fade">
+                    <h3>Test</h3>
+                    <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+                        explicabo.</p>
+                    {% include "testSection.html" %}
+                </div>
+                <!--Test Section End-->
+
+                <!--MCQ Section Start-->
+                <div id="mcq" class="tab-pane fade">
+                    <h3>MCQ</h3>
+                    <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+                        explicabo.</p>
+                    {% include "mcqSection.html" %}
+                </div>
+                <!--MCQ Section End-->
+
+                <!--Essay Section Start-->
+                <div id="essay" class="tab-pane fade">
+                    <h3>Essay</h3>
+                    <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+                        explicabo.</p>
+                    {% include "essaySection.html" %}
+                </div>
+                <!--Essay Section End-->
+
+                <!--Review Section Start-->
+                <div id="review" class="tab-pane fade">
+                    <h3>Review</h3>
+                    <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+                        explicabo.</p>
+                    <form class="form-horizontal" action="/action_page.php">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="user">User</label>
+                            <div class="col-sm-6">
+                                <select class="form-control" id="user">
+                                    <option>---Please Select---</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="test">Test</label>
+                            <div class="col-sm-6">
+                                <select class="form-control" id="test">
+                                    <option>---Please Select---</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center">Ques ID</th>
+                                        <th class="text-center">Question</th>
+                                        <th class="text-center">Answer</th>
+                                        <th class="text-center">Mark</th>
+                                        <th class="text-center">Suggestions</th>
+                                        <th class="text-center">Reviewed?</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Question: Test?</td>
+                                        <td>Answer: Test Test Test</td>
+                                        <td><input type="text" class="form-control" id="mark" placeholder="Mark"
+                                                   name="mark"></td>
+                                        <td><input type="text" class="form-control" id="suggestions"
+                                                   placeholder="Suggestions" name="suggestions"></td>
+                                        <td><input type="checkbox"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!--Review Section End-->
             </div>
         </div>
     </div>
+</div>
 
 </body>
 

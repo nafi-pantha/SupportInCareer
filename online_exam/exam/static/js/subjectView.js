@@ -33,14 +33,15 @@ $(document).ready(function(){
     $('#subjectSaveBtn').on('click',function(){
         $.ajax({
             url: "/subject_insert/",
-            type: "GET",
+            type: "POST",
             data: {'subjectName':  $('#subjectName').val(),
                      'mcqTotalQues': $('#mcqTotalQues').val(),
-                     'essayTotalQues': $('#essayTotalQues').val()},
+                     'essayTotalQues': $('#essayTotalQues').val(),
+                     'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()},
             dataType:"JSON",
             success: function(response) {
                 if(response.status==1){
-                    swal("Success!", "Successfully Updated!", "success");
+                    swal("Success!", "Successfully Added!", "success");
                 }
                 else{
                     swal("Error!", "Something Wrong!", "error");

@@ -15,9 +15,13 @@ def userLogin(request):
 
         if(user):
             if(user.is_active and user.is_staff):
+                request.session.set_expiry(18000)
                 login(request,user)
+                userInfoList = UserInfo.objects.select_related().filter(user_id=user.id)
+                for info in userInfoList:
+                    print(info.user.username)
                 messages.add_message(request, messages.INFO, 'Successfully Login In Admin Panel')
-                return render(request,'exam/onlineExam.html')
+                return render(request,'exam/onlineExam.html', {'userInfoList':userInfoList})
 
             elif(user.is_active==1 and user.is_staff==0):
                 login(request,user)

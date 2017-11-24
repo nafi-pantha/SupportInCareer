@@ -1,5 +1,8 @@
+import json
+
+from django.core import serializers
 from django.shortcuts import render,get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 import datetime
 from django.contrib.auth.models import User
 from exam.models import UserInfo
@@ -39,3 +42,17 @@ def userInfoInsert(request):
         return HttpResponse("Problem")
 
     return render(request,'exam/onlineExam.html',{'registered':registered})
+
+def getUserList(request):
+        r = []
+        for user in User.objects.all():
+            r.append({
+                'id': user.id,
+                'username': user.username,
+                'user_contact': user.userinfo.user_contact,
+                'email': user.email,
+                'is_active': user.is_active,
+                'is_staff': user.is_staff
+            })
+        return JsonResponse(r, safe=False)
+
