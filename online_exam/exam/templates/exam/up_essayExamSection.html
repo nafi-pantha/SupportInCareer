@@ -1,0 +1,18 @@
+<form class="form-horizontal" id="up_essayExamForm">
+    {% csrf_token %}
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="essayExamSubjectList">Subject</label>
+        <div class="col-sm-6">
+            <select class="form-control" id="essayExamSubjectList">
+                <option>---Please Select---</option>
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <button type="button" id="essayTestStartBtn" class="btn btn-primary" data-test="" data-time="">Start Test</button>
+        </div>
+    </div>
+    <div class="col-sm-12 essayExamQuesList">
+    </div>
+</form>
+<button type="button" class="btn btn-primary" id="essayAnsSubmitBtn">Submit</button>

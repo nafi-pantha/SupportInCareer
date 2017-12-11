@@ -2,13 +2,13 @@ from django.conf.urls import url
 from exam import views
 
 urlpatterns = [
-    url(r'^$',views.demoIndex,name='demo_index'),
-    # url(r'^userinfo/$',views.userInfoInsert,name='user_info'),
-    # url(r'^user_info_update/(?P<pk>\d+)$',views.profileUpdate,name='user_info_update'),
+    url(r'^$',views.userLogin,name='home'),
 
+    #User Section
+    url(r'^user_update/$',views.userUpdate,name='user_update'),
 
+    #Subject Section
     url(r'^subject_insert/$',views.subjectInsert,name='subject_insert'),
-
 
     #Test Section
     url(r'^test/$',views.getAllSubjectList,name='test'),
@@ -18,7 +18,7 @@ urlpatterns = [
 
     #Login Register
     url(r'^user_registration/$',views.userRegistration,name='user_registration'),
-    url(r'^user_login/$',views.userLogin,name='user_login'),
+    #url(r'^user_login/$',views.userLogin,name='user_login'),
 
     #MCQ Section
     url(r'^mcq_available_check/$',views.isMcqQuesAvailable,name='mcq_available_check'),
@@ -35,5 +35,18 @@ urlpatterns = [
 
     #User Section
     url(r'^getUserList/$',views.getUserList,name='getUserList'),
+
+    #UP MCQ Exam Section
+    url(r'^test_info_list/$',views.test_info_list,name='test_info_list'),
+    url(r'^ques_info/$',views.ques_info,name='ques_info'),
+
+    url(r'^mcq_ans_submit/$',views.mcq_ans_submit,name='mcq_ans_submit'),
+    url(r'^user_test_id/$',views.user_test_id,name='user_test_id'),
+    url(r'^get_user_result/$',views.get_user_result,name='get_user_result'),
+
+    #UP Essay Exam Section
+    url(r'^essay_ques_info/$',views.essay_ques_info,name='essay_ques_info'),
+    url(r'^essay_ans_submit/$',views.essay_ans_submit,name='essay_ans_submit'),
+
 
 ]

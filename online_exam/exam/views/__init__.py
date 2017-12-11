@@ -1,5 +1,3 @@
-from .IndexView import *
-from .DemoIndexView import *
 from .UserInfoView import *
 from .SubjectView import *
 from .TestView import *
@@ -8,3 +6,5 @@ from .McqQuestionView import *
 from .EssayQuestionView import *
 from .RegistrationView import *
 from .LoginView import *
+from .UP_mcqExamView import *
+from .UP_essayExamView import *

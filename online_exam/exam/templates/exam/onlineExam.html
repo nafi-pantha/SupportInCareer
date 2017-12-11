@@ -1,6 +1,6 @@
-﻿{% include "header.html" %}
+﻿{% extends "header.html" %}
 
-<body>
+<!--<body>
 {% if messages %}
 {% for message in messages %}
 <div
@@ -9,7 +9,8 @@
 <h4 style="text-align:center;">{{ message }}</h4>
 </div>
 {% endfor %}
-{% endif %}
+{% endif %}-->
+{% block content %}
 
 <div class="container-fluid">
     <div class="row">
@@ -161,7 +162,8 @@
         </div>
     </div>
 </div>
-
-</body>
+{% endblock %}
+<!--
+</body>-->
 
 </html>

@@ -1,0 +1,37 @@
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    {% for testData in testInfo %}
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading{{testData.test_id|slugify|slice:'3:5'}}">
+            <h4 class="panel-title">
+                <!--<a class="accordion-toggle" role="button" data-toggle="collapse" data-parent="#accordion"-->
+                   <!--href="#collapse{{testData.test_id|slugify|slice:'3:5'}}" aria-expanded="true">-->
+                {{testData.test_id|slugify|slice:"3:5"}} : {{testData.test_name}}
+                <!--</a>-->
+            </h4>
+        </div>
+        <div id="collapse{{testData.test_id|slugify|slice:'3:5'}}" class="panel-collapse collapse"
+             role="tabpanel" aria-labelledby="heading{{testData.test_id|slugify|slice:'3:5'}}">
+            <div class="panel-body">
+                <div class="mcqExamStats">
+                    <div class="col-sm-6">Marks: {{testData.test_totalmarks}}</div>
+                    <div class="col-sm-6">Time: {{testData.test_totaltimes}} mins</div>
+                    <div class="col-sm-6">Total Ques: {{testData.test_total_questions}}</div>
+                </div>
+                <div class="col-sm-12 owl-theme">
+                    <div class="owl-controls">
+                        <div id="customDots" class="owl-dots"></div>
+                    </div>
+                </div>
+                <div class="user_mcqExamStats">
+                    <div class="col-sm-6">Score: <span id="user_mcqExamStats_Score"></span></div>
+                    <div class="col-sm-6">Status: <span id="user_mcqExamStats_Status"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div id="mcqExamTimer" data-timer="">
+
+</div>

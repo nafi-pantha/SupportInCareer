@@ -1,0 +1,42 @@
+<form class="form-horizontal" id="up_mcqExamForm">
+    {% csrf_token %}
+<div class="col-sm-12 slideWrap owl-carousel owl-theme mcq_carousel">
+    {% for quesData in quesInfo %}
+    <div class="item">
+        <p>{{quesData.mcq_question_id}}. {{quesData.mcq_question}}</p>
+        <div class="radio">
+            <label><input type="radio" data-qid="{{quesData.mcq_question_id}}" name="ques[{{quesData.mcq_question_id}}]" value="1">{{quesData.mcq_option1}}</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" data-qid="{{quesData.mcq_question_id}}" name="ques[{{quesData.mcq_question_id}}]" value="2">{{quesData.mcq_option2}}</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" data-qid="{{quesData.mcq_question_id}}" name="ques[{{quesData.mcq_question_id}}]" value="3">{{quesData.mcq_option3}}</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" data-qid="{{quesData.mcq_question_id}}" name="ques[{{quesData.mcq_question_id}}]" value="4">{{quesData.mcq_option4}}</label>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</form>
+<script>
+    $('.mcq_carousel').owlCarousel({
+        loop:true,
+        margin:10,
+        nav:true,
+        dotsContainer: '#customDots',
+        dots: true,
+        responsive:{
+            0:{
+                items:1
+            },
+            600:{
+                items:1
+            },
+            1000:{
+                items:1
+            }
+        }
+    });
+</script>

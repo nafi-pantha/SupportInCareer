@@ -44,15 +44,24 @@ def userInfoInsert(request):
     return render(request,'exam/onlineExam.html',{'registered':registered})
 
 def getUserList(request):
-        r = []
-        for user in User.objects.all():
-            r.append({
-                'id': user.id,
-                'username': user.username,
-                'user_contact': user.userinfo.user_contact,
-                'email': user.email,
-                'is_active': user.is_active,
-                'is_staff': user.is_staff
-            })
-        return JsonResponse(r, safe=False)
+    r = []
+    for user in User.objects.all():
+        r.append({
+            'id': user.id,
+            'username': user.username,
+            'user_contact': user.userinfo.user_contact,
+            'email': user.email,
+            'is_active': user.is_active,
+            'is_staff': user.is_staff
+        })
+    return JsonResponse(r, safe=False)
 
+def userUpdate(request):
+    if(request.method=="GET"):
+        user_id = request.GET.get('user_id')
+        is_staff = request.GET.get('is_staff')
+        is_active = request.GET.get('is_active')
+        User.objects.filter(id=user_id).update(is_staff=is_staff, is_active=is_active)
+        return JsonResponse({'status': 1})
+    else:
+        return JsonResponse({'status': 2})
