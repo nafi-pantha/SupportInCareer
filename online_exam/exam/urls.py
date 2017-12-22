@@ -48,5 +48,12 @@ urlpatterns = [
     url(r'^essay_ques_info/$',views.essay_ques_info,name='essay_ques_info'),
     url(r'^essay_ans_submit/$',views.essay_ans_submit,name='essay_ans_submit'),
 
+    #Review Section
+    url(r'^reviewUserList/$',views.reviewUserList,name='reviewUserList'),
+    url(r'^getTestListReview/$',views.getTestListReview,name='getTestListReview'),
+    url(r'^getUserAnswerReview/$',views.getUserAnswerReview,name='getUserAnswerReview'),
+    url(r'^review_submit/$',views.reviewSubmit,name='review_submit'),
+
+
 
 ]

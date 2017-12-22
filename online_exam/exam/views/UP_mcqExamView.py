@@ -82,13 +82,13 @@ def mcq_ans_submit(request):
             for value in list:
                 UserMcqAnswer(user_id=user_id, test_id=Test.objects.get(pk=test_id),
                               mcq_question_id=McqQuestion.objects.get(pk=value['ques']),
-                              user_answer=value['ans']).save()
+                              user_answer=value['ans'],datetime=datetime.datetime.now()).save()
         else:
             delIfExist.delete()
             for value in list:
                 UserMcqAnswer(user_id=user_id, test_id=Test.objects.get(pk=test_id),
                               mcq_question_id=McqQuestion.objects.get(pk=value['ques']),
-                              user_answer=value['ans']).save()
+                              user_answer=value['ans'],datetime=datetime.datetime.now()).save()
         return JsonResponse({'status': '1'})
     else:
         return HttpResponse("Problem")
@@ -97,6 +97,7 @@ def get_user_result(request):
     if (request.method == "GET"):
         test_id = request.GET.get('test_id')
         user_id = request.GET.get('user_id')
+        usedTime = request.GET.get('usedTime')
         totalQues = Test.objects.values('test_totalmarks', 'test_totaltimes', 'test_total_questions').filter(test_type=1)
         answers = UserMcqAnswer.objects.filter(test_id=test_id, user=user_id).annotate(
             is_correct=Case(
@@ -123,7 +124,7 @@ def get_user_result(request):
         print(result_status)
 
         delIfExist = UserResult.objects.filter(user_id=user_id, test_id=test_id)
-        userResult = UserResult.objects.create(test_type=1, gained_marks=gained_marks, spend_time=15,
+        userResult = UserResult.objects.create(test_type=1, gained_marks=gained_marks, spend_time=usedTime,
                                                is_passed=result_status, datetime=datetime.datetime.now(),
                                                test_id=Test.objects.get(pk=test_id), user_id=user_id)
         testTime = Test.objects.values('test_totaltimes').filter(test_id=next_test_id)

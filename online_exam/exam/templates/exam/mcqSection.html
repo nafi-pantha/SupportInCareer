@@ -2,7 +2,7 @@
     {% csrf_token %}
     <div class="form-group">
         <label class="control-label col-sm-2" for="mcqSubjectList">Subject</label>
-        <div class="col-sm-6">
+        <div class="col-sm-3">
             <select class="form-control" id="mcqSubjectList">
                 <option>---Please Select---</option>
             </select>
@@ -10,7 +10,7 @@
     </div>
     <div class="form-group">
         <label class="control-label col-sm-2" for="mcqTestList">Test</label>
-        <div class="col-sm-6">
+        <div class="col-sm-3">
             <select class="form-control" id="mcqTestList">
                 <option>---Please Select---</option>
             </select>
@@ -18,21 +18,21 @@
     </div>
     <div class="form-group">
         <label class="control-label col-sm-2" for="mcqMaxQuesNo">Max. MCQ Ques: </label>
-        <div class="col-sm-6"><span id="mcqMaxQuesNo"></span></div>
+        <div class="col-sm-3"><span id="mcqMaxQuesNo"></span></div>
     </div>
     <div class="form-group">
         <label class="control-label col-sm-2" for="mcqExamTime">MCQ Exam Time: </label>
-        <div class="col-sm-6"><span id="mcqExamTime"></span></div>
+        <div class="col-sm-3"><span id="mcqExamTime"></span></div>
     </div>
     <div class="form-group">
         <label class="control-label col-sm-2" for="mcqTotalMarks">Total Marks: </label>
-        <div class="col-sm-6"><span id="mcqTotalMarks"></span></div>
+        <div class="col-sm-3"><span id="mcqTotalMarks"></span></div>
     </div>
     <div class="form-group">
         <div class="col-sm-2"></div>
         <div class="col-sm-3"><button type="button" class="btn btn-primary" id="mcqQuesSubBtn">Generate Question Submit Form</button></div>
         <div class="col-sm-1"></div>
-        <div class="col-sm-2"><button type="button" id="mcqEditBtn" class="btn btn-primary" disabled="true">Edit</button></div>
+        <div class="col-sm-2"><button type="button" id="mcqEditBtn" class="btn btn-block btn-primary" disabled="true">Edit</button></div>
 
     </div>
     <div class="form-group">
@@ -79,8 +79,8 @@
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="reset" id="mcqResetBtn" class="btn btn-default">Reset</button>
-            <button type="button" class="btn btn-default" id="mcqSubmitBtn">Save</button>
+            <button type="reset" id="mcqResetBtn" class="btn btn-primary">Reset</button>
+            <button type="button" class="btn btn-primary" id="mcqSubmitBtn">Save</button>
         </div>
     </div>
 </form>

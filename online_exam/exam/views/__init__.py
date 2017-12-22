@@ -8,3 +8,4 @@ from .RegistrationView import *
 from .LoginView import *
 from .UP_mcqExamView import *
 from .UP_essayExamView import *
+from .ReviewView import *

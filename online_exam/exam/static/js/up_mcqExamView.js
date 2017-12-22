@@ -32,7 +32,7 @@ $(document).ready(function(){
             dataType:"JSON",
             success: function(response) {
                 if(response.length!=0){
-                    console.log(response.test_time);
+                    //console.log(response.test_time);
                     $('#mcqTestStartBtn').data('test',response.examTestID);
                     $('#mcqTestStartBtn').data('time',response.test_time);
                 }
@@ -85,8 +85,9 @@ $(document).ready(function(){
                         });
                     }
                     if(total <= 0){
+                        var time=(((mcqExamTest_time*60)-($('#mcqExamTimer').TimeCircles().getTime()))/60).toFixed(2);
                         $('#mcqExamTimer').TimeCircles().destroy();
-                        get_ans_submit();
+                        get_ans_submit(time);
                     }
                 });
             }
@@ -94,10 +95,13 @@ $(document).ready(function(){
     });
 
     $('#mcqAnsSubmitBtn').on('click',function(){
-        get_ans_submit();
+        var time=((($('#mcqExamTimer').data('timer'))-($('#mcqExamTimer').TimeCircles().getTime()))/60).toFixed(2);
+        console.log(time);
+        get_ans_submit(time);
     });
 
-    function get_ans_submit(){
+    function get_ans_submit(time){
+        usedTime=time;
         userID=$('#profileUserID').html();
         var val = [];
         $('.item input:checked').each(function(){
@@ -108,7 +112,7 @@ $(document).ready(function(){
             });
             val.push(row);
         });
-        console.log(val);
+        //console.log(val);
         $.ajax({
             url: "/mcq_ans_submit/",
             type: "POST",
@@ -119,10 +123,10 @@ $(document).ready(function(){
             dataType:"JSON",
             success: function(response) {
                 //console.log(response);
-                console.log(response.status);
+                //console.log(response.status);
                 if(response.status=='1'){
                     swal("Success!", "Successfully Inserted!", "success");
-                    get_user_result();
+                    get_user_result(usedTime);
                 }
                 else{
                     swal("Error!", "Something Wrong!", "error");
@@ -130,13 +134,14 @@ $(document).ready(function(){
             }
         });
     }
-    function get_user_result(){
+    function get_user_result(usedTime){
         userID=$('#profileUserID').html();
         $.ajax({
             url: "/get_user_result/",
             type: "GET",
             data: {'test_id':$('#mcqTestStartBtn').data('test'),
-                    'user_id':userID},
+                    'user_id':userID,
+                    'usedTime':usedTime},
             dataType:"JSON",
             success: function(response) {
                 $('#mcqTestStartBtn').data('test',response.result_list[0].next_test_id);

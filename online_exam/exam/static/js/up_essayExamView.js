@@ -69,8 +69,9 @@ $(document).ready(function() {
                         });
                     }
                     if(total <= 0){
+                        var time=(((mcqExamTest_time*60)-($('#mcqExamTimer').TimeCircles().getTime()))/60).toFixed(2);
                         $('#mcqExamTimer').TimeCircles().destroy();
-                        get_ans_submit();
+                        get_ans_submit(time);
                     }
                 });
             }
@@ -96,19 +97,22 @@ $(document).ready(function() {
     }
 
     $('#essayAnsSubmitBtn').on('click',function(){
-        get_ans_submit();
+        var time=((($('#mcqExamTimer').data('timer'))-($('#mcqExamTimer').TimeCircles().getTime()))/60).toFixed(2);
+        console.log(time);
+        get_ans_submit(time);
     });
 
-    function get_ans_submit(){
+    function get_ans_submit(time){
+        usedTime=time;
         userID=$('#profileUserID').html();
         var val = [];
-        $('.essayAns').each(function(){
+        $(".essayAns").each(function(){
             var row={};
-            $(this).each(function(i){
+            if($(this).val()){
                 row['ques'] =  $(this).data("qid");
                 row['ans'] = $(this).val();
-            });
-            val.push(row);
+                val.push(row);
+            }
         });
         console.log(val);
         $.ajax({
@@ -117,7 +121,8 @@ $(document).ready(function() {
             data: {obj:JSON.stringify(val),
             'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val(),
             'test_id':$('#essayTestStartBtn').data('test'),
-            'user_id':userID},
+            'user_id':userID,
+            'usedTime':usedTime},
              dataType:"JSON",
             success: function(response) {
                 //console.log(response);

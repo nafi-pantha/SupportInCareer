@@ -38,10 +38,11 @@ def userLogin(request):
 
                else:
                    messages.add_message(request, messages.INFO, 'You are not Registered')
+                   return render(request, 'exam/login.html', {})
 
            else:
                messages.error(request, 'Please,Sign Up or Your Account is not Active. Contact with Admin Site.')
-
+               return render(request, 'exam/login.html', {})
        else:
            return render(request, 'exam/login.html', {})
 

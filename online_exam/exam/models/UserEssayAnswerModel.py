@@ -6,3 +6,6 @@ class UserEssayAnswer(models.Model):
     test_id = models.ForeignKey('exam.Test')
     essay_question_id=models.ForeignKey('exam.EssayQuestion')
     user_answer = models.TextField()
+    suggestions=models.TextField(null=True, blank=True)
+    individual_mark=models.IntegerField(null=True, blank=True)
+    datetime = models.DateTimeField(null=True)

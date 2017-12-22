@@ -6,3 +6,4 @@ class UserMcqAnswer(models.Model):
     test_id = models.ForeignKey('exam.Test')
     mcq_question_id=models.ForeignKey('exam.McqQuestion')
     user_answer = models.IntegerField()
+    datetime = models.DateTimeField(null=True)

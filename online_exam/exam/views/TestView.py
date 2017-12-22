@@ -38,7 +38,7 @@ def testInfoInsert(request):
                     approver="Null",
                     datetime=datetime.datetime.now()
                 )
-                test.save()
+                test.savesave()
                 registered = True
                 return JsonResponse({'status': 2})
         else:
