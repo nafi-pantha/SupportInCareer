@@ -54,6 +54,8 @@ a {
 }
 .main_menu{
     margin-top: 20px;
+    padding-left: 0px;
+    padding-right: 0px;
     border-right: 1px dotted #8C4895;
 }
 #profileUserImage{
@@ -123,4 +125,57 @@ fieldset[disabled] .btn-primary:focus,
 fieldset[disabled] .btn-primary:hover {
     background-color: #8C4895;
     border-color: #8C4895;
+}
+
+.flip {
+    -webkit-perspective: 800;
+    perspective: 800;
+    position: relative;
+}
+
+.flip .card.flipped {
+    -webkit-transform: rotatex(-180deg);
+    transform: rotatex(-180deg);
+}
+.flip .card.flipped .front{
+    opacity: 0;
+}
+.flip .card {
+    height: 100%;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition: 0.5s;
+    transform-style: preserve-3d;
+    transition: 0.5s;
+}
+.flip .card .face {
+    -webkit-backface-visibility: hidden ;
+    backface-visibility: hidden ;
+    z-index: 2;
+    -webkit-transition-property: opacity;
+    -webkit-transition-timing-function: linear;
+    -webkit-transition-duration: 0.2s;
+}
+.flip .card .front {
+    position: absolute;
+    z-index: 1;
+    -webkit-transition-delay: 0.2s;
+}
+.flip .card .back {
+    -webkit-transform: rotatex(-180deg);
+    transform: rotatex(-180deg);
+
+}
+
+.inner {
+    margin:0px !important;
+}
+
+#imageSelect{
+    padding: 5px;
+    border: 1px dashed #8C4895;
+    display: table;
+}
+
+input[type="file"] {
+    display: none;
 }

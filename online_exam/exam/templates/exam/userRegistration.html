@@ -1,63 +1,70 @@
-{% include "header.html" %}
 
-<div class="container">
-  {% if registered  %}
+
+<!--<div class="container" id="regSection">
+    {% if registered %}
     {% if messages %}
-      {% for message in messages %}
-        <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
-          <a class="close" data-dismiss="alert" href="#">&times;</a>
-          <h4 class="alert alert-success" style="text-align:center;">{{ message }}</h4>
-        </div>
-      {% endfor %}
+    {% for message in messages %}
+    <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
+        <a class="close" data-dismiss="alert" href="#">&times;</a>
+        <h4 class="alert alert-success" style="text-align:center;">{{ message }}</h4>
+    </div>
+    {% endfor %}
     {% endif %}
-  {% else %}
-  <h1>Registered Here.....</h1><br><br>
-  <form class="form-horizontal" enctype="multipart/form-data" method="POST">
-    {% csrf_token %}
+    {% else %}-->
+    <form class="form-horizontal" enctype="multipart/form-data" method="POST" id="regFrom">
+        {% csrf_token %}
 
-      <div class="form-group">
-          <label class="control-label col-sm-2" for="userName">User Name</label>
-          <div class="col-sm-6">
-              <input type="text" class="form-control" id="userName" placeholder="User Name" name="userName">
-          </div>
-      </div>
-      <div class="form-group">
-          <label class="control-label col-sm-2" for="userContact">User Contact</label>
-          <div class="col-sm-6">
-              <input type="text" class="form-control" id="userContact" placeholder="User Contact" name="userContact">
-          </div>
-      </div>
-      <div class="form-group">
-          <label class="control-label col-sm-2" for="userImage">User Image</label>
-          <div class="col-sm-6">
-              <input type="file" name="pic" accept="image/*">
-          </div>
-      </div>
-      <div class="form-group">
-          <label class="control-label col-sm-2" for="email">Email</label>
-          <div class="col-sm-6">
-              <input type="email" class="form-control" id="email" placeholder="Email" name="email">
-          </div>
-      </div>
-      <div class="form-group">
-          <label class="control-label col-sm-2" for="pwd">Password</label>
-          <div class="col-sm-6">
-              <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
-          </div>
-      </div>
-      <div class="form-group">
-          <label class="control-label col-sm-2" for="confirm_pwd">Confirm Password</label>
-          <div class="col-sm-6">
-              <input type="password" class="form-control" id="confirm_pwd" placeholder="Confirm password" name="confirm_pwd">
-          </div>
-      </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="userName">User Name</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="userName" minlength="3"
+                       placeholder="User Name" name="userName" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="userContact">User Contact</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="userContact" placeholder="User Contact" name="userContact" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="userImage">User Image</label>
+            <div class="col-sm-8">
+                <label id="imageSelect"> Select File
+                    <input type="file" name="pic" id="userImage" accept="image/*">
+                </label>
+                <!--<input type="file" name="pic" id="userImage" accept="image/*">-->
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="email">Email</label>
+            <div class="col-sm-8">
+                <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="pwd">Password</label>
+            <div class="col-sm-8">
+                <input type="password" class="form-control" id="pwd" minlength="7" placeholder="Enter password" name="pwd" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="confirm_pwd">Confirm Password</label>
+            <div class="col-sm-8">
+                <input type="password" class="form-control" id="confirm_pwd" placeholder="Confirm password"
+                       name="confirm_pwd" required>
+            </div>
+        </div>
 
-      <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" class="btn btn-primary">Save</button>
-          </div>
-      </div>
-  </form>
-  {% endif %}
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8">
+                <button type="submit" class="btn btn-block btn-primary">Sign Up</button>
+            </div>
+        </div>
+    </form>
+
+ <!--   {% endif %}-->
+<!--
 
 </div>
+-->

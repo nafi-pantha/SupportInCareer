@@ -16,65 +16,64 @@
     <link rel="stylesheet" href="{% static 'css/scfu.css' %}">
 </head>
 
-
-<nav class="navbar navbar-default navbar-static-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button"
-                    class="navbar-toggle collapsed"
-                    data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">smartcareer4u.com</a>
-        </div>
-
-        {% if user.is_authenticated %}
-            {% for info in userInfoList %}
-            <div class="collapse navbar-collapse" id="isLoggedIn">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="#">
-                            {% if info.user.is_staff %}
-                                Admin
-                            {% else %}
-                                User
-                            {% endif %}
-                        </a>
-                    </li>
-                    <li class="dropdown ">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ info.user.username }}
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li class=""><a href="#">Settings</a></li>
-                            <li><a href="{% url 'logout' %}">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            {% endfor %}
-        {% else %}
-            <div class="collapse navbar-collapse" id="isNotLoggedIn">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" id="registerLink">Sign Up</a></li>
-                    <li><a href="#" id="loginLink" data-toggle="modal" data-target="#loginModal">Login</a></li>
-                </ul>
-            </div>
-        {% endif %}
-    </div>
-</nav>
-
 <body>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button"
+                        class="navbar-toggle collapsed"
+                        data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">smartcareer4u.com</a>
+            </div>
+
+            {% if user.is_authenticated %}
+                {% for info in userInfoList %}
+                <div class="collapse navbar-collapse" id="isLoggedIn">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#">
+                                {% if info.user.is_staff %}
+                                    Admin
+                                {% else %}
+                                    User
+                                {% endif %}
+                            </a>
+                        </li>
+                        <li class="dropdown ">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    {{ info.user.username }}
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class=""><a href="#">Settings</a></li>
+                                <li><a href="{% url 'logout' %}">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="collapse navbar-collapse" id="isNotLoggedIn">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#" id="registerLink">Sign Up</a></li>
+                        <li><a href="#" id="loginLink" data-toggle="modal" data-target="#loginModal">Login</a></li>
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </nav>
 {% block content %}
 {% endblock %}
 
 <div id="footer">
     <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
     <script src="{% static 'js/sweetalert2.all.min.js' %}"></script>
     <script src="{% static 'js/jquery.blockUI.min.js' %}"></script>
     <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
@@ -89,6 +88,32 @@
     <script src="{% static 'js/up_mcqExamView.js' %}"></script>
     <script src="{% static 'js/up_essayExamView.js' %}"></script>
     <script src="{% static 'js/reviewView.js' %}"></script>
+
 </div>
+<script>
+    $.validator.setDefaults({
+    errorClass: 'help-block',
+    highlight: function(element) {
+      $(element)
+        .closest('.form-group')
+        .addClass('has-error');
+    },
+    unhighlight: function(element) {
+      $(element)
+        .closest('.form-group')
+        .removeClass('has-error').addClass('has-success');
+    },
+    errorPlacement: function (error, element) {
+        if (element.prop('type') === 'checkbox') {
+        error.insertAfter(element.parent());
+        }
+        else {
+            error.insertAfter(element);
+        }
+    }
+  });
+    $("#regFrom").validate();
+</script>
 </body>
+
 </html>
