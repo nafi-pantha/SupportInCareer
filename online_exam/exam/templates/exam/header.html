@@ -74,6 +74,7 @@
     <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/additional-methods.min.js' %}"></script>
     <script src="{% static 'js/sweetalert2.all.min.js' %}"></script>
     <script src="{% static 'js/jquery.blockUI.min.js' %}"></script>
     <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
@@ -90,30 +91,6 @@
     <script src="{% static 'js/reviewView.js' %}"></script>
 
 </div>
-<script>
-    $.validator.setDefaults({
-    errorClass: 'help-block',
-    highlight: function(element) {
-      $(element)
-        .closest('.form-group')
-        .addClass('has-error');
-    },
-    unhighlight: function(element) {
-      $(element)
-        .closest('.form-group')
-        .removeClass('has-error').addClass('has-success');
-    },
-    errorPlacement: function (error, element) {
-        if (element.prop('type') === 'checkbox') {
-        error.insertAfter(element.parent());
-        }
-        else {
-            error.insertAfter(element);
-        }
-    }
-  });
-    $("#regFrom").validate();
-</script>
 </body>
 
 </html>

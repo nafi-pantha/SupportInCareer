@@ -1,4 +1,14 @@
 $(document).ready(function(){
+    $('.picture_slide_main').owlCarousel({
+        margin:10,
+        loop:true,
+        items: 1,
+        center: true,
+        autoplay: true,
+        autoplayTimeout:2500,
+        autoplayHoverPause:true,
+        animateOut: 'fadeOut'
+    });
     $('#registerLink').on('click' ,function(){
         $('.card').addClass('flipped');
     });
@@ -7,5 +17,89 @@ $(document).ready(function(){
         $('.card').removeClass('flipped');
     });
 
-    $("#regform").validate();
+
+    //Register Validtion
+    $.validator.setDefaults({
+        errorClass: 'help-block',
+        highlight: function(element) {
+          $(element)
+            .closest('.form-group')
+            .addClass('has-error');
+        },
+        unhighlight: function(element) {
+          $(element)
+            .closest('.form-group')
+            .removeClass('has-error').addClass('has-success');
+        },
+        errorPlacement: function (error, element) {
+            if (element.prop('type') === 'checkbox') {
+            error.insertAfter(element.parent());
+            }
+            else {
+                error.insertAfter(element);
+            }
+        },
+        onkeyup: function(element) {
+            if (element.name == 'username'|| element.name == 'email') {
+                return true;
+            }
+            if ( element.name in this.submitted || element ==
+                this.lastElement ) {
+                this.element(element);
+            }
+        }
+    });
+
+    $.validator.addMethod('strongPassword', function(value, element) {
+        return this.optional(element)
+          || value.length >= 7
+          && /\d/.test(value)
+          && /[a-z]/i.test(value);
+    }, 'Must contain at least one number and one char');
+
+    $(document).on('blur','#regform input',function(){
+        $.unblockUI();
+    });
+
+    $("#regFrom").validate({
+        onkeyup: false,
+        rules: {
+            username:{
+                required: true,
+                minlength: 5,
+                remote: "/username_Check/"
+            },
+            email: {
+                required: true,
+                email: true,
+                remote: "/email_Check/"
+            },
+            password: {
+                required: true,
+                strongPassword: true
+            },
+            password2: {
+                equalTo: "#pwd"
+            },
+            phone: {
+                required: true,
+                digits: true,
+                phonesUK: true
+            },
+            pic: {
+                accept: "image/*"
+            },
+            userContact: {
+                digits: true,
+                minlength: 11
+            },
+            messages: {
+                email: {
+                    required: 'Please enter an email address',
+                    email: 'Please enter a <em>valid</em> email address',
+                    remote: $.validator.format("{0} is already associated with an account")
+                }
+            }
+        }
+    });
 });

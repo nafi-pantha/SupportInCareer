@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from exam.models import UserInfo
@@ -39,3 +39,27 @@ def userRegistration(request):
             return HttpResponse("<h3>Username Already Exist.Please Select another one.</h3>")
 
     return render(request,'exam/userRegistration.html',{'registered':registered})
+
+
+def emailAvailableCheck(request):
+    if (request.method == "GET"):
+        email = request.GET.get('email')
+        isEmailAvailable=User.objects.filter(email=email)
+        if(isEmailAvailable):
+            return JsonResponse("This email has already been used!", safe=False)
+        else:
+            return JsonResponse("true", safe=False)
+    else:
+        return HttpResponse("Problem")
+
+
+def usernameAvailableCheck(request):
+    if (request.method == "GET"):
+        username = request.GET.get('username')
+        isUsernameAvailable=User.objects.filter(username=username)
+        if(isUsernameAvailable):
+            return JsonResponse("This username has already been used!", safe=False)
+        else:
+            return JsonResponse("true", safe=False)
+    else:
+        return HttpResponse("Problem")

@@ -1,4 +1,5 @@
 {% extends "header.html" %}
+{% load staticfiles %}
 
 {% block content %}
 {% if messages %}
@@ -11,39 +12,54 @@
 {% endif %}
 
 
-<div class="container-fluid">
-	<div class="row flip">
-		<div class="col-sm-12 card">
-			<div class="col-sm-4 face front">
-                <form class="form-horizontal" enctype="multipart/form-data" method="POST">
-                    {% csrf_token %}
-                    <div class="row">
-                        <div class="form-group">
-                            <label class="control-label col-sm-4" for="username">User Name</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="username" id="username" placeholder="User Name" required/>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-7">
+            <div class="owl-carousel owl-theme picture_slide_main">
+                <div class="item"><img src="{% static 'images/slide1.jpg' %}" alt="slideImg1"></div>
+                <div class="item"><img src="{% static 'images/slide2.jpg' %}" alt="slideImg2"></div>
+                <div class="item"><img src="{% static 'images/slide3.jpg' %}" alt="slideImg3"></div>
+                <div class="item"><img src="{% static 'images/slide4.jpg' %}" alt="slideImg4"></div>
+                <div class="item"><img src="{% static 'images/slide5.jpg' %}" alt="slideImg5"></div>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="col-sm-12 flip">
+                <div class="row card">
+                    <div class="col-sm-12 face front">
+                        <form class="form-horizontal" enctype="multipart/form-data" method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" for="username">User Name</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="username" id="username" placeholder="User Name" required/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" for="password">Password</label>
+                                    <div class="col-sm-8">
+                                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-4 col-sm-8">
+                                        <input type="submit" class="btn btn-primary btn-block formbtn" value="Login">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4" for="password">Password</label>
-                            <div class="col-sm-8">
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Password" required/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-4 col-sm-8">
-                                <input type="submit" class="btn btn-primary btn-block formbtn" value="Login">
-                            </div>
-                        </div>
+                        </form>
                     </div>
-                </form>
-			</div>
-			<div class="col-sm-4 face back">
-                {% include "userRegistration.html" %}
+                    <div class="col-sm-12 face back">
+                        {% include "userRegistration.html" %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+
 
 {% endblock %}
 

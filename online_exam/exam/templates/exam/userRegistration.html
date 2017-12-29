@@ -13,52 +13,53 @@
     {% else %}-->
     <form class="form-horizontal" enctype="multipart/form-data" method="POST" id="regFrom">
         {% csrf_token %}
+        <div class="row">
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="userName">User Name</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="userName" minlength="5"
+                           placeholder="User Name" name="username" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="email">Email</label>
+                <div class="col-sm-8">
+                    <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="pwd">Password</label>
+                <div class="col-sm-8">
+                    <input type="password" class="form-control" id="pwd" minlength="7" placeholder="Enter password" name="password" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="password2">Confirm Password</label>
+                <div class="col-sm-8">
+                    <input type="password" class="form-control" id="password2" minlength="7" placeholder="Confirm password"
+                           name="password2" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="pic">User Image</label>
+                <div class="col-sm-8">
+                    <label id="imageSelect"> Select File
+                        <input type="file" name="pic" id="pic" accept="image/*">
+                    </label>
+                    <!--<input type="file" name="pic" id="userImage" accept="image/*">-->
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="userContact">User Contact</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="userContact" placeholder="User Contact" name="userContact">
+                </div>
+            </div>
 
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="userName">User Name</label>
-            <div class="col-sm-8">
-                <input type="text" class="form-control" id="userName" minlength="3"
-                       placeholder="User Name" name="userName" required>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="userContact">User Contact</label>
-            <div class="col-sm-8">
-                <input type="text" class="form-control" id="userContact" placeholder="User Contact" name="userContact" required>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="userImage">User Image</label>
-            <div class="col-sm-8">
-                <label id="imageSelect"> Select File
-                    <input type="file" name="pic" id="userImage" accept="image/*">
-                </label>
-                <!--<input type="file" name="pic" id="userImage" accept="image/*">-->
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="email">Email</label>
-            <div class="col-sm-8">
-                <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="pwd">Password</label>
-            <div class="col-sm-8">
-                <input type="password" class="form-control" id="pwd" minlength="7" placeholder="Enter password" name="pwd" required>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="confirm_pwd">Confirm Password</label>
-            <div class="col-sm-8">
-                <input type="password" class="form-control" id="confirm_pwd" placeholder="Confirm password"
-                       name="confirm_pwd" required>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-8">
-                <button type="submit" class="btn btn-block btn-primary">Sign Up</button>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                    <button type="submit" class="btn btn-block btn-primary">Sign Up</button>
+                </div>
             </div>
         </div>
     </form>

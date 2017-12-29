@@ -1,0 +1,4 @@
+Violet: #8C4895 
+Blue1: 	#089de3 
+Blue2: 	#3399FF
+Blue3: 	#6699FF

@@ -18,6 +18,8 @@ urlpatterns = [
 
     #Login Register
     url(r'^user_registration/$',views.userRegistration,name='user_registration'),
+    url(r'^username_Check/$',views.usernameAvailableCheck,name='username_Check'),
+    url(r'^email_Check/$',views.emailAvailableCheck,name='email_Check'),
     #url(r'^user_login/$',views.userLogin,name='user_login'),
 
     #MCQ Section
