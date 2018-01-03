@@ -181,8 +181,32 @@ input[type="file"] {
     display: none;
 }
 
-picture_slide_main .item img{
+.picture_slide_main .item img{
     display: block;
     width: 100%;
     height: auto;
+}
+
+.vresize {
+    resize: vertical;
+}
+
+a {
+	color: #6699FF;
+}
+a:visited , a:focus, a:hover{
+	color: #3366CC;
+}
+a.morelink {
+	text-decoration:none;
+	outline: none;
+}
+
+.morecontent span {
+	display: none;
+}
+.comment {
+	width: 400px;
+	background-color: #F0F0F0;
+	margin: 10px;
 }

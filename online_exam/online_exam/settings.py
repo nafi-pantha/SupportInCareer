@@ -129,4 +129,5 @@ STATIC_ROOT = os.path.join(BASE_DIR,'exam/static')
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/user_login/'
+LOGIN_REDIRECT_URL = 'home'

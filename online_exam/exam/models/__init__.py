@@ -7,3 +7,4 @@ from .UserResultModel import *
 from .UserMcqAnswerModel import *
 from .UserEssayAnswerModel import *
 from .AdminReviewModel import *
+from .EssaySummaryModel import *

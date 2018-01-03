@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse, JsonResponse
 import datetime
@@ -5,7 +6,7 @@ import datetime
 from exam.models import Subject
 from exam.models import Test
 
-
+@login_required(login_url='user_login')
 def getAllSubjectList(request):
     if (request.method == "GET"):
         subjectList = Subject.objects.values('subject_id','subject_name','mcq_total_test','essay_total_test')
@@ -38,7 +39,7 @@ def testInfoInsert(request):
                     approver="Null",
                     datetime=datetime.datetime.now()
                 )
-                test.savesave()
+                test.save()
                 registered = True
                 return JsonResponse({'status': 2})
         else:

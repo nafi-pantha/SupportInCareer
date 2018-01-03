@@ -76,6 +76,17 @@ $(document).ready(function() {
                 });
             }
         });
+        $.ajax({
+            url: "/get_essay_summary/",
+            type: "GET",
+            data: {'test_id':essayExamTest_id},
+            success: function(response){
+                summary=(response.summaryInfo[0]['essay_summary_details']);
+                summary=summary.replace(/\n/g, "<br />");
+                $('.essayExamQuesSummary').html(summary);
+                moreContent();
+            }
+        });
     });
 
     function getTestID(){
@@ -136,4 +147,30 @@ $(document).ready(function() {
             }
         });
     }
+
+	function moreContent(){
+	    var showChar = 250;
+        var ellipsestext = "...";
+        var moretext = "more";
+        var lesstext = "less";
+        var content = $('.essayExamQuesSummary').html();
+        if(content.length > 250) {
+            var c = content.substr(0, showChar);
+            var h = content.substr(showChar-1, content.length - showChar);
+            var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="#" class="morelink">' + moretext + '</a></span>';
+            $('.essayExamQuesSummary').html(html);
+        }
+        $(".morelink").click(function(){
+            if($(this).hasClass("less")) {
+                $(this).removeClass("less");
+                $(this).html(moretext);
+            } else {
+                $(this).addClass("less");
+                $(this).html(lesstext);
+            }
+            $(this).parent().prev().toggle();
+            $(this).prev().toggle();
+            return false;
+        });
+	}
  });

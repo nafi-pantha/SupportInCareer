@@ -100,11 +100,12 @@ $(document).ready(function(){
             type: "POST",
             data: {obj:JSON.stringify(data),
             'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val(),
-            'test_id':$('#essayTestList').val()},
+            'test_id':$('#essayTestList').val(),
+            'essay_summary':$('#essaySummary').val()},
             dataType:"JSON",
             success: function(response) {
                 //console.log(response);
-                console.log("tEST");
+                console.log("Test");
                 if(response.status==1){
                     swal("Success!", "Successfully Updated!", "success");
                 }

@@ -12,14 +12,14 @@ def userRegistration(request):
         userName = request.POST.get('userName')
         userContact = request.POST.get('userContact')
 
-        if(request.FILES['pic']):
-            user_image = request.FILES['pic']
-        else:
-            print("File is not Found")
+        # if(request.FILES['pic']):
+        #     user_image = request.FILES['pic']
+        # else:
+        #     print("File is not Found")
 
         email = request.POST.get('email')
         pwd = request.POST.get('pwd')
-        confirm_pwd = request.POST.get('confirm_pwd')
+        confirm_pwd = request.POST.get('password2')
 
         if(not(User.objects.filter(username = userName).exists())):
             if(pwd == confirm_pwd):
@@ -29,16 +29,17 @@ def userRegistration(request):
                 user.is_staff = False
                 user.save()
 
-                user_info = UserInfo.objects.create(user_id=user.pk,user_contact=userContact,user_image=user_image,
+                user_info = UserInfo.objects.create(user_id=user.pk,user_contact=userContact,user_image="Null",
                 approver="Null",datetime=datetime.datetime.now())
                 registered=True
-                messages.add_message(request, messages.INFO, 'Account Created Successfully')
+                #messages.add_message(request, messages.INFO, 'Account Created Successfully')
+                return JsonResponse({'status': '1'})
             else:
                 print("No Data")
         else:
-            return HttpResponse("<h3>Username Already Exist.Please Select another one.</h3>")
-
-    return render(request,'exam/userRegistration.html',{'registered':registered})
+            #return HttpResponse("<h3>Username Already Exist.Please Select another one.</h3>")
+            return JsonResponse({'status': '2'})
+    return render(request,'exam/login.html',{'registered':registered})
 
 
 def emailAvailableCheck(request):
@@ -55,7 +56,7 @@ def emailAvailableCheck(request):
 
 def usernameAvailableCheck(request):
     if (request.method == "GET"):
-        username = request.GET.get('username')
+        username = request.GET.get('userName')
         isUsernameAvailable=User.objects.filter(username=username)
         if(isUsernameAvailable):
             return JsonResponse("This username has already been used!", safe=False)

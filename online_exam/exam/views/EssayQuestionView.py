@@ -7,18 +7,22 @@ import datetime
 from exam.models import Subject
 from exam.models import Test
 from exam.models import EssayQuestion
+from exam.models import EssaySummary
 
 
 def essayQuesPaperSubmit(request):
     if (request.method == "POST"):
         test_id=request.POST.get('test_id')
         ret = request.POST.get('obj')
+        essay_summary = request.POST.get('essay_summary')
         list = json.loads(ret)
         for value in list:
             EssayQuestion(essay_question_id=value['qid'], essay_question=value['ques'],
                         essay_question_marks=value['mark'],
                         test_id=Test.objects.get(pk=test_id),approver="Null",
                         datetime=datetime.datetime.now()).save()
+        EssaySummary.objects.create(test_id=Test.objects.get(pk=test_id), essay_summary_details=essay_summary,
+                                              approver="Null", datetime=datetime.datetime.now()).save()
         return JsonResponse({'status': 1})
     else:
         return HttpResponse("Problem")

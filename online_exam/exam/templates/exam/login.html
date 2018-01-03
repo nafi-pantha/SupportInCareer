@@ -27,17 +27,17 @@
             <div class="col-sm-12 flip">
                 <div class="row card">
                     <div class="col-sm-12 face front">
-                        <form class="form-horizontal" enctype="multipart/form-data" method="POST">
+                        <form class="form-horizontal" enctype="multipart/form-data" method="POST" id="loginForm">
                             {% csrf_token %}
                             <div class="row">
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4" for="username">User Name</label>
+                                    <label class="control-label col-sm-4" for="username" required>User Name</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control" name="username" id="username" placeholder="User Name" required/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4" for="password">Password</label>
+                                    <label class="control-label col-sm-4" for="password" required>Password</label>
                                     <div class="col-sm-8">
                                         <input type="password" class="form-control" name="password" id="password" placeholder="Password" required/>
                                     </div>
@@ -48,6 +48,7 @@
                                     </div>
                                 </div>
                             </div>
+<!--                            <input type="hidden" name="next" value="{{ next }}"/>-->
                         </form>
                     </div>
                     <div class="col-sm-12 face back">

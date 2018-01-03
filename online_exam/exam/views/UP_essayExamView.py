@@ -8,6 +8,7 @@ from exam.models import UserEssayAnswer
 from exam.models import Test
 
 from exam.models import AdminReview
+from exam.models import EssaySummary
 
 
 def essay_ques_info(request):
@@ -17,6 +18,16 @@ def essay_ques_info(request):
         return render(request, 'up_essayExamList.html', {'quesInfo': quesInfo})
     else:
         return HttpResponse("Problem")
+
+def essay_summary_info(request):
+    if (request.method == "GET"):
+        test_id = request.GET.get('test_id')
+        summaryInfo = EssaySummary.objects.values('essay_summary_details').filter(test_id=test_id)
+        return JsonResponse({'summaryInfo':list(summaryInfo)})
+    else:
+        return HttpResponse("Problem")
+
+
 
 def essay_ans_submit(request):
     if (request.method == "POST"):

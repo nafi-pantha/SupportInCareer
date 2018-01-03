@@ -64,7 +64,7 @@ $(document).ready(function(){
     $("#regFrom").validate({
         onkeyup: false,
         rules: {
-            username:{
+            userName:{
                 required: true,
                 minlength: 5,
                 remote: "/username_Check/"
@@ -74,7 +74,7 @@ $(document).ready(function(){
                 email: true,
                 remote: "/email_Check/"
             },
-            password: {
+            pwd: {
                 required: true,
                 strongPassword: true
             },
@@ -85,9 +85,6 @@ $(document).ready(function(){
                 required: true,
                 digits: true,
                 phonesUK: true
-            },
-            pic: {
-                accept: "image/*"
             },
             userContact: {
                 digits: true,
@@ -100,6 +97,88 @@ $(document).ready(function(){
                     remote: $.validator.format("{0} is already associated with an account")
                 }
             }
+        },submitHandler: function(form) {
+            $.ajax({
+                type: $(form).attr('method'),
+                url: /user_registration/,
+                data: $(form).serialize(),
+                success: function(response) {
+                    if(response.status=='1'){
+                        msgText='<p>Please login to your email to activate the account</p>'+
+                                '<p>If you face any problem during activation or login please contact our admins.</p>'+
+                                '<p>Contact: 01727210244</p>';
+                        swal({
+                            title: 'Account created successfully!!!',
+                            type: 'success',
+                            html: msgText,
+                            showCloseButton: true,
+                        });
+                    }
+                    else{
+                        swal({
+                            position: 'top-right',
+                            type: 'error',
+                            title: 'Please try again!!!',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            toast:true
+                        });
+                    }
+                }
+            });
         }
     });
+
+    $("#loginForm").validate({
+        rules: {
+            username:{
+                required: true
+            },
+            password: {
+                required: true
+            }
+        },submitHandler: function(form) {
+            $.ajax({
+                type: $(form).attr('method'),
+                url: /user_login/,
+                data: $(form).serialize(),
+                success: function(response) {
+                    if(response.status=='1'){
+                        window.location = "/"
+                    }
+                    if(response.status=='2'){
+                        swal({
+                            position: 'top-right',
+                            type: 'error',
+                            title: 'Username or Password Wrong or Account not activated!!!',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            toast:true
+                        });
+                    }
+                }
+            });
+        }
+    });
+
 });
+
+
+/*
+,
+        submitHandler: function(form) {
+            $.ajax({
+                type: $(form).attr('method'),
+                url: /user_login/,
+                data: $(form).serialize(),
+                success: function(response) {
+                    if(response.results=='1'){
+                        window.location.href = "{% url 'home' %}"
+                    }
+                    if(response.results=='2'){
+                        swal("Error!", "Login Failed!", "error");
+                    }
+                }
+            });
+        }
+*/

@@ -3,6 +3,7 @@ from exam import views
 
 urlpatterns = [
     url(r'^$',views.userLogin,name='home'),
+    url(r'user_login/$',views.testLogin,name='user_login'),
 
     #User Section
     url(r'^user_update/$',views.userUpdate,name='user_update'),
@@ -49,6 +50,7 @@ urlpatterns = [
     #UP Essay Exam Section
     url(r'^essay_ques_info/$',views.essay_ques_info,name='essay_ques_info'),
     url(r'^essay_ans_submit/$',views.essay_ans_submit,name='essay_ans_submit'),
+    url(r'^get_essay_summary/$',views.essay_summary_info,name='get_essay_summary'),
 
     #Review Section
     url(r'^reviewUserList/$',views.reviewUserList,name='reviewUserList'),
