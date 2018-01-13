@@ -10,12 +10,14 @@ urlpatterns = [
 
     #Subject Section
     url(r'^subject_insert/$',views.subjectInsert,name='subject_insert'),
+    url(r'^subjectname_Check/$',views.subjectAvailableCheck,name='subjectname_Check'),
 
     #Test Section
     url(r'^test/$',views.getAllSubjectList,name='test'),
     url(r'^test_submit/$',views.testInfoInsert,name='test_submit'),
     url(r'^test_info/$',views.getTestInfo,name='test_info'),
     url(r'^test_available_check/$',views.testAvailableCheck,name='test_available_check'),
+    url(r'^testname_Check/$',views.testNameCheck,name='testname_Check'),
 
     #Login Register
     url(r'^user_registration/$',views.userRegistration,name='user_registration'),
@@ -58,6 +60,11 @@ urlpatterns = [
     url(r'^getUserAnswerReview/$',views.getUserAnswerReview,name='getUserAnswerReview'),
     url(r'^review_submit/$',views.reviewSubmit,name='review_submit'),
 
+    #System URL's
+    url(r'^user_status/$',views.getUserStatus,name='user_status'),
+    url(r'^user_type/$',views.getUserType,name='user_type'),
+    url(r'^total_ques_no/$',views.getTotalQuesNo,name='total_ques_no'),
+    url(r'^test_type/$',views.getTestType,name='test_type'),
 
 
 ]

@@ -9,3 +9,4 @@ from .LoginView import *
 from .UP_mcqExamView import *
 from .UP_essayExamView import *
 from .ReviewView import *
+from .SCFU_SysView import *

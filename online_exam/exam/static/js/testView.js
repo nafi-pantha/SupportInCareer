@@ -1,7 +1,7 @@
 $(document).ready(function(){
-    $('#editBtn').prop('disabled',true);
+    $('#editTestBtn').prop('disabled',true);
     $('#testLink').on('click',function(){
-        console.log("Test");
+        getTestType();
         $.ajax({
             url: "/test/",
             type: "GET",
@@ -71,31 +71,103 @@ $(document).ready(function(){
                     console.log("Ok");
                 }
                 else{
-
                     $("#subjectList").prop('disabled',true);
                     $("#testTypeList").prop('disabled',true);
-                    $("#testIDList").prop('disabled',true);
+                    $("#testIDList").readonly();
                     $("#testName").val(response.results[0].test_name).prop('disabled',true);
                     $("#testTotalQues").val(response.results[0].test_total_questions).prop('disabled',true);
                     $("#totalMarks").val(response.results[0].test_totalmarks);
                     $("#totalTime").val(response.results[0].test_totaltimes).prop('disabled',true);
-                    $("#editBtn").prop('disabled',false);
-                    $("#submitBtn").prop('disabled',true);
+                    $("#unitMark").prop('disabled',true);
+                    $("#editTestBtn").prop('disabled',false);
+                    $("#submitTestBtn").prop('disabled',true);
                 }
             }
         });
     });
-    $('#editBtn').on('click',function(){
+    $('#editTestBtn').on('click',function(){
         $("#testName").prop('disabled',false);
-        $("#testTotalQues").val('').prop('disabled',false);
-        $("#totalMarks").val('');
+//        $("#testTotalQues").val('').prop('disabled',false);
+//        $("#totalMarks").val('');
         $("#totalTime").prop('disabled',false);
-        $("#submitBtn").prop('disabled',false);
-        $("#submitBtn").prop('disabled',false);
+//        $("#unitMark").prop('disabled',false);
+        $("#submitTestBtn").prop('disabled',false);
         $(this).prop('disabled',true);
         $("#mode").val(1);
     });
-    $('#submitBtn').on('click',function(){
+
+    $("#testSectionForm").validate({
+        onkeyup: false,
+        rules: {
+            subjectList:{
+                required: true,
+            },
+            testTypeList:{
+                required: true,
+            },
+            testIDList: {
+                required: true
+            },
+            testName: {
+                required: true,
+                minlength: 3,
+//                remote: "/testname_Check/"
+                remote: {
+                    param: {
+                        url: "/testname_Check/",
+                        data:{'test_id': function() {
+                            return $( "#testIDList" ).val();
+                          }}
+                    }/*,
+                    depends: function(element) {
+                        return ($('#mode').val() !== '1');
+                    }*/
+                }
+            },
+            testTotalQues: {
+                required: true
+            },
+            unitMark: {
+                required: true,
+                digits: true
+            },
+            totalMarks: {
+                required: false
+            },
+            totalTime: {
+                required: true,
+                digits: true
+            },
+            mode: {
+                required: false
+            },
+        },submitHandler: function(form) {
+            $.ajax({
+                type: $(form).attr('method'),
+                url: /test_submit/,
+                data: $(form).serialize(),
+                success: function(response) {
+                    if(response.status==1){
+                        swal("Success!", "Successfully Updated!", "success");
+                        enable();
+                        //$("#testSectionForm")[0].reset();
+                        resetTestSection();
+                        $("#quesNo").text('');
+                    }
+                    else if(response.status==2){
+                        swal("Success!", "Successfully Inserted!", "success");
+                        enable();
+                        resetTestSection();
+                    }
+                    else{
+                        swal("Error!", "Something Wrong!", "error");
+                    }
+                }
+            });
+        }
+    });
+
+    /*$('#submitTestBtn').on('click',function(){
         console.log($('#mode').val());
         $.ajax({
             url: "/test_submit/",
@@ -125,14 +197,58 @@ $(document).ready(function(){
                 }
             }
         });
-    });
+    });*/
     $('#resetBtn').on('click',function(){
+        resetTestSection();
         enable();
-        $("#totalMarks").prop('disabled',true);
+        $('#quesNo').text("");
+        $("#totalMarks").prop('readonly',true);
+        $("#submitTestBtn").prop('disabled',false);
+        $("#editTestBtn").prop('disabled',true);
     });
+
+    function resetTestSection(){
+        var validator = $( "#testSectionForm" ).validate();
+        validator.resetForm();
+        $("input[type=text]").val("");
+        $('#quesNo').text("");
+        $("select").prop('selectedIndex',0);
+        $(":input").closest('.form-group').removeClass('has-success');
+    }
+
     function enable() {
+        $("#testIDList").readonly(false);
         $('input:disabled, select:disabled').each(function () {
            $(this).removeAttr('disabled');
+        });
+    }
+
+    function getTestType(){
+        $.ajax({
+            url: "/test_type/",
+            type: "GET",
+            dataType:"JSON",
+            success: function(response) {
+                $("#testTypeList").find('option').not(':first').remove();
+                if(response.length!=0){
+                    $.each(response.results,function(index,row){
+                        $("#testTypeList")
+                        .append(
+                            $("<option></option>")
+                                .text(row.test_type_name)
+                                .val(row.test_type_id)
+                        );
+                    });
+                    $.each(response.quesNoResult,function(index,row){
+                        $("#testTotalQues")
+                        .append(
+                            $("<option></option>")
+                                .text(row.test_ques_no)
+                                .val(row.test_ques_no)
+                        );
+                    });
+                }
+            }
         });
     }
 });

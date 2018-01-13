@@ -1,5 +1,64 @@
 $(document).ready(function(){
     $('#subjectLink').on('click',function(){
+        allSubjectListOnTbl();
+        getTotalQuesNo();
+    });
+
+    $('#subjectEditTbl').on('click','tr', function(){
+        $('#subjectID').val($(this).attr("data-id"));
+        $('#subjectName').val($(this).attr("data-subName"));
+        $('#mcqTotalTest').val($(this).attr("data-mcq_total_test"));
+        $('#essayTotalTest').val($(this).attr("data-essay_total_test"));
+    });
+
+    $("#subjectSectionForm").validate({
+        onkeyup: false,
+        rules: {
+            subjectID:{
+                required: false,
+            },
+            subjectName:{
+                required: true,
+                minlength: 3,
+                remote: "/subjectname_Check/"
+            },
+            mcqTotalTest: {
+                required: true
+            },
+            essayTotalTest: {
+                required: true
+            }
+        },submitHandler: function(form) {
+            $.ajax({
+                type: $(form).attr('method'),
+                url: /subject_insert/,
+                data: $(form).serialize(),
+                success: function(response) {
+                    if(response.status=='1'){
+                        swal("Success!", "Successfully Added!", "success");
+                        allSubjectListOnTbl();
+                        resetSection();
+                    }
+                    else if(response.status=='2'){
+                        swal("Success!", "Successfully Updated!", "success");
+                        allSubjectListOnTbl();
+                        resetSection();
+                    }
+                    else{
+                        swal("Error!", "Something Wrong!", "error");
+                    }
+                }
+            });
+        }
+    });
+
+    $('#subjectReset').on('click',function(){
+        var validator = $( "#subjectSectionForm" ).validate();
+        validator.resetForm();
+        $(":input").closest('.form-group').removeClass('has-success');
+    });
+
+    function allSubjectListOnTbl(){
         $.ajax({
             url: "/test/",
             type: "GET",
@@ -10,7 +69,6 @@ $(document).ready(function(){
                     var trHTML = '';
                     $.each(response,function(index,row){
                         $.each(row, function(key, value){
-                            //console.log(v.subject_id);
                             trHTML +='<tr data-id="'+value.subject_id+'" data-subName="'+value.subject_name+'" data-mcq_total_test="'+value.mcq_total_test+'" data-essay_total_test="'+value.essay_total_test+'">'+
                         '<td data-id="'+value.subject_id+'">' + value.subject_id +'</td>'+
                         '<td>' + value.subject_name +'</td>'+
@@ -22,34 +80,42 @@ $(document).ready(function(){
                 }
             }
         });
-    });
-    $('#subjectEditTbl').on('click','tr', function(){
-        $('#subjectID').val($(this).attr("data-id"));
-        $('#subjectName').val($(this).attr("data-subName"));
-        $('#mcqTotalQues').val($(this).attr("data-mcq_total_test"));
-        $('#essayTotalQues').val($(this).attr("data-essay_total_test"));
-    });
+    }
 
-    $('#subjectSaveBtn').on('click',function(){
+    function resetSection(){
+        $("input[type=text]").val("");
+        $("select").prop('selectedIndex',0);
+        $(":input").closest('.form-group').removeClass('has-success');
+    }
+
+    function getTotalQuesNo(){
         $.ajax({
-            url: "/subject_insert/",
-            type: "POST",
-            data: {'subjectName':  $('#subjectName').val(),
-                     'mcqTotalQues': $('#mcqTotalQues').val(),
-                     'essayTotalQues': $('#essayTotalQues').val(),
-                     'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()},
+            url: "/total_ques_no/",
+            type: "GET",
             dataType:"JSON",
             success: function(response) {
-                if(response.status==1){
-                    swal("Success!", "Successfully Added!", "success");
-                }
-                else{
-                    swal("Error!", "Something Wrong!", "error");
+                $("#mcqTotalTest").find('option').not(':first').remove();
+                if(response.length!=0){
+                    $.each(response.mcqResults,function(index,row){
+                        $("#mcqTotalTest")
+                        .append(
+                            $("<option></option>")
+                                .text(row.mcq_total_test)
+                                .val(row.mcq_total_test)
+                        );
+                    });
+                    $.each(response.essayResults,function(index,row){
+                        $("#essayTotalTest")
+                        .append(
+                            $("<option></option>")
+                                .text(row.essay_total_test)
+                                .val(row.essay_total_test)
+                        );
+                    });
                 }
             }
         });
-
-    });
+    }
 
 
 });

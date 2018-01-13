@@ -65,3 +65,4 @@ def userUpdate(request):
         return JsonResponse({'status': 1})
     else:
         return JsonResponse({'status': 2})
+

@@ -30,6 +30,8 @@ $(document).ready(function(){
                 }
             ]
         });
+        getUserStatusList();
+        getUserTypeList();
     });
 
     $('#userListTbl tbody').on('click','tr', function(){
@@ -73,5 +75,50 @@ $(document).ready(function(){
             }
         });
     });
+
+    function getUserStatusList(){
+        $.ajax({
+            url: "/user_status/",
+            type: "GET",
+            dataType:"JSON",
+            success: function(response) {
+                $("#userEditStatus").find('option').not(':first').remove();
+                if(response.length!=0){
+                    $.each(response,function(index,row){
+                        $.each(row, function(k, v){
+                            $("#userEditStatus")
+                            .append(
+                                $("<option></option>")
+                                    .text(v.status_name)
+                                    .val(v.status_id ? 1:0)
+                            );
+                        });
+                    });
+                }
+            }
+        });
+    }
+    function getUserTypeList(){
+        $.ajax({
+            url: "/user_type/",
+            type: "GET",
+            dataType:"JSON",
+            success: function(response) {
+                $("#userEditType").find('option').not(':first').remove();
+                if(response.length!=0){
+                    $.each(response,function(index,row){
+                        $.each(row, function(k, v){
+                            $("#userEditType")
+                            .append(
+                                $("<option></option>")
+                                    .text(v.type_name)
+                                    .val(v.type_id ? 1:0)
+                            );
+                        });
+                    });
+                }
+            }
+        });
+    }
 
 });

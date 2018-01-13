@@ -1,0 +1,108 @@
+[
+  {
+	"model": "exam.scfu_userstatus",
+	"pk": 0,
+	"fields": {
+	  "status_name": "Inactive"
+	}
+  },
+  {
+	"model": "exam.scfu_userstatus",
+	"pk": 1,
+	"fields": {
+	  "status_name": "Active"
+	}
+  },
+
+  {
+	"model": "exam.scfu_usertype",
+	"pk": 0,
+	"fields": {
+	  "type_name": "User"
+	}
+  },
+  {
+	"model": "exam.scfu_usertype",
+	"pk": 1,
+	"fields": {
+	  "type_name": "Admin"
+	}
+  },
+
+  {
+	"model": "exam.scfu_mcqtotaltest",
+	"fields": {
+	  "mcq_total_test": 20
+	}
+  },
+  {
+	"model": "exam.scfu_mcqtotaltest",
+	"fields": {
+	  "mcq_total_test": 30
+	}
+  },
+  {
+	"model": "exam.scfu_mcqtotaltest",
+	"fields": {
+	  "mcq_total_test": 50
+	}
+  },
+
+  {
+	"model": "exam.scfu_essaytotaltest",
+	"fields": {
+	  "essay_total_test": 20
+	}
+  },
+  {
+	"model": "exam.scfu_essaytotaltest",
+	"fields": {
+	  "essay_total_test": 30
+	}
+  },
+  {
+	"model": "exam.scfu_essaytotaltest",
+	"fields": {
+	  "essay_total_test": 50
+	}
+  },
+
+  {
+	"model": "exam.scfu_testtype",
+    "pk": 1,
+	"fields": {
+	  "test_type_name": "MCQ"
+	}
+  },
+  {
+	"model": "exam.scfu_testtype",
+    "pk": 2,
+	"fields": {
+	  "test_type_name": "Essay"
+	}
+  },
+  {
+	"model": "exam.scfu_testtotalquesno",
+	"fields": {
+	  "test_ques_no": 10
+	}
+  },
+  {
+	"model": "exam.scfu_testtotalquesno",
+	"fields": {
+	  "test_ques_no": 20
+	}
+  },
+  {
+	"model": "exam.scfu_testtotalquesno",
+	"fields": {
+	  "test_ques_no": 30
+	}
+  },
+  {
+	"model": "exam.scfu_testtotalquesno",
+	"fields": {
+	  "test_ques_no": 50
+	}
+  }
+]

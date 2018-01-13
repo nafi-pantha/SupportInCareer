@@ -141,11 +141,13 @@ a {
 }
 .btn{
     border-radius: 0px;
+}
+.btn-primary{
     background-color: #6699FF;
     border-color: #6699FF;
 }
 /* Previous: #62216B */
-.btn:hover, .btn:active, .btn:active:focus, .btn:focus{
+.btn-primary:hover, .btn-primary:active, .btn-primary:active:focus, .btn-primary:focus{
     color: #FFF;
     background-color: #3366CC;
     border-color: #3366CC;
@@ -253,4 +255,10 @@ a.morelink {
 	width: 400px;
 	background-color: #F0F0F0;
 	margin: 10px;
+}
+.modal-content{
+    border-radius: 0px;
+}
+.form-horizontal .control-label{
+    text-align: left;
 }

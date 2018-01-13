@@ -1,67 +1,60 @@
 <div class="sectionBody">
-    <form class="form-horizontal" id="subjectSectionForm">
+    <form class="form-horizontal" method="POST" id="subjectSectionForm">
     {% csrf_token %}
         <div class="form-group">
             <label class="control-label col-sm-2" for="subjectID">Subject ID</label>
-            <div class="col-sm-3">
-                <input type="text" class="form-control" id="subjectID" placeholder="Subject ID" name="subjectID" disabled>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="subjectID"
+                       placeholder="Subject ID" name="subjectID" readonly>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="subjectName">Subject Name</label>
-            <div class="col-sm-3">
-                <input type="text" class="form-control" id="subjectName" placeholder="Subject Name" name="subjectName">
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="subjectName"
+                       placeholder="Subject Name" name="subjectName" required>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="mcqTotalQues">MCQ Total Test.</label>
+            <label class="control-label col-sm-2" for="mcqTotalTest">MCQ Total Test.</label>
             <div class="col-sm-3">
-                <select class="form-control" id="mcqTotalQues" name="mcqTotalQues">
-                    <option>---Please Select---</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                    <option value="50">50</option>
+                <select class="form-control" id="mcqTotalTest" name="mcqTotalTest" required>
+                    <option option selected="true" disabled="disabled">---Please Select---</option>
                 </select>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="essayTotalQues">Essay Total Test.</label>
+            <label class="control-label col-sm-2" for="essayTotalTest">Essay Total Test.</label>
             <div class="col-sm-3">
-                <select class="form-control" id="essayTotalQues" name="essayTotalQues">
-                    <option>---Please Select---</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                    <option value="50">50</option>
+                <select class="form-control" id="essayTotalTest" name="essayTotalTest" required>
+                    <option option selected="true" disabled="disabled">---Please Select---</option>
                 </select>
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-2">
-                <button type="button" class="btn btn-block btn-primary">Reset</button>
+                <button type="reset" class="btn btn-block btn-warning" id="subjectReset">Reset</button>
             </div>
             <div class="col-sm-2">
-                <button type="button" class="btn btn-block btn-primary" id="subjectSaveBtn">Save</button>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="table-responsive">
-                <table class="table table-striped text-center" id="subjectEditTbl">
-                    <thead>
-                        <tr>
-                            <th class="text-center">Subject ID</th>
-                            <th class="text-center">Subject Name</th>
-                            <th class="text-center">MCQ Total Test.</th>
-                            <th class="text-center">Essay Total Test.</th>
-                            <!--<th class="text-center hidden">ID</th>-->
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
+                <button type="submit" class="btn btn-block btn-primary" id="subjectSaveBtn">Save</button>
             </div>
         </div>
     </form>
+    <div class="table-responsive">
+        <table class="table table-striped text-center" id="subjectEditTbl">
+            <thead>
+                <tr>
+                    <th class="text-center">Subject ID</th>
+                    <th class="text-center">Subject Name</th>
+                    <th class="text-center">MCQ Total Test.</th>
+                    <th class="text-center">Essay Total Test.</th>
+                    <!--<th class="text-center hidden">ID</th>-->
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
 </div>
 
