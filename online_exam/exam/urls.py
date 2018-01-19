@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from exam import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r'^$',views.userLogin,name='home'),
@@ -65,6 +66,21 @@ urlpatterns = [
     url(r'^user_type/$',views.getUserType,name='user_type'),
     url(r'^total_ques_no/$',views.getTotalQuesNo,name='total_ques_no'),
     url(r'^test_type/$',views.getTestType,name='test_type'),
+
+    #email verification
+    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        views.activate, name='activate'),
+    #password reset
+    url(r'^password_reset/$', auth_views.password_reset,
+        {'template_name':'exam/password_reset_form.html',
+        'password_reset_form': views.EmailValidationOnForgotPassword},name='password_reset'),
+    url(r'^password_reset/done/$', auth_views.password_reset_done,
+        {'template_name':'exam/password_reset_done.html'} ,name='password_reset_done'),
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        auth_views.password_reset_confirm,{'template_name':'exam/password_reset_confirm.html'},
+        name='password_reset_confirm'),
+    url(r'^reset/done/$', auth_views.password_reset_complete,
+        {'template_name':'exam/password_reset_complete.html'} ,name='password_reset_complete'),    
 
 
 ]
