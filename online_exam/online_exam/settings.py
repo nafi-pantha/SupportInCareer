@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap3',
+    'crispy_forms',
     'exam',
 ]
 
@@ -131,3 +133,9 @@ MEDIA_URL = '/media/'
 
 LOGIN_URL = '/user_login/'
 LOGIN_REDIRECT_URL = 'home'
+# email verification
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'sajib.pantha@gmail.com'
+EMAIL_HOST_PASSWORD = '1104010123'
+EMAIL_PORT = 587
