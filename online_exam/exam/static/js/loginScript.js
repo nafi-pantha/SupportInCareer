@@ -33,7 +33,7 @@ $(document).ready(function(){
         },
         errorPlacement: function (error, element) {
             if (element.prop('type') === 'checkbox') {
-            error.insertAfter(element.parent());
+                error.insertAfter(element.parent());
             }
             else {
                 error.insertAfter(element);

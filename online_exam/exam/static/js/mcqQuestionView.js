@@ -64,7 +64,7 @@ $(document).ready(function(){
             dataType:"JSON",
             success: function(response) {
                 $('#mcqMaxQuesNo').text(response.results[0].test_total_questions);
-                $('#mcqExamTime').text(response.results[0].test_totaltimes);
+                $('#mcqExamTime').text(response.results[0].test_totaltimes+" mins");
                 $('#mcqTotalMarks').text(response.results[0].test_totalmarks);
                 //mcq_available_check();
                 get_mcq_ques_data();
@@ -77,22 +77,29 @@ $(document).ready(function(){
         var quesLimit=$("#mcqMaxQuesNo").text();
         var trHTML = '';
         for(var i=1;i<=quesLimit;i++){
-            trHTML+= '<tr id='+i+'><td><span>'+i+'</span><input type="text" class="form-control hidden" id="qid" name="qid" value="'+i+'"></td><td><input type="text" class="form-control" id="ques" name="ques" placeholder="Question"></td>'+
-            '<td><input type="text" class="form-control" id="option1" name="option1" placeholder="Option 1"></td>'+
+            trHTML+= '<tr id='+i+'><td><span>'+i+'</span><input type="text" class="form-control hidden" id="qid" name="qid" value="'+i+'"></td>'+
+//            '<td><input type="text" class="form-control" id="ques" name="ques" placeholder="Question"></td>'+
+            '<td><textarea class="form-control vresize quesTest" id="ques" name="ques" placeholder="Question" required></textarea></td>'+
+            '<td><textarea class="form-control vresize" id="option1" name="option1" placeholder="Option 1" required></textarea></td>'+
+            '<td><textarea class="form-control vresize" id="option2" name="option2" placeholder="Option 2" required></textarea></td>'+
+            '<td><textarea class="form-control vresize" id="option3" name="option3" placeholder="Option 3" required></textarea></td>'+
+            '<td><textarea class="form-control vresize" id="option4" name="option4" placeholder="Option 4" required></textarea></td>'+
+            /*'<td><input type="text" class="form-control" id="option1" name="option1" placeholder="Option 1"></td>'+
             '<td><input type="text" class="form-control" id="option2" name="option2" placeholder="Option 2"></td>'+
             '<td><input type="text" class="form-control" id="option3" name="option3" placeholder="Option 3"></td>'+
-            '<td><input type="text" class="form-control" id="option4" name="option4" placeholder="Option 4"></td>'+
-            '<td><input type="text" class="form-control" id="rightAnswer" name="rightAnswer" placeholder="Right Answer"></td></tr>';
+            '<td><input type="text" class="form-control" id="option4" name="option4" placeholder="Option 4"></td>'+*/
+            '<td><input type="text" class="form-control" id="rightAnswer" name="rightAnswer" placeholder="Right Answer" required></td></tr>';
         }
         $('#mcqQuesTbl').append(trHTML);
     });
+
 
     $('#mcqSubmitBtn').on('click',function(){
         var data=[];
         $('#mcqQuesTbl').find('tr:not(:has(th))').each(function(){
             var id=$(this).attr('id');
             var row={};
-            $(this).find('input').each(function(){
+            $(this).find('textarea, input').each(function(){
                 row[$(this).attr('name')]=$(this).val();
             });
             data.push(row);
@@ -110,7 +117,7 @@ $(document).ready(function(){
 
                 console.log(response.status);
                 if(response.status=='1'){
-                    swal("Success!", "Successfully Updated!", "success");
+                    swal("Success!", "Successfully Submitted!", "success");
                 }
                 else{
                     swal("Error!", "Something Wrong!", "error");
@@ -132,7 +139,7 @@ $(document).ready(function(){
                     $.each(response, function (key,value) {
                         trHTML +='<tr data-id="'+value.mcq_question_id+'" data-ques="'+value.mcq_question+'" data-option1="'+value.mcq_option1+'" data-option2="'+value.mcq_option2+'" data-option3="'+value.mcq_option3+'" data-option4="'+value.mcq_option4+'" data-ans="'+value.mcq_right_answer+'">'+
                         '<td data-id="'+value.mcq_question_id+'">' + value.mcq_question_id +'</td>'+
-                        '<td>' + value.mcq_question +'</td>'+
+                        '<td>' + value.mcq_question.replace(/\n/g, "<br />") +'</td>'+
                         '<td>' + value.mcq_option1 +'</td>'+
                         '<td>' + value.mcq_option2 +'</td>'+
                         '<td>' + value.mcq_option3 +'</td>'+

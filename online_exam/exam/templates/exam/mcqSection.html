@@ -3,16 +3,16 @@
     <div class="form-group">
         <label class="control-label col-sm-2" for="mcqSubjectList">Subject</label>
         <div class="col-sm-3">
-            <select class="form-control" id="mcqSubjectList">
-                <option>---Please Select---</option>
+            <select class="form-control" id="mcqSubjectList" name="mcqSubjectList">
+                <option option selected="true" disabled="disabled">---Please Select---</option>
             </select>
         </div>
     </div>
     <div class="form-group">
         <label class="control-label col-sm-2" for="mcqTestList">Test</label>
         <div class="col-sm-3">
-            <select class="form-control" id="mcqTestList">
-                <option>---Please Select---</option>
+            <select class="form-control" id="mcqTestList" name="mcqTestList">
+                <option option selected="true" disabled="disabled">---Please Select---</option>
             </select>
         </div>
     </div>
@@ -21,7 +21,7 @@
         <div class="col-sm-3"><span id="mcqMaxQuesNo"></span></div>
     </div>
     <div class="form-group">
-        <label class="control-label col-sm-2" for="mcqExamTime">MCQ Exam Time: </label>
+        <label class="control-label col-sm-2" for="mcqExamTime">Exam Time: </label>
         <div class="col-sm-3"><span id="mcqExamTime"></span></div>
     </div>
     <div class="form-group">
@@ -30,9 +30,12 @@
     </div>
     <div class="form-group">
         <div class="col-sm-2"></div>
-        <div class="col-sm-3"><button type="button" class="btn btn-primary" id="mcqQuesSubBtn">Generate Question Submit Form</button></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-2"><button type="button" id="mcqEditBtn" class="btn btn-block btn-primary" disabled="true">Edit</button></div>
+        <div class="col-sm-3">
+            <button type="button" class="btn btn-block btn-primary" id="mcqQuesSubBtn">Generate Form</button>
+        </div>
+        <div class="col-sm-3">
+            <button type="button" class="btn btn-block btn-primary" id="mcqEditBtn" disabled="true">Edit Form</button>
+        </div>
 
     </div>
     <div class="form-group">
@@ -78,9 +81,11 @@
         </div>
     </div>
     <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="reset" id="mcqResetBtn" class="btn btn-primary">Reset</button>
-            <button type="button" class="btn btn-primary" id="mcqSubmitBtn">Save</button>
+        <div class="col-sm-6">
+            <button type="reset" class="btn btn-block btn-warning" id="mcqResetBtn">Reset</button>
+        </div>
+        <div class="col-sm-6">
+            <button type="button" class="btn btn-block btn-primary" id="mcqSubmitBtn">Save</button>
         </div>
     </div>
 </form>
@@ -96,40 +101,41 @@
                 <div class="row">
                     <form class="form-horizontal">
                         <div class="form-group">
-                            <label class="control-label col-sm-4" for="quesIDEdit">Ques ID: </label>
-                            <div class="col-sm-6"><input type="text" class="form-control input-sm" id="quesIDEdit" disabled/></div>
+                            <label class="control-label col-sm-offset-2 col-sm-3" for="quesIDEdit">Ques ID: </label>
+                            <div class="col-sm-4"><input type="text" class="form-control input-sm" id="quesIDEdit" disabled/></div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-4" for="mcqQuesEdit">Question: </label>
-                            <div class="col-sm-6"><input type="text" class="form-control input-sm" id="mcqQuesEdit"/></div>
+                            <label class="control-label col-sm-offset-2 col-sm-3" for="mcqQuesEdit">Question: </label>
+                            <div class="col-sm-4"><input type="text" class="form-control input-sm" id="mcqQuesEdit"/></div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-4" for="mcqOptionOneEdit">Option 1: </label>
-                            <div class="col-sm-6"><input type="text" class="form-control input-sm" id="mcqOptionOneEdit"/></div>
+                            <label class="control-label col-sm-offset-2 col-sm-3" for="mcqOptionOneEdit">Option 1: </label>
+                            <div class="col-sm-4"><input type="text" class="form-control input-sm" id="mcqOptionOneEdit"/></div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-4" for="mcqOptionTwoEdit">Option 2: </label>
-                            <div class="col-sm-6"><input type="text" class="form-control input-sm" id="mcqOptionTwoEdit"/></div>
+                            <label class="control-label col-sm-offset-2 col-sm-3" for="mcqOptionTwoEdit">Option 2: </label>
+                            <div class="col-sm-4"><input type="text" class="form-control input-sm" id="mcqOptionTwoEdit"/></div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-4" for="mcqOptionThreeEdit">Option 3: </label>
-                            <div class="col-sm-6"><input type="text" class="form-control input-sm" id="mcqOptionThreeEdit"/></div>
+                            <label class="control-label col-sm-offset-2 col-sm-3" for="mcqOptionThreeEdit">Option 3: </label>
+                            <div class="col-sm-4"><input type="text" class="form-control input-sm" id="mcqOptionThreeEdit"/></div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-4" for="mcqOptionFourEdit">Option 4: </label>
-                            <div class="col-sm-6"><input type="text" class="form-control input-sm" id="mcqOptionFourEdit"/></div>
+                            <label class="control-label col-sm-offset-2 col-sm-3" for="mcqOptionFourEdit">Option 4: </label>
+                            <div class="col-sm-4"><input type="text" class="form-control input-sm" id="mcqOptionFourEdit"/></div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-4" for="mcqRightAnswerEdit">Right Answer: </label>
-                            <div class="col-sm-6"><input type="text" class="form-control input-sm" id="mcqRightAnswerEdit"/></div>
+                            <label class="control-label col-sm-offset-2 col-sm-3" for="mcqRightAnswerEdit">Right Answer: </label>
+                            <div class="col-sm-4"><input type="text" class="form-control input-sm" id="mcqRightAnswerEdit"/></div>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="mcqQuesEditBtn">Save changes</button>
             </div>
         </div>
   </div>
 </div>
+
