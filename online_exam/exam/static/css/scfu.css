@@ -262,3 +262,6 @@ a.morelink {
 .form-horizontal .control-label{
     text-align: left;
 }
+.emptyDiv{ display:none;}
+.grnSign { color: #00ff00; }
+.redSign { color: #ff0000; }

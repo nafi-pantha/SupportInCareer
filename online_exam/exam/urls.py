@@ -80,7 +80,12 @@ urlpatterns = [
         auth_views.password_reset_confirm,{'template_name':'exam/password_reset_confirm.html'},
         name='password_reset_confirm'),
     url(r'^reset/done/$', auth_views.password_reset_complete,
-        {'template_name':'exam/password_reset_complete.html'} ,name='password_reset_complete'),    
+        {'template_name':'exam/password_reset_complete.html'} ,name='password_reset_complete'),
+
+    #Result Section
+    url(r'^user_result/$',views.getResult,name='user_result'),
+    url(r'^essay_result_details/$',views.getEssayResultDetails,name='essay_result_details'),
+
 
 
 ]
