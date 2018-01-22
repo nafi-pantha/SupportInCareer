@@ -86,6 +86,10 @@ urlpatterns = [
     url(r'^user_result/$',views.getResult,name='user_result'),
     url(r'^essay_result_details/$',views.getEssayResultDetails,name='essay_result_details'),
 
+    #Profile
+    url(r'^pic_update/$',views.getPicForm,name='pic_update'),
+    url(r'^pic_update_submit/$',views.getPicUpdate,name='pic_update_submit'),
+
 
 
 ]

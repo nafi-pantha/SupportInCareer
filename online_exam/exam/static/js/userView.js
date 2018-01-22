@@ -120,5 +120,49 @@ $(document).ready(function(){
             }
         });
     }
+    $('#profileLink').on('click',function(){
+        $('.main_content').removeClass('col-md-6').addClass('col-md-8');
+        $.ajax({
+            url: "/pic_update/",
+            type: "GET",
+            success: function(newData){
+                $('#picUpdateDiv').html(newData);
+            }
+        });
+    });
+    $('#profileImgDiv').on('click',function(){
+        $('#picEditModal').modal('show');
+    });
 
+    $.validator.addMethod('filesize', function (value, element, param) {
+        return this.optional(element) || (element.files[0].size <= param)
+    }, 'File size must be less than {0}Kb');
+
+    $("#picUpdateForm").validate({
+        rules: {
+            user_image: {
+                required: true,
+                extension: "jpg,jpeg,png,svg",
+                filesize: 20,
+            }
+        },
+        submitHandler: function(form) {
+            $.ajax({
+                type: $(form).attr('method'),
+                url: /pic_update_submit/,
+                data: new FormData(form),
+                mimeType: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(response) {
+                    $('#picEditModal').modal('hide');
+                    $("#profileImgDiv").load(" #profileImgDiv").fadeIn(1000);
+                    if(response.status=='1'){
+                        swal("Success!", "Successfully Added!", "success");
+                    }
+                }
+            });
+        }
+    });
 });

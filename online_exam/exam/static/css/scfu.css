@@ -99,9 +99,13 @@ a {
     padding-top: 35px;
     height: 100%;
 }
-#profileUserImage{
+/*#profileUserImage{
     height: 100px;
     width: 100px;
+}*/
+
+#profileUserImage:hover{
+    opacity: 0.5;
 }
 .panel-heading .accordion-toggle:after {
     font-family: 'Glyphicons Halflings';
@@ -223,9 +227,9 @@ fieldset[disabled] .btn-primary:hover {
     display: table;
 }
 
-input[type="file"] {
+/*input[type="file"] {
     display: none;
-}
+}*/
 
 .picture_slide_main .item img{
     display: block;

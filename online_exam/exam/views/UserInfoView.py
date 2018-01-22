@@ -1,11 +1,14 @@
 import json
 
+from django.contrib.auth.decorators import login_required
 from django.core import serializers
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, JsonResponse
 import datetime
 from django.contrib.auth.models import User
 from exam.models import UserInfo
+
+from exam.forms import UserInfoForm
 
 
 def userInfoInsert(request):
@@ -66,3 +69,23 @@ def userUpdate(request):
     else:
         return JsonResponse({'status': 2})
 
+@login_required
+def getPicUpdate(request):
+    if request.method == 'POST':
+        picture_form = UserInfoForm(request.POST, instance=request.user.userinfo)
+        user = request.user
+        if(picture_form.is_valid()):
+            profile = picture_form.save(commit=False)
+            profile.user = user
+            if('user_image' in request.FILES):
+                profile.user_image = request.FILES['user_image']
+                img = UserInfo.objects.all()
+                profile.save()
+                return JsonResponse({'status': 1})
+        return redirect('home')
+
+@login_required
+def getPicForm(request):
+    if request.method == 'GET':
+        picture_form = UserInfoForm(instance=request.user.userinfo)
+        return render(request, 'exam/picture_update.html', {'picture_form': picture_form})
