@@ -52,10 +52,11 @@ def reviewSubmit(request):
         userResult = UserResult.objects.create(test_type=2, gained_marks=total_marks,
                                   spend_time=15, datetime=datetime.datetime.now(), is_passed=is_passed,
                                   test_id=Test.objects.get(pk=test_id), user_id=user_id)
+        print(list)
         for value in list:
-            UserEssayAnswer.objects.filter(test_id=test_id,
-                                        user_id=user_id).update(individual_mark=value['mark'],
-                                                                suggestions=value['suggestions'])
+            print(value['suggestions'])
+            UserEssayAnswer.objects.filter(user_id=user_id, test_id=test_id, essay_question_id=value['quesid'])\
+                .update(individual_mark=value['mark'], suggestions=value['suggestions'])
         AdminReview.objects.filter(test_id=test_id,
                                     user_id=user_id).update(is_reviewed=True)
 

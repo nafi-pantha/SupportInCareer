@@ -161,24 +161,11 @@ $(document).ready(function(){
         }
     });
 
+    $('#id_email').addClass('form-control');
+    $('#forgetPassResetBtn').on('click', function(){
+        window.location = window.location.href;
+    });
+
 });
 
 
-/*
-,
-        submitHandler: function(form) {
-            $.ajax({
-                type: $(form).attr('method'),
-                url: /user_login/,
-                data: $(form).serialize(),
-                success: function(response) {
-                    if(response.results=='1'){
-                        window.location.href = "{% url 'home' %}"
-                    }
-                    if(response.results=='2'){
-                        swal("Error!", "Login Failed!", "error");
-                    }
-                }
-            });
-        }
-*/
