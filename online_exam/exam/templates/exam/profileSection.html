@@ -24,13 +24,15 @@
             <div class="form-group">
                 <label class="control-label col-sm-4" for="profileUserContact">User Contact</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="profileUserContact" value="{{ info.user_contact }}" name="profileUserContact">
+                    <input type="text" class="form-control" id="profileUserContact" value="{{ info.user_contact }}"
+                           name="profileUserContact">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-4" for="profileEmail">Email</label>
                 <div class="col-sm-6">
-                    <input type="email" class="form-control" id="profileEmail" value="{{ info.user.email }}" name="profileEmail">
+                    <input type="email" class="form-control" id="profileEmail" value="{{ info.user.email }}"
+                           name="profileEmail">
                 </div>
             </div>
             <!--<div class="form-group">
@@ -49,11 +51,11 @@
             <div class="form-group">
                 <label class="control-label col-sm-4" for="profileUserType">User Type</label>
                 <div class="col-sm-6" id="profileUserType">
-                {% if info.user.is_staff == 1 %}
+                    {% if info.user.is_staff == 1 %}
                     Admin
-                {% else %}
+                    {% else %}
                     User
-                {% endif %}
+                    {% endif %}
                 </div>
             </div>
             <div class="form-group">
@@ -69,10 +71,12 @@
 <div class="col-md-4">
     {% for info in userInfoList %}
     <div id="profileImgDiv">
-        {% if info.user_image %}
-          <img class="center-block img-responsive img-thumbnail" src="{{ info.user_image.url }}" alt="Image Not Found" id="profileUserImage">
+        {% if info.user_image == 'Null' %}
+            <img class="center-block img-responsive img-thumbnail proImgCanvas" src="{% static 'images/default_img.jpg' %}"
+             alt="Image Not Found" id="defaultUserImage">
         {% else %}
-          <img class="center-block img-responsive img-thumbnail" src="{% static "images/default_img.jpg" %}" alt="Image Not Found" id="profileUserImage">
+            <img class="center-block img-responsive img-thumbnail proImgCanvas" src="{{ info.user_image.url }}" alt="profilePic"
+             id="profileUserImage">
         {% endif %}
     </div>
     {% endfor %}
@@ -82,23 +86,23 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <form enctype="multipart/form-data" method="POST" id="picUpdateForm">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">Edit Image</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm-12" id="picUpdateDiv">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Edit Image</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12" id="picUpdateDiv">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
             </form>
         </div>
-  </div>
+    </div>
 </div>

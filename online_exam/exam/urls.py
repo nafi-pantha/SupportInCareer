@@ -90,4 +90,8 @@ urlpatterns = [
     url(r'^pic_update/$',views.getPicForm,name='pic_update'),
     url(r'^pic_update_submit/$',views.getPicUpdate,name='pic_update_submit'),
 
+    #Pass Change
+    url(r'^oldPass_Check/$',views.getOldPassCheck,name='oldPass_Check'),
+    url(r'^user_pass_change/$',views.getPassChange,name='user_pass_change'),
+
 ]

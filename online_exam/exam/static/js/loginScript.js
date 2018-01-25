@@ -57,6 +57,10 @@ $(document).ready(function(){
           && /[a-z]/i.test(value);
     }, 'Must contain at least one number and one char');
 
+    /*jQuery.validator.addMethod("notEqualTo", function(value, element, param) {
+        return this.optional(element) || value != param;
+    }, "Please specify a different (non-default) value");*/
+
     $(document).on('blur','#regform input',function(){
         $.unblockUI();
     });
@@ -173,5 +177,68 @@ $(document).ready(function(){
     $('#forgetPassResetBtn').on('click', function(){
         window.location = window.location.href;
     });
+    if(location.pathname){
+        urlPath=location.pathname;
+        if(urlPath.split('/')[1]=='reset'){
+            $('#registerLink').hide();
+            $('#loginLink').hide();
+        }
+    }
+    $("#passChangeForm").validate({
+        rules: {
+            oldPass:{
+                required: true,
+                remote: {
+                    param: {
+                        url: "/oldPass_Check/",
+                        type: "POST",
+                        data:{'csrfmiddlewaretoken': function() {
+                                return $("input[name=csrfmiddlewaretoken]").val();
+                            }
+                        }
+                    }
+                }
+            },
+            newPass: {
+                required: true,
+                strongPassword: true,
+                notEqualTo: "#oldPass"
+            },
+            newPassConfirm: {
+                required: true,
+                equalTo: "#newPass"
+            },
+        },
+        messages: {
+            newPass: {
+              notEqualTo: "Can't be same as Old Password!"
+            }
+        },submitHandler: function(form) {
+            $.ajax({
+                type: $(form).attr('method'),
+                url: /user_pass_change/,
+                data: $(form).serialize(),
+                success: function(response) {
+                    if(response.status=='1'){
+                        swal("Success!", "Successfully Updated!", "success");
+                        resetPassChangeForm();
 
+                    }
+                    else{
+                        swal("Error!", "Can't change!", "error");
+                        resetPassChangeForm();
+                    }
+                }
+            });
+        }
+    });
+    function resetPassChangeForm(){
+        var validator = $( "#passChangeForm" ).validate();
+        validator.resetForm();
+        $('#oldPass').val('');
+        $('#newPass').val('');
+        $('#newPassConfirm').val('');
+        $('#changePassModal').modal('hide');
+        $(":input").closest('.form-group').removeClass('has-success');
+    }
 });

@@ -1,6 +1,7 @@
 import json
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import check_password
 from django.core import serializers
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, JsonResponse
@@ -89,3 +90,31 @@ def getPicForm(request):
     if request.method == 'GET':
         picture_form = UserInfoForm(instance=request.user.userinfo)
         return render(request, 'exam/picture_update.html', {'picture_form': picture_form})
+
+@login_required
+def getOldPassCheck(request):
+    if (request.method == "POST"):
+        user = request.user
+        oldPass = request.POST.get('oldPass')
+        isPassOK=check_password(oldPass, user.password)
+        if(not isPassOK):
+            return JsonResponse("Password mismatch!", safe=False)
+        else:
+            return JsonResponse("true", safe=False)
+    else:
+        return HttpResponse("Problem")
+
+@login_required
+def getPassChange(request):
+    if(request.method=="POST"):
+        oldPass = request.POST.get('oldPass')
+        newPass = request.POST.get('newPass')
+        if(oldPass==newPass):
+            return JsonResponse({'status': 2})
+        else:
+            passChange = User.objects.get(id=request.user.id)
+            passChange.set_password(newPass)
+            passChange.save()
+            return JsonResponse({'status': 1})
+    else:
+        return HttpResponse("Problem")

@@ -110,7 +110,7 @@ a {
     width: 100px;
 }*/
 
-#profileUserImage:hover{
+.proImgCanvas:hover{
     opacity: 0.5;
 }
 .panel-heading .accordion-toggle:after {
@@ -281,9 +281,43 @@ a.morelink {
 .margin_top_20{
     margin-top: 20px;
 }
+.margin_bot_20{
+    margin-bottom: 20px;
+}
 .forgetPass form p>label{
     display: none;
 }
 .errorlist li{
     color: #FF0000;
+}
+.margin_top_10_per{
+    margin-top: 10%;
+}
+.rightUserMenu li i{
+    margin-right: 10px;
+}
+.inset {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  /*box-shadow:
+    inset 0 0 0 2px rgba(255,255,255,0.6),
+    0 1px 1px rgba(0,0,0,0.1);
+  background-color: transparent !important;*/
+  z-index: 999;
+}
+
+.inset img {
+  border-radius: inherit;
+  width: inherit;
+  height: inherit;
+  display: block;
+  position: relative;
+  z-index: 998;
+  margin-top: 25%;
+  margin-right: 10px;
+  margin-bottom: auto;
+}
+.navbar-right li{
+    margin-right: 7px;
 }
