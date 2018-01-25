@@ -1,7 +1,7 @@
 from .UserInfoView import *
 from .SubjectView import *
 from .TestView import *
-# from .ProfileUpdateView import *
+from .ProfileUpdateView import *
 from .McqQuestionView import *
 from .EssayQuestionView import *
 from .RegistrationView import *

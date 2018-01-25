@@ -69,6 +69,14 @@ $(document).ready(function(){
                 minlength: 5,
                 remote: "/username_Check/"
             },
+            firstName:{
+                required: true,
+                minlength: 3,
+            },
+            lastName:{
+                required: true,
+                minlength: 3,
+            },
             email: {
                 required: true,
                 email: true,
@@ -167,5 +175,3 @@ $(document).ready(function(){
     });
 
 });
-
-

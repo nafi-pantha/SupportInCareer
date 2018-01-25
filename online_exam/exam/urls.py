@@ -90,6 +90,4 @@ urlpatterns = [
     url(r'^pic_update/$',views.getPicForm,name='pic_update'),
     url(r'^pic_update_submit/$',views.getPicUpdate,name='pic_update_submit'),
 
-
-
 ]

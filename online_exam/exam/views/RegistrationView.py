@@ -21,12 +21,8 @@ def userRegistration(request):
     if(request.method=="POST"):
         userName = request.POST.get('userName')
         userContact = request.POST.get('userContact')
-
-        # if(request.FILES['pic']):
-        #     user_image = request.FILES['pic']
-        # else:
-        #     print("File is not Found")
-
+        firstName = request.POST.get('firstName')
+        lastName = request.POST.get('lastName')
         email = request.POST.get('email')
         pwd = request.POST.get('pwd')
         confirm_pwd = request.POST.get('password2')
@@ -34,7 +30,8 @@ def userRegistration(request):
         if(not(User.objects.filter(username = userName).exists())):
             if(pwd == confirm_pwd):
                 print("inside in the if condition")
-                user = User.objects.create_user(username=userName,email=email,password=pwd)
+                user = User.objects.create_user(username=userName,first_name=firstName,
+                    last_name = lastName,email=email,password=pwd)
                 user.is_active=False
                 user.is_staff = False
                 user.save()

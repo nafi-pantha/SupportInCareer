@@ -1,8 +1,8 @@
 from django.shortcuts import render,get_object_or_404
-from django.http import HttpResponse
-# from exam.models import UserInfo
-#
-# def profileUpdate(request,pk):
-#     obj = get_object_or_404(UserInfo,pk=pk)
-#
-#     return render(request,'exam/onlineExam.html',{'obj':obj})
+import json
+from django.http import HttpResponse, JsonResponse
+from django.core import serializers
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm

@@ -136,14 +136,14 @@ $(document).ready(function(){
 
     $.validator.addMethod('filesize', function (value, element, param) {
         return this.optional(element) || (element.files[0].size <= param)
-    }, 'File size must be less than {0}Kb');
+    }, 'File size must be less than 300KB');
 
     $("#picUpdateForm").validate({
         rules: {
             user_image: {
                 required: true,
                 extension: "jpg,jpeg,png,svg",
-                filesize: 20,
+                filesize: 300000,
             }
         },
         submitHandler: function(form) {

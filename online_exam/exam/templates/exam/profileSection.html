@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <div class="col-md-8">
     <div class="row">
         <form class="form-horizontal" id="profileSectionForm" method="POST">
@@ -12,6 +14,14 @@
                 <div class="col-sm-6" id="profileUserName">{{ info.user.username }}</div>
             </div>
             <div class="form-group">
+                <label class="control-label col-sm-4" for="profileFirstName">First Name</label>
+                <div class="col-sm-6" id="profileFirstName">{{ info.user.first_name }}</div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="profileLastName">Last Name</label>
+                <div class="col-sm-6" id="profileLastName">{{ info.user.last_name }}</div>
+            </div>
+            <div class="form-group">
                 <label class="control-label col-sm-4" for="profileUserContact">User Contact</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="profileUserContact" value="{{ info.user_contact }}" name="profileUserContact">
@@ -23,7 +33,7 @@
                     <input type="email" class="form-control" id="profileEmail" value="{{ info.user.email }}" name="profileEmail">
                 </div>
             </div>
-            <div class="form-group">
+            <!--<div class="form-group">
                 <label class="control-label col-sm-4" for="profilePassword">Password</label>
                 <div class="col-sm-6">
                     <input type="password" class="form-control" id="profilePassword" placeholder="Enter password" name="profilePassword">
@@ -35,7 +45,7 @@
                     <input type="password" class="form-control" id="confirmProfilePassword" placeholder="Confirm password"
                            name="confirmProfilePassword">
                 </div>
-            </div>
+            </div>-->
             <div class="form-group">
                 <label class="control-label col-sm-4" for="profileUserType">User Type</label>
                 <div class="col-sm-6" id="profileUserType">
@@ -59,7 +69,11 @@
 <div class="col-md-4">
     {% for info in userInfoList %}
     <div id="profileImgDiv">
-        <img class="center-block img-responsive img-thumbnail" src="{{ info.user_image.url }}" alt="Image Not Found" id="profileUserImage">
+        {% if info.user_image %}
+          <img class="center-block img-responsive img-thumbnail" src="{{ info.user_image.url }}" alt="Image Not Found" id="profileUserImage">
+        {% else %}
+          <img class="center-block img-responsive img-thumbnail" src="{% static "images/default_img.jpg" %}" alt="Image Not Found" id="profileUserImage">
+        {% endif %}
     </div>
     {% endfor %}
 </div>

@@ -9,3 +9,11 @@ class UserInfo(models.Model):
     user_image = models.FileField(upload_to='profile_pics',blank=True,null=True)
     approver = models.CharField(max_length=200,null=True,blank=True)
     datetime = models.DateTimeField()
+
+    def save(self, *args, **kwargs):
+        try:
+            previous = UserInfo.objects.get(id=self.id)
+            if previous.user_image != self.user_image:
+                previous.user_image.delete(save=False)
+        except: pass
+        super(UserInfo, self).save(*args, **kwargs)
