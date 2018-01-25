@@ -65,15 +65,15 @@
                 {% url 'password_reset_confirm' as passResetConfirm %}
                 {% url 'password_reset_complete' as passResetComplete %}
 
-                {% if request.path != passReset or request.path != passResetDone or request.path != passResetConfirm or request.path != passResetComplete %}
+                {% if request.path == passReset or request.path == passResetDone or request.path == passResetConfirm or request.path == passResetComplete %}
+
+                {% else %}
                     <div class="collapse navbar-collapse" id="isNotLoggedIn">
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#" id="registerLink">Sign Up</a></li>
                             <li><a href="#" id="loginLink" data-toggle="modal" data-target="#loginModal">Login</a></li>
                         </ul>
                     </div>
-                {% else %}
-
                 {% endif %}
             {% endif %}
         </div>
