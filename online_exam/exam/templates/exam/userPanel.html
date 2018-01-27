@@ -15,7 +15,7 @@
             </ul>
         </div>
 
-        <div class="col-md-offset-1 col-md-6 main_content">
+        <div class="col-md-offset-1 col-md-8 main_content">
             <div class="tab-content">
 
                 <!--Home Section Start-->
@@ -36,20 +36,27 @@
 
                 <!--MCQ Exam Section Start-->
                 <div id="mcqExam" class="tab-pane fade">
-                    <h3>MCQ</h3>
-                    <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-                        explicabo.</p>
-                    {% include "up_mcqExamSection.html" %}
-
+                    <div class="col-md-8">
+                        <h3>MCQ</h3>
+                        <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+                            explicabo.</p>
+                        {% include "up_mcqExamSection.html" %}
+                    </div>
+                    <div class="col-md-4 quesController">
+                    </div>
                 </div>
                 <!--MCQ Exam Section End-->
 
                 <!--Essay Exam Section Start-->
                 <div id="essayExam" class="tab-pane fade">
-                    <h3>Essay</h3>
-                    <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-                        explicabo.</p>
-                    {% include "up_essayExamSection.html" %}
+                    <div class="col-md-8">
+                        <h3>Essay</h3>
+                        <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+                            explicabo.</p>
+                        {% include "up_essayExamSection.html" %}
+                    </div>
+                    <div class="col-md-4 quesController">
+                    </div>
                 </div>
                 <!--Essay Exam Section End-->
 
@@ -61,8 +68,8 @@
                 <!--Result Section End-->
             </div>
         </div>
-        <div class="col-md-3 quesController">
-        </div>
+        <!--<div class="col-md-3 quesController">
+        </div>-->
     </div>
 </div>
 

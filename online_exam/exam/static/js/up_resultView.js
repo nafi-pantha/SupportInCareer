@@ -1,6 +1,5 @@
 $(document).ready(function(){
     $('#resultLink').on('click',function(){
-        $('.main_content').removeClass('col-md-6').addClass('col-md-8');
         up_resultTestType();
     });
 

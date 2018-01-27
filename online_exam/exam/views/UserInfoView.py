@@ -118,3 +118,18 @@ def getPassChange(request):
             return JsonResponse({'status': 1})
     else:
         return HttpResponse("Problem")
+
+def getProfileUpdate(request):
+    if(request.method=="POST"):
+        first_name = request.POST.get('profileFirstName')
+        last_name = request.POST.get('profileLastName')
+        user_contact = request.POST.get('profileUserContact')
+        print(first_name)
+        print(last_name)
+        print(user_contact)
+        User.objects.filter(id=request.user.id).update(first_name=first_name, last_name=last_name)
+        UserInfo.objects.filter(user_id=request.user.id).update(user_contact=user_contact)
+        #User.objects.filter(userinfo__user_id=request.user.id).update(first_name=first_name, last_name=last_name, user_contact=user_contact)
+        return JsonResponse({'status': 1})
+    else:
+        return JsonResponse({'status': 2})

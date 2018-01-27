@@ -15,11 +15,17 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-4" for="profileFirstName">First Name</label>
-                <div class="col-sm-6" id="profileFirstName">{{ info.user.first_name }}</div>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="profileFirstName" value="{{ info.user.first_name }}"
+                           name="profileFirstName">
+                </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-4" for="profileLastName">Last Name</label>
-                <div class="col-sm-6" id="profileLastName">{{ info.user.last_name }}</div>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="profileLastName" value="{{ info.user.last_name }}"
+                           name="profileLastName">
+                </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-4" for="profileUserContact">User Contact</label>
@@ -32,22 +38,9 @@
                 <label class="control-label col-sm-4" for="profileEmail">Email</label>
                 <div class="col-sm-6">
                     <input type="email" class="form-control" id="profileEmail" value="{{ info.user.email }}"
-                           name="profileEmail">
+                           name="profileEmail" readonly>
                 </div>
             </div>
-            <!--<div class="form-group">
-                <label class="control-label col-sm-4" for="profilePassword">Password</label>
-                <div class="col-sm-6">
-                    <input type="password" class="form-control" id="profilePassword" placeholder="Enter password" name="profilePassword">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-4" for="confirmProfilePassword">Confirm Password</label>
-                <div class="col-sm-6">
-                    <input type="password" class="form-control" id="confirmProfilePassword" placeholder="Confirm password"
-                           name="confirmProfilePassword">
-                </div>
-            </div>-->
             <div class="form-group">
                 <label class="control-label col-sm-4" for="profileUserType">User Type</label>
                 <div class="col-sm-6" id="profileUserType">
@@ -59,8 +52,11 @@
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-offset-4 col-sm-6">
-                    <button type="button" class="btn btn-block btn-primary" id="profileSaveBtn">Save</button>
+                <div class="col-sm-offset-4 col-sm-3">
+                    <button type="reset" class="btn btn-block btn-warning">Reset</button>
+                </div>
+                <div class="col-sm-3">
+                    <button type="submit" class="btn btn-block btn-primary" id="profileSaveBtn">Save</button>
                 </div>
             </div>
             {% endfor %}

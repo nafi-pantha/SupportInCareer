@@ -120,8 +120,9 @@ $(document).ready(function(){
             }
         });
     }
+
     $('#profileLink').on('click',function(){
-        $('.main_content').removeClass('col-md-6').addClass('col-md-8');
+        /*$('.main_content').removeClass('col-md-6').addClass('col-md-8');*/
         $.ajax({
             url: "/pic_update/",
             type: "GET",
@@ -165,4 +166,41 @@ $(document).ready(function(){
             });
         }
     });
+    $("#profileSectionForm").validate({
+        onkeyup: false,
+        rules: {
+            profileFirstName:{
+                required: true,
+                minlength: 3
+            },
+            profileLastName:{
+                required: true,
+                minlength: 3
+            },
+            profileUserContact: {
+                digits: true,
+                minlength: 11
+            },
+        },submitHandler: function(form) {
+            $.ajax({
+                type: $(form).attr('method'),
+                url: /profile_update/,
+                data: $(form).serialize(),
+                success: function(response) {
+                    if(response.status==1){
+                        swal("Success!", "Successfully Updated!", "success");
+                        resetProfileSection();
+                    }else{
+                        swal("Error!", "Something Wrong!", "error");
+                        resetProfileSection();
+                    }
+                }
+            });
+        }
+    });
+    function resetProfileSection(){
+        var validator = $( "#profileSectionForm" ).validate();
+        validator.resetForm();
+        $(":input").closest('.form-group').removeClass('has-success');
+    }
 });

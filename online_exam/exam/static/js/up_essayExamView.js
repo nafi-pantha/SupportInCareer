@@ -1,5 +1,8 @@
 $(document).ready(function() {
     $('#essayExamLink').on('click',function(){
+        /*if($('.main_content').hasClass('col-md-8')){
+            $('.main_content').removeClass('col-md-8').addClass('col-md-6');
+        }*/
         $.ajax({
             url: "/test/",
             type: "GET",

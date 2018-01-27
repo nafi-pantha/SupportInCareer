@@ -53,14 +53,15 @@ $(document).ready(function(){
                    'test_id':$('#reviewTest').val()},
             dataType:"JSON",
             success: function(response) {
+                console.log(response);
                 if(response){
                     $("#reviewAnsTbl").find('tr').not(':first').remove();
                     var trHTML = '';
                     $.each(response,function(index,row){
                         $.each(row, function (key,value) {
-                            trHTML+= '<tr id='+value.essay_question_id+'>'+
-                            '<td><span>'+value.essay_question_id+'</span><input type="text" class="form-control hidden" id="quesid" name="quesid" value="'+value.essay_question_id+'"></td>'+
-                            '<td>'+value.essay_question_id__essay_question+'</td>'+
+                            trHTML+= '<tr id='+value.ques_id+'>'+
+                            '<td><span>'+value.ques_id+'</span><input type="text" class="form-control hidden" id="quesid" name="quesid" value="'+value.ques_id+'"></td>'+
+                            '<td>'+value.ques+'</td>'+
                             '<td>'+value.user_answer+'</td>'+
                             '<td><input type="text" class="form-control reviewMark" name="mark"></td>'+
                             '<td><input type="text" class="form-control" name="suggestions"></td></tr>';
