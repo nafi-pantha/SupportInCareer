@@ -1,3 +1,4 @@
+from django.db import connection
 from django.http import JsonResponse
 from exam.models import UserResult
 
@@ -19,14 +20,22 @@ def getResult(request):
 
 def getEssayResultDetails(request):
     if(request.method=="GET"):
-        current_user = request.user
         test_id = request.GET.get('test_id')
-        resultList = UserEssayAnswer.objects.values('essay_question_id','essay_question_id__essay_question',
-                                                    'user_answer', 'individual_mark', 'suggestions',
-                                                    'essay_question_id__essay_question_marks')\
-                                                    .filter(user_id=current_user.id, test_id=test_id)
-        print(resultList)
-        if (resultList):
-            return JsonResponse(list(resultList), safe=False)
+        user_id=request.user.id
+
+        cursor = connection.cursor()
+        cursor.execute(
+            """SELECT A.id, A.essay_question_id_id, B.essay_question, A.user_answer, \
+                A.individual_mark, A.suggestions, B.essay_question_marks \
+                FROM exam_useressayanswer A \
+                INNER JOIN exam_essayquestion B on B.essay_question_id= A.essay_question_id_id \
+                AND B.test_id_id=A.test_id_id WHERE user_id=%s and B.test_id_id=%s""", [user_id, test_id])
+        rows = cursor.fetchall()
+        result = []
+        keys = ('id', 'ques_id', 'ques', 'user_answer', 'gained_marks', 'suggestions', 'actual_marks')
+        for row in rows:
+            result.append(dict(zip(keys, row)))
+        print(result)
+        return JsonResponse(list(result), safe=False)
     else:
         return JsonResponse({'status': 2})

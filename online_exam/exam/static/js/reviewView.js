@@ -63,11 +63,13 @@ $(document).ready(function(){
                             '<td><span>'+value.ques_id+'</span><input type="text" class="form-control hidden" id="quesid" name="quesid" value="'+value.ques_id+'"></td>'+
                             '<td>'+value.ques+'</td>'+
                             '<td>'+value.user_answer+'</td>'+
-                            '<td><input type="text" class="form-control reviewMark" name="mark"></td>'+
+                            /*'<td><input type="text" class="form-control reviewMark" id="reviewMark" name="mark"></td>'+*/
+                            '<td><select class="form-control reviewMark" name="mark"></select></td>'+
                             '<td><input type="text" class="form-control" name="suggestions"></td></tr>';
                         });
                     });
                     $('#reviewAnsTbl').append(trHTML);
+                    getRatingMarks();
                 }
             }
         });
@@ -89,7 +91,7 @@ $(document).ready(function(){
         $('#reviewAnsTbl').find('tr:not(:has(th))').each(function(){
             var id=$(this).attr('id');
             var row={};
-            $(this).find('input').each(function(){
+            $(this).find(':input').each(function(){
                 row[$(this).attr('name')]=$(this).val();
             });
             data.push(row);
@@ -115,4 +117,28 @@ $(document).ready(function(){
             }
         });
     });
+
+    function getRatingMarks(){
+        $.ajax({
+            url: "/rating_marks/",
+            type: "GET",
+            data: {'test_id':$('#reviewTest').val()},
+            dataType:"JSON",
+            success: function(response) {
+                if(response.length!=0){
+                    resArr = [];
+                    $.each(response,function(index,row){
+                        $.each(row, function(k, v){
+                            resArr.push(v);
+                        });
+                    });
+                    $('.reviewMark').each(function(index,row){
+                        for(var i=0; i<= resArr[index]; i++){
+                             $(this).append($("<option></option>").text(i).val(i));
+                        }
+                    });
+                }
+            }
+        });
+    }
 });

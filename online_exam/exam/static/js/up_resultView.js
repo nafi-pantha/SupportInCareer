@@ -72,11 +72,11 @@ $(document).ready(function(){
                         }
                   },
             "columns": [
-                { "data": "essay_question_id" },
-                { "data": "essay_question_id__essay_question" },
-                { "data": "essay_question_id__essay_question_marks" },
+                { "data": "ques_id" },
+                { "data": "ques" },
                 { "data": "user_answer" },
-                { "data": "individual_mark" },
+                { "data": "actual_marks" },
+                { "data": "gained_marks" },
                 { "data": "suggestions" }
             ],
             "columnDefs": [{

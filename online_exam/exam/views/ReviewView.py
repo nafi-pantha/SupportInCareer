@@ -42,7 +42,7 @@ def getUserAnswerReview(request):
 
         cursor = connection.cursor()
         cursor.execute(
-            """SELECT A.id, A.essay_question_id_id, B.essay_question, A.user_answer \
+            """SELECT A.id, A.essay_question_id_id, B.essay_question, A.user_answer, B.essay_question_marks \
               FROM exam_useressayanswer A \
               INNER JOIN exam_essayquestion B on B.essay_question_id= A.essay_question_id_id \
               AND B.test_id_id=A.test_id_id WHERE user_id=%s and B.test_id_id=%s""", [user_id, test_id])
@@ -55,6 +55,18 @@ def getUserAnswerReview(request):
     else:
         return HttpResponse("Problem")
 
+def getRatingMarks(request):
+    if (request.method == "GET"):
+        test_id = request.GET.get('test_id')
+        results = EssayQuestion.objects.filter(test_id=test_id).values_list('essay_question_marks')
+        resArr=[]
+        print(results.count())
+        for row in results:
+            resArr.append(row)
+        print(resArr)
+        return JsonResponse(list(results), safe=False)
+    else:
+        return HttpResponse("Problem")
 
 def reviewSubmit(request):
     if (request.method == "POST"):

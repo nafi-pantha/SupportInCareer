@@ -60,6 +60,7 @@ urlpatterns = [
     url(r'^getTestListReview/$',views.getTestListReview,name='getTestListReview'),
     url(r'^getUserAnswerReview/$',views.getUserAnswerReview,name='getUserAnswerReview'),
     url(r'^review_submit/$',views.reviewSubmit,name='review_submit'),
+    url(r'^rating_marks/$',views.getRatingMarks,name='rating_marks'),
 
     #System URL's
     url(r'^user_status/$',views.getUserStatus,name='user_status'),
