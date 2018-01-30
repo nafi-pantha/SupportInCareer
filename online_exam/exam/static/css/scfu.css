@@ -284,6 +284,9 @@ a.morelink {
 .margin_bot_20{
     margin-bottom: 20px;
 }
+.margin_top_30{
+    margin-top: 30px;
+}
 .forgetPass form p>label{
     display: none;
 }
@@ -320,4 +323,33 @@ a.morelink {
 }
 .navbar-right li{
     margin-right: 7px;
+}
+
+.footer-bottom {
+    background-color: #15224F;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+.copyright {
+    color: #FFFFFF;
+    line-height: 30px;
+    min-height: 20px;
+    padding: 5px 0;
+    text-align: right;
+    font-size: 1.25rem;
+}
+.design {
+    color: #FFFFFF;
+    line-height: 30px;
+    min-height: 20px;
+    padding: 5px 0;
+    text-align: left;
+    font-size: 1.25rem;
+}
+.design a {
+    color: #FFFFFF;
 }

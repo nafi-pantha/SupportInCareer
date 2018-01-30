@@ -7,11 +7,11 @@
             {% for info in userInfoList %}
             <div class="form-group">
                 <label class="control-label col-sm-4" for="profileUserID">User ID</label>
-                <div class="col-sm-6" id="profileUserID">{{ info.user.id }}</div>
+                <div class="col-sm-6 control-label" id="profileUserID">{{ info.user.id }}</div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-4" for="profileUserName">User Name</label>
-                <div class="col-sm-6" id="profileUserName">{{ info.user.username }}</div>
+                <div class="col-sm-6 control-label" id="profileUserName">{{ info.user.username }}</div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-4" for="profileFirstName">First Name</label>
@@ -43,15 +43,15 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-4" for="profileUserType">User Type</label>
-                <div class="col-sm-6" id="profileUserType">
+                <div class="col-sm-6 control-label" id="profileUserType">
                     {% if info.user.is_staff == 1 %}
-                    Admin
+                        Admin
                     {% else %}
-                    User
+                        User
                     {% endif %}
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group margin_top_30">
                 <div class="col-sm-offset-4 col-sm-3">
                     <button type="reset" class="btn btn-block btn-warning">Reset</button>
                 </div>
