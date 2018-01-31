@@ -1,16 +1,16 @@
 <form class="form-horizontal" id="essaySectionForm">
     {% csrf_token %}
     <div class="form-group">
-        <label class="control-label col-sm-3" for="essaySubjectList">Subject</label>
-        <div class="col-sm-4">
+        <label class="control-label col-sm-2" for="essaySubjectList">Subject</label>
+        <div class="col-sm-3">
             <select class="form-control" id="essaySubjectList">
                 <option>---Please Select---</option>
             </select>
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-sm-3" for="essayTestList">Test</label>
-        <div class="col-sm-4">
+        <label class="control-label col-sm-2" for="essayTestList">Test</label>
+        <div class="col-sm-3">
             <select class="form-control" id="essayTestList">
                 <option>---Please Select---</option>
             </select>
@@ -18,26 +18,29 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label col-sm-3" for="essaySummary">Essay Summary</label>
-        <div class="col-sm-4"><textarea class="form-control vresize" id="essaySummary"></textarea></div>
+        <label class="control-label col-sm-2" for="essaySummary">Essay Summary</label>
+        <div class="col-sm-6"><textarea class="form-control vresize" id="essaySummary"></textarea></div>
     </div>
     <div class="form-group">
-        <label class="control-label col-sm-3" for="essayMaxQuesNo">Max. Essay Ques: </label>
-        <div class="col-sm-4"><span id="essayMaxQuesNo"></span></div>
+        <label class="control-label col-sm-2" for="essayMaxQuesNo">Max. Ques: </label>
+        <div class="col-sm-3"><span id="essayMaxQuesNo"></span></div>
     </div>
     <div class="form-group">
-        <label class="control-label col-sm-3" for="essayExamTime">Essay Exam Time: </label>
-        <div class="col-sm-4"><span id="essayExamTime"></span></div>
+        <label class="control-label col-sm-2" for="essayExamTime">Exam Time: </label>
+        <div class="col-sm-3"><span id="essayExamTime"></span></div>
     </div>
     <div class="form-group">
-        <label class="control-label col-sm-3" for="essayTotalMarks">Total Marks: </label>
-        <div class="col-sm-4"><span id="essayTotalMarks"></span></div>
+        <label class="control-label col-sm-2" for="essayTotalMarks">Total Marks: </label>
+        <div class="col-sm-3"><span id="essayTotalMarks"></span></div>
     </div>
     <div class="form-group">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-3"><button type="button" class="btn btn-primary" id="essayQuesSubBtn">Generate Question Submit Form</button></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-2"><button type="button" id="essayEditBtn" class="btn btn-primary" disabled="true">Edit</button></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-3">
+            <button type="button" class="btn btn-block btn-primary" id="essayQuesSubBtn">Generate Form</button>
+        </div>
+        <div class="col-sm-3">
+            <button type="button" class="btn btn-block btn-primary" id="essayEditBtn" disabled="true">Edit Form</button>
+        </div>
 
     </div>
 
@@ -77,8 +80,11 @@
     </div>
 
     <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="button" class="btn btn-default" id="essaySubmitBtn">Save</button>
+        <div class="col-sm-6">
+            <button type="reset" class="btn btn-block btn-warning" id="essayResetBtn">Reset</button>
+        </div>
+        <div class="col-sm-6">
+            <button type="button" class="btn btn-block btn-primary" id="essaySubmitBtn">Save</button>
         </div>
     </div>
 </form>
@@ -94,23 +100,38 @@
                 <div class="row">
                     <form class="form-horizontal">
                         <div class="form-group">
-                            <label class="control-label col-sm-4" for="essayQuesIDEdit">Ques ID: </label>
-                            <div class="col-sm-6"><input type="text" class="form-control input-sm" id="essayQuesIDEdit" disabled/></div>
+                            <label class="control-label col-sm-offset-2 col-sm-3" for="essayQuesIDEdit">Ques ID: </label>
+                            <div class="col-sm-4"><input type="text" class="form-control input-sm" id="essayQuesIDEdit" disabled/></div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-4" for="essayQuesEdit">Question: </label>
-                            <div class="col-sm-6"><input type="text" class="form-control input-sm" id="essayQuesEdit"/></div>
+                            <label class="control-label col-sm-offset-2 col-sm-3" for="essayQuesEdit">Question: </label>
+                            <div class="col-sm-4"><input type="text" class="form-control input-sm" id="essayQuesEdit"/></div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-4" for="questionMarkEdit">Question Marks: </label>
-                            <div class="col-sm-6"><input type="text" class="form-control input-sm" id="questionMarkEdit"/></div>
+                            <label class="control-label col-sm-offset-2 col-sm-3" for="questionMarkEdit">Question Marks: </label>
+                            <div class="col-sm-4">
+                                <!--<input type="text" class="form-control input-sm" id="questionMarkEdit"/>-->
+                                <select class="form-control input-sm" id="questionMarkEdit">
+                                    <option option selected="true" disabled="disabled">---Please Select---</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
                         </div>
 
                     </form>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="essayQuesEditBtn">Save changes</button>
             </div>
         </div>

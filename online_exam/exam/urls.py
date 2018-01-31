@@ -67,6 +67,7 @@ urlpatterns = [
     url(r'^user_type/$',views.getUserType,name='user_type'),
     url(r'^total_ques_no/$',views.getTotalQuesNo,name='total_ques_no'),
     url(r'^test_type/$',views.getTestType,name='test_type'),
+    url(r'^test_ques_no/$',views.getTestQuesNo,name='test_ques_no'),
 
     #email verification
     url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',

@@ -88,9 +88,11 @@ $(document).ready(function(){
             '<td><input type="text" class="form-control" id="option2" name="option2" placeholder="Option 2"></td>'+
             '<td><input type="text" class="form-control" id="option3" name="option3" placeholder="Option 3"></td>'+
             '<td><input type="text" class="form-control" id="option4" name="option4" placeholder="Option 4"></td>'+*/
-            '<td><input type="text" class="form-control" id="rightAnswer" name="rightAnswer" placeholder="Right Answer" required></td></tr>';
+            //'<td><input type="text" class="form-control" id="rightAnswer" name="rightAnswer" placeholder="Right Answer" required></td></tr>';
+            '<td><select class="form-control rightAnswer" name="rightAnswer"></select></td></tr>';
         }
         $('#mcqQuesTbl').append(trHTML);
+        getRightAnsOptions();
     });
 
 
@@ -99,7 +101,7 @@ $(document).ready(function(){
         $('#mcqQuesTbl').find('tr:not(:has(th))').each(function(){
             var id=$(this).attr('id');
             var row={};
-            $(this).find('textarea, input').each(function(){
+            $(this).find('textarea, :input').each(function(){
                 row[$(this).attr('name')]=$(this).val();
             });
             data.push(row);
@@ -216,4 +218,11 @@ $(document).ready(function(){
         mcq_available_check();
     });
 
+    function getRightAnsOptions(){
+        $('.rightAnswer').each(function(index,row){
+            for(var i=1; i<= 4; i++){
+                 $(this).append($("<option></option>").text(i).val(i));
+            }
+        });
+    }
 });

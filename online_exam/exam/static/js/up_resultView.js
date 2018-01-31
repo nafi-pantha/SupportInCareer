@@ -74,8 +74,8 @@ $(document).ready(function(){
             "columns": [
                 { "data": "ques_id" },
                 { "data": "ques" },
-                { "data": "user_answer" },
                 { "data": "actual_marks" },
+                { "data": "user_answer" },
                 { "data": "gained_marks" },
                 { "data": "suggestions" }
             ],

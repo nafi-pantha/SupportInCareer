@@ -78,10 +78,14 @@ $(document).ready(function(){
         var quesLimit=$("#essayMaxQuesNo").text();
         var trHTML = '';
         for(var i=1;i<=quesLimit;i++){
-            trHTML+= '<tr id='+i+'><td><span>'+i+'</span><input type="text" class="form-control hidden" id="qid" name="qid" value="'+i+'"></td><td><input type="text" class="form-control" id="ques" name="ques" placeholder="Question"></td>'+
-            '<td><input type="text" class="form-control" id="mark" name="mark" placeholder="Mrak"></td>';
+            trHTML+= '<tr id='+i+'><td><span>'+i+'</span><input type="text" class="form-control hidden" id="qid" name="qid" value="'+i+'"></td>'+
+            '<td><textarea class="form-control vresize ques" name="ques" placeholder="Question" required></textarea></td>'+
+            /*'<td><input type="text" class="form-control" id="ques" name="ques" placeholder="Question"></td>'+
+            '<td><input type="text" class="form-control" id="mark" name="mark" placeholder="Mark"></td>';*/
+            '<td><select class="form-control mark" name="mark"></select></td></tr>';
         }
         $('#essayQuesTbl').append(trHTML);
+        getMarkOptions();
     });
 
     $('#essaySubmitBtn').on('click',function(){
@@ -89,7 +93,7 @@ $(document).ready(function(){
         $('#essayQuesTbl').find('tr:not(:has(th))').each(function(){
             var id=$(this).attr('id');
             var row={};
-            $(this).find('input').each(function(){
+            $(this).find(':input').each(function(){
                 row[$(this).attr('name')]=$(this).val();
             });
             data.push(row);
@@ -195,5 +199,11 @@ $(document).ready(function(){
         $('#essayQuesTbl').hide();
         essay_available_check();
     });
-
+    function getMarkOptions(){
+        $('.mark').each(function(index,row){
+            for(var i=1; i<= 10; i++){
+                 $(this).append($("<option></option>").text(i).val(i));
+            }
+        });
+    }
 });

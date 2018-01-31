@@ -19,5 +19,8 @@ class SCFU_TestType(models.Model):
     test_type_id = models.IntegerField(primary_key=True)
     test_type_name = models.CharField(max_length=10)
 
-class SCFU_TestTotalQuesNo(models.Model):
+class SCFU_MCQTestTotalQuesNo(models.Model):
+    test_ques_no = models.IntegerField()
+
+class SCFU_EssayTestTotalQuesNo(models.Model):
     test_ques_no = models.IntegerField()

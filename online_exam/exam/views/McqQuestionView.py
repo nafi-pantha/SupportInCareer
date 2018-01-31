@@ -10,7 +10,6 @@ from exam.models import McqQuestion
 
 
 def index(request):
-
     return render(request,'exam/onlineExam.html',{})
 
 def getAllTestList(request):

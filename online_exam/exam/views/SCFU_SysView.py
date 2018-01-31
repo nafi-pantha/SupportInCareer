@@ -1,10 +1,11 @@
+from enum import Enum
+
 from django.http import JsonResponse, HttpResponse
 from exam.models import SCFU_UserStatus
 from exam.models import SCFU_UserType
-
 from exam.models import SCFU_McqTotalTest, SCFU_EssayTotalTest
 from exam.models import SCFU_TestType
-from exam.models import SCFU_TestTotalQuesNo
+from exam.models import SCFU_MCQTestTotalQuesNo, SCFU_EssayTestTotalQuesNo
 
 
 def getUserStatus(request):
@@ -32,7 +33,18 @@ def getTotalQuesNo(request):
 def getTestType(request):
     if (request.method == "GET"):
         testTypeList = SCFU_TestType.objects.values('test_type_id', 'test_type_name')
-        testQuesNoList= SCFU_TestTotalQuesNo.objects.values('test_ques_no')
-        return JsonResponse({'results': list(testTypeList), 'quesNoResult': list(testQuesNoList)})
+        return JsonResponse({'results': list(testTypeList)})
+    else:
+        return HttpResponse("Problem")
+
+def getTestQuesNo(request):
+    if (request.method == "GET"):
+        test_type=request.GET.get('test_type')
+        if(test_type=='1'):
+            testQuesNoList = SCFU_MCQTestTotalQuesNo.objects.values('test_ques_no')
+        else:
+            testQuesNoList = SCFU_EssayTestTotalQuesNo.objects.values('test_ques_no')
+
+        return JsonResponse({'quesNoResult': list(testQuesNoList)})
     else:
         return HttpResponse("Problem")

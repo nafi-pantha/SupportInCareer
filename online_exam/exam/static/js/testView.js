@@ -51,6 +51,7 @@ $(document).ready(function(){
                 $("#testIDList").append($("<option></option>").text('Test: ' +testNum).val(subjectID+testNum+testTypeID));
             }
         }
+        getTestQuesNo(testTypeID);
     });
     $('#testTotalQues').on('change',function(){
         $('#quesNo').html($('#testTotalQues').val());
@@ -238,7 +239,29 @@ $(document).ready(function(){
                                 .text(row.test_type_name)
                                 .val(row.test_type_id)
                         );
-                    });
+                    });/*
+                    $.each(response.quesNoResult,function(index,row){
+                        $("#testTotalQues")
+                        .append(
+                            $("<option></option>")
+                                .text(row.test_ques_no)
+                                .val(row.test_ques_no)
+                        );
+                    });*/
+                }
+            }
+        });
+    }
+
+    function getTestQuesNo(test_type){
+        $.ajax({
+            url: "/test_ques_no/",
+            type: "GET",
+            data: {'test_type':test_type},
+            dataType:"JSON",
+            success: function(response) {
+                $("#testTotalQues").find('option').not(':first').remove();
+                if(response.length!=0){
                     $.each(response.quesNoResult,function(index,row){
                         $("#testTotalQues")
                         .append(
