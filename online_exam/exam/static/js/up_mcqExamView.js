@@ -7,16 +7,16 @@ $(document).ready(function(){
             success: function(response) {
                 $("#mcqExamSubjectList").find('option').not(':first').remove();
                 if(response.length!=0){
-                    $.each(response,function(index,row){
-                        $.each(row, function(k, v){
+                    $.each(response.results,function(index,row){
+                        //$.each(row, function(k, v){
                             //console.log(v.subject_id);
                             $("#mcqExamSubjectList")
                             .append(
                                 $("<option></option>")
-                                    .text(v.subject_id+':'+v.subject_name)
-                                    .val(v.subject_id)
+                                    .text(row.subject_id+':'+row.subject_name)
+                                    .val(row.subject_id)
                             );
-                        });
+                        //});
                     });
                 }
             }

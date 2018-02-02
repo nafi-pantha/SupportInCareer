@@ -27,7 +27,7 @@
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="testName">Test Name</label>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <input type="text" class="form-control" id="testName" required
                        placeholder="Test Name" name="testName">
             </div>
@@ -42,11 +42,11 @@
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="totalMarks">Total Marks</label>
-            <div class="col-sm-1" id="quesNo"></div>
+            <!--<div class="col-sm-1" id="quesNo"></div>
             <div class="col-sm-2">
                 <input type="text" class="form-control" id="unitMark" placeholder="Unit Mark" name="unitMark" required>
-            </div>
-            <div class="col-sm-2">
+            </div>-->
+            <div class="col-sm-3">
                 <input type="text" class="form-control" id="totalMarks"
                        placeholder="Total Marks" name="totalMarks" readonly>
             </div>
@@ -54,8 +54,9 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="totalTime">Total Time</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" id="totalTime" required
-                       placeholder="Total Time in Minutes" name="totalTime">
+                <select class="form-control" id="totalTime" name="totalTime" required>
+                    <option option selected="true" disabled="disabled">---Please Select---</option>
+                </select>
             </div>
         </div>
         <input type="text" class="hidden" id="mode" value="0" placeholder="Mode" name="mode">

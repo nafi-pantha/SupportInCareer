@@ -67,14 +67,14 @@ $(document).ready(function(){
                 if(response){
                     $("#subjectEditTbl").find('tr').not(':first').remove();
                     var trHTML = '';
-                    $.each(response,function(index,row){
-                        $.each(row, function(key, value){
-                            trHTML +='<tr data-id="'+value.subject_id+'" data-subName="'+value.subject_name+'" data-mcq_total_test="'+value.mcq_total_test+'" data-essay_total_test="'+value.essay_total_test+'">'+
-                        '<td data-id="'+value.subject_id+'">' + value.subject_id +'</td>'+
-                        '<td>' + value.subject_name +'</td>'+
-                        '<td>' + value.mcq_total_test +'</td>'+
-                        '<td>' + value.essay_total_test +'</td>';
-                        });
+                    $.each(response.results,function(index,row){
+                        //$.each(row, function(key, value){
+                            trHTML +='<tr data-id="'+row.subject_id+'" data-subName="'+row.subject_name+'" data-mcq_total_test="'+row.mcq_total_test+'" data-essay_total_test="'+row.essay_total_test+'">'+
+                        '<td data-id="'+row.subject_id+'">' + row.subject_id +'</td>'+
+                        '<td>' + row.subject_name +'</td>'+
+                        '<td>' + row.mcq_total_test +'</td>'+
+                        '<td>' + row.essay_total_test +'</td>';
+                        //});
                     });
                     $('#subjectEditTbl').append(trHTML);
                 }

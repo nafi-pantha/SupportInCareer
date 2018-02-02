@@ -356,3 +356,15 @@ a.morelink {
 .tab-content{
     padding-bottom: 50px;
 }
+#summaryEdit:hover{
+    color: #6699FF;
+    cursor: pointer;
+}
+#summaryEditDone:hover{
+    color: #6699FF;
+    cursor: pointer;
+}
+#summaryEditCancel:hover{
+    color: #6699FF;
+    cursor: pointer;
+}

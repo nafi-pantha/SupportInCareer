@@ -5,12 +5,15 @@ import datetime
 
 from exam.models import Subject
 from exam.models import Test
+from exam.models import SCFU_TotalTime
+
 
 @login_required(login_url='user_login')
 def getAllSubjectList(request):
     if (request.method == "GET"):
         subjectList = Subject.objects.values('subject_id','subject_name','mcq_total_test','essay_total_test')
-        return JsonResponse({'results': list(subjectList)})
+        total_timeList = SCFU_TotalTime.objects.values('test_time')
+        return JsonResponse({'results': list(subjectList), 'total_timeList':list(total_timeList)})
     else:
         return HttpResponse("Problem")
 

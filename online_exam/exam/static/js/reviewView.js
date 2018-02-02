@@ -110,6 +110,7 @@ $(document).ready(function(){
                 console.log(response.status);
                 if(response.status=='1'){
                     swal("Success!", "Successfully Updated!", "success");
+                    resetReviewSection();
                 }
                 else{
                     swal("Error!", "Something Wrong!", "error");
@@ -141,4 +142,18 @@ $(document).ready(function(){
             }
         });
     }
+
+    function resetReviewSection(){
+        var validator = $( "#reviewSectionForm" ).validate();
+        validator.resetForm();
+        $("input[type=text]").val("");
+        $("textarea").val("");
+        $("select").prop('selectedIndex',0);
+        $(":input").closest('.form-group').removeClass('has-success');
+        $("#reviewAnsTbl tbody>tr").remove();
+    }
+
+    $('#reviewResetBtn').on('click',function(){
+        resetReviewSection();
+    });
 });

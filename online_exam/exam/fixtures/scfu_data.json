@@ -124,5 +124,29 @@
 		"fields": {
 			"test_ques_no": 10
 		}
+	},
+	{
+		"model": "exam.scfu_totaltime",
+		"fields": {
+			"test_time": 15
+		}
+	},
+	{
+		"model": "exam.scfu_totaltime",
+		"fields": {
+			"test_time": 30
+		}
+	},
+	{
+		"model": "exam.scfu_totaltime",
+		"fields": {
+			"test_time": 60
+		}
+	},
+	{
+		"model": "exam.scfu_totaltime",
+		"fields": {
+			"test_time": 90
+		}
 	}
 ]

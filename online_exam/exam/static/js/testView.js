@@ -9,16 +9,17 @@ $(document).ready(function(){
             success: function(response) {
                 var data=response;
                 $("#subjectList").find('option').not(':first').remove();
+                $("#totalTime").find('option').not(':first').remove();
                 if(response.length!=0){
-                    $.each(response,function(index,row){
-                        $.each(row, function(k, v){
+                    $.each(response.results,function(index,row){
+                        //$.each(row, function(k, v){
                             $("#subjectList")
                             .append(
                                 $("<option></option>")
-                                    .text(v.subject_id+':'+v.subject_name)
-                                    .val(v.subject_id)
+                                    .text(row.subject_id+':'+row.subject_name)
+                                    .val(row.subject_id)
                             );
-                        });
+                        //});
                     });
                     $('#subjectList').on('change',function(){
                         $('#testTypeList').prop('selectedIndex',0);
@@ -29,11 +30,21 @@ $(document).ready(function(){
                         $('#mcq_tt').val(returnedData[0].mcq_total_test);
                         $('#essay_tt').val(returnedData[0].essay_total_test);
                     });
+                    $.each(response.total_timeList,function(index,row){
+                        $("#totalTime")
+                        .append(
+                            $("<option></option>")
+                                .text(row.test_time+' mins')
+                                .val(row.test_time)
+                        );
+                    });
                 }
             }
         });
     });
     $('#testTypeList').on('change',function(){
+        $('#totalMarks').val("");
+        $('#testTotalQues').prop('selectedIndex',0);
         var subjectID = $('#subjectList').val();
         var testTypeID = $('#testTypeList').val();
         var mcq_tt=$('#mcq_tt').val();
@@ -54,12 +65,22 @@ $(document).ready(function(){
         getTestQuesNo(testTypeID);
     });
     $('#testTotalQues').on('change',function(){
-        $('#quesNo').html($('#testTotalQues').val());
+        var test_type=$('#testTypeList').val();
+        if(test_type=='1'){
+            $('#totalMarks').val($('#testTotalQues').val());
+        }
+        else if(test_type=='2'){
+            $('#totalMarks').val(0);
+        }
+        else{
+            swal("Error!", "Please select test type first!", "error");
+        }
+        //$('#quesNo').html($('#testTotalQues').val());
     });
-    $('#unitMark').on('change',function(){
+    /*$('#unitMark').on('change',function(){
         var quesNo=$('#quesNo').text();
         $('#totalMarks').val(quesNo*($('#unitMark').val()));
-    });
+    });*/
     $('#testIDList').on('change',function(){
         console.log($('#testIDList').val());
         $.ajax({
@@ -128,10 +149,10 @@ $(document).ready(function(){
             testTotalQues: {
                 required: true
             },
-            unitMark: {
+            /*unitMark: {
                 required: true,
                 digits: true
-            },
+            },*/
             totalMarks: {
                 required: false
             },

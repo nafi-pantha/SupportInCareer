@@ -38,6 +38,7 @@ urlpatterns = [
     url(r'^essay_available_check/$',views.isEssayQuesAvailable,name='essay_available_check'),
     url(r'^get_essay_ques_data/$',views.getEssayQuesData,name='get_essay_ques_data'),
     url(r'^essay_ques_edit/$',views.essayQuesEdit,name='essay_ques_edit'),
+    url(r'^essay_summary_edit/$',views.essaySummaryEdit,name='essay_summary_edit'),
 
     #User Section
     url(r'^getUserList/$',views.getUserList,name='getUserList'),

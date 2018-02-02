@@ -1,6 +1,8 @@
 $(document).ready(function(){
     $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
     $('#mcqQuesEditTbl').hide();
+    $('#mcqSubmitBtn').prop('disabled',true);
+
     $('#mcqLink').on('click',function(){
         $.ajax({
             url: "/test/",
@@ -10,16 +12,16 @@ $(document).ready(function(){
                 //console.log(response);
                 $("#mcqSubjectList").find('option').not(':first').remove();
                 if(response.length!=0){
-                    $.each(response,function(index,row){
-                        $.each(row, function(k, v){
+                    $.each(response.results,function(index,row){
+                        //$.each(row, function(k, v){
                             //console.log(v.subject_id);
                             $("#mcqSubjectList")
                             .append(
                                 $("<option></option>")
-                                    .text(v.subject_id+':'+v.subject_name)
-                                    .val(v.subject_id)
+                                    .text(row.subject_id+':'+row.subject_name)
+                                    .val(row.subject_id)
                             );
-                        });
+                        //});
                     });
                 }
             }
@@ -27,6 +29,7 @@ $(document).ready(function(){
     });
     $('#mcqSubjectList').on('change',function(){
         $("#mcqQuesTbl").find('tr').not(':first').remove();
+        $("#mcqTestList").prop('selectedIndex',0);
         //console.log("Test");
         $.ajax({
             url: "/test_list/",
@@ -73,17 +76,22 @@ $(document).ready(function(){
     });
 
     $('#mcqQuesSubBtn').on('click',function(){
+        $('#mcqSubjectList').prop('disabled',true);
+        $('#mcqTestList').prop('disabled',true);
+        $('#mcqQuesTbl').show();
+        $('#mcqQuesEditTbl').hide();
+        $('#mcqSubmitBtn').prop('disabled',false);
         $("#mcqQuesTbl").find('tr').not(':first').remove();
         var quesLimit=$("#mcqMaxQuesNo").text();
         var trHTML = '';
         for(var i=1;i<=quesLimit;i++){
             trHTML+= '<tr id='+i+'><td><span>'+i+'</span><input type="text" class="form-control hidden" id="qid" name="qid" value="'+i+'"></td>'+
 //            '<td><input type="text" class="form-control" id="ques" name="ques" placeholder="Question"></td>'+
-            '<td><textarea class="form-control vresize quesTest" id="ques" name="ques" placeholder="Question" required></textarea></td>'+
-            '<td><textarea class="form-control vresize" id="option1" name="option1" placeholder="Option 1" required></textarea></td>'+
-            '<td><textarea class="form-control vresize" id="option2" name="option2" placeholder="Option 2" required></textarea></td>'+
-            '<td><textarea class="form-control vresize" id="option3" name="option3" placeholder="Option 3" required></textarea></td>'+
-            '<td><textarea class="form-control vresize" id="option4" name="option4" placeholder="Option 4" required></textarea></td>'+
+            '<td><textarea class="form-control vresize quesTest" id="ques" name="ques" placeholder="Question"></textarea></td>'+
+            '<td><textarea class="form-control vresize" id="option1" name="option1" placeholder="Option 1"></textarea></td>'+
+            '<td><textarea class="form-control vresize" id="option2" name="option2" placeholder="Option 2"></textarea></td>'+
+            '<td><textarea class="form-control vresize" id="option3" name="option3" placeholder="Option 3"></textarea></td>'+
+            '<td><textarea class="form-control vresize" id="option4" name="option4" placeholder="Option 4"></textarea></td>'+
             /*'<td><input type="text" class="form-control" id="option1" name="option1" placeholder="Option 1"></td>'+
             '<td><input type="text" class="form-control" id="option2" name="option2" placeholder="Option 2"></td>'+
             '<td><input type="text" class="form-control" id="option3" name="option3" placeholder="Option 3"></td>'+
@@ -96,39 +104,52 @@ $(document).ready(function(){
     });
 
 
-    $('#mcqSubmitBtn').on('click',function(){
-        var data=[];
-        $('#mcqQuesTbl').find('tr:not(:has(th))').each(function(){
-            var id=$(this).attr('id');
-            var row={};
-            $(this).find('textarea, :input').each(function(){
-                row[$(this).attr('name')]=$(this).val();
-            });
-            data.push(row);
-        });
-        console.log(data);
-        $.ajax({
-            url: "/mcq_paper_submit/",
-            type: "POST",
-            data: {obj:JSON.stringify(data),
-            'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val(),
-            'test_id':$('#mcqTestList').val()},
-            dataType:"JSON",
-            success: function(response) {
-                //console.log(response);
+    var mcqForm = $( "#mcqSectionForm" );
+    mcqForm.validate();
 
-                console.log(response.status);
-                if(response.status=='1'){
-                    swal("Success!", "Successfully Submitted!", "success");
-                }
-                else{
-                    swal("Error!", "Something Wrong!", "error");
-                }
+    $('#mcqSubmitBtn').on('click',function(){
+        if(mcqForm.valid()) {
+            var data=[];
+            $('#mcqQuesTbl').find('tr:not(:has(th))').each(function(){
+                var id=$(this).attr('id');
+                var row={};
+                $(this).find('textarea, :input').each(function(){
+                    row[$(this).attr('name')]=$(this).val();
+                });
+                data.push(row);
+            });
+            console.log(data);
+            if (data.length === 0) {
+                swal("Error!", "Please generate the form!", "error");
             }
-        });
+            else{
+                $.ajax({
+                    url: "/mcq_paper_submit/",
+                    type: "POST",
+                    data: {obj:JSON.stringify(data),
+                    'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val(),
+                    'test_id':$('#mcqTestList').val()},
+                    dataType:"JSON",
+                    success: function(response) {
+                        //console.log(response);
+
+                        console.log(response.status);
+                        if(response.status=='1'){
+                            swal("Success!", "Successfully Submitted!", "success");
+                            resetMCQQuesSection();
+                        }
+                        else{
+                            swal("Error!", "Something Wrong!", "error");
+                            resetMCQQuesSection();
+                        }
+                    }
+                });
+            }
+        }
     });
 
     function mcq_available_check(){
+        $('#mcqSubmitBtn').prop('disabled',true);
         $.ajax({
             url: "/mcq_available_check/",
             type: "GET",
@@ -184,6 +205,7 @@ $(document).ready(function(){
             success: function(response) {
                 if(response.status==1){
                     swal("Success!", "Successfully Updated!", "success");
+                    mcq_available_check();
                 }
                 else{
                     swal("Error!", "Something Wrong!", "error");
@@ -215,6 +237,8 @@ $(document).ready(function(){
     $('#mcqEditBtn').on('click',function(){
         $('#mcqQuesEditTbl').show();
         $('#mcqQuesTbl').hide();
+        $('#mcqSubjectList').prop('disabled',true);
+        $('#mcqTestList').prop('disabled',true);
         mcq_available_check();
     });
 
@@ -225,4 +249,37 @@ $(document).ready(function(){
             }
         });
     }
+
+    /*$('#resetBtn').on('click',function(){
+        resetTestSection();
+        enable();
+        $('#quesNo').text("");
+        $("#totalMarks").prop('readonly',true);
+        $("#submitTestBtn").prop('disabled',false);
+        $("#editTestBtn").prop('disabled',true);
+    });*/
+
+    function resetMCQQuesSection(){
+        var validator = $( "#mcqSectionForm" ).validate();
+        validator.resetForm();
+        $("input[type=text]").val("");
+        $("textarea").val("");
+        $("select").prop('selectedIndex',0);
+        $(":input").closest('.form-group').removeClass('has-success');
+        $("#mcqQuesTbl tbody>tr").remove();
+        $("#mcqQuesEditTbl tbody>tr").remove();
+        $('#mcqMaxQuesNo').text('');
+        $('#mcqExamTime').text('');
+        $('#mcqTotalMarks').text('');
+        $('#mcqSubjectList').prop('disabled',false);
+        $('#mcqTestList').prop('disabled',false);
+        $('#mcqSubmitBtn').prop('disabled',true);
+    }
+
+    $('#mcqResetBtn').on('click',function(){
+        resetMCQQuesSection();
+        $('#mcqEditBtn').prop('disabled',true);
+        $('#mcqQuesSubBtn').prop('disabled',true);
+    });
+
 });

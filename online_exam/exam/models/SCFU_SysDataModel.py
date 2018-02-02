@@ -24,3 +24,6 @@ class SCFU_MCQTestTotalQuesNo(models.Model):
 
 class SCFU_EssayTestTotalQuesNo(models.Model):
     test_ques_no = models.IntegerField()
+
+class SCFU_TotalTime(models.Model):
+    test_time = models.IntegerField()
