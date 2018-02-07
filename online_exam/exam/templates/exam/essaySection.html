@@ -42,7 +42,7 @@
     <div class="form-group">
         <div class="col-sm-2"></div>
         <div class="col-sm-3">
-            <button type="button" class="btn btn-block btn-primary" id="essayQuesSubBtn">Generate Form</button>
+            <button type="button" class="btn btn-block btn-primary" id="essayQuesSubBtn" disabled="true">Generate Form</button>
         </div>
         <div class="col-sm-3">
             <button type="button" class="btn btn-block btn-primary" id="essayEditBtn" disabled="true">Edit Form</button>
@@ -111,7 +111,10 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-offset-2 col-sm-3" for="essayQuesEdit">Question: </label>
-                            <div class="col-sm-4"><input type="text" class="form-control input-sm" id="essayQuesEdit"/></div>
+                            <div class="col-sm-4">
+                                <!--<input type="text" class="form-control input-sm" id="essayQuesEdit"/>-->
+                                <textarea class="form-control vresize" id="essayQuesEdit"></textarea>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-offset-2 col-sm-3" for="questionMarkEdit">Question Marks: </label>

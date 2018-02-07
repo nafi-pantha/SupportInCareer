@@ -14,6 +14,8 @@ from exam.models import McqQuestion
 from exam.models import UserResult
 from exam.models import UserMcqAnswer
 
+from exam.models import AdminReview
+
 
 def test_info_list(request):
     if(request.method == "GET"):
@@ -31,6 +33,7 @@ def user_test_id(request):
         subject_id = request.GET.get('subject_id')
         test_type = request.GET.get('test_type')
         user_id = request.GET.get('user_id')
+        # user_id = request.user.id
         testInfo = Test.objects.values('test_id', 'test_name', 'test_totalmarks', 'test_totaltimes',
                                        'test_type', 'subject_id', 'test_total_questions').filter(test_type=test_type,
                                                                                                  subject_id=subject_id)
@@ -38,24 +41,44 @@ def user_test_id(request):
             'test_id').filter(user_id=user_id,
                               test_id__subject_id=subject_id,
                               test_type=test_type)
-        failedTestIDInfo = UserResult.objects.select_related('test_id').select_related('test_id__subject_id').values(
-            'test_id', 'is_passed').filter(user_id=user_id,
-                                           test_id__subject_id=subject_id,
-                                           test_type=test_type,
-                                           is_passed=0).order_by('test_id')[:1]
-        passedTestIDInfo = UserResult.objects.select_related('test_id').select_related('test_id__subject_id').values(
-            'test_id', 'is_passed').filter(user_id=user_id,
-                                           test_id__subject_id=subject_id,
-                                           test_type=test_type,
-                                           is_passed=1).order_by('-test_id')[:1]
-        test_time=testInfo[0]['test_totaltimes']
+        # if testInfo:
+        #     test_time=testInfo[0]['test_totaltimes']
+
         if not intialTestID:
-            examTestID = testInfo[0]['test_id']
+            if test_type == '1':
+                examTestID = testInfo[0]['test_id']
+                test_time = testInfo[0]['test_totaltimes']
+            else:
+                examTestID = testInfo[0]['test_id']
+                reviewCheck = AdminReview.objects.values('test_id','is_reviewed').filter(test_id=examTestID)
+                if not reviewCheck[0]['is_reviewed']:
+                    print(reviewCheck)
+                    return JsonResponse({'status': 4})
         else:
+            failedTestIDInfo = UserResult.objects.select_related('test_id').select_related(
+                'test_id__subject_id').values(
+                'test_id', 'is_passed', 'test_id__test_totaltimes').filter(user_id=user_id,
+                                               test_id__subject_id=subject_id,
+                                               test_type=test_type,
+                                               is_passed=False).order_by('test_id')[:1]
             if not failedTestIDInfo:
-                examTestID = passedTestIDInfo[0]['test_id']
+                passedTestIDInfo = UserResult.objects.select_related('test_id').select_related(
+                    'test_id__subject_id').values(
+                    'test_id', 'is_passed').filter(user_id=user_id,
+                                                   test_id__subject_id=subject_id,
+                                                   test_type=test_type,
+                                                   is_passed=True).order_by('-test_id')[:1]
+                nextTestID = Test.objects.values('test_id', 'test_totaltimes').filter(test_id__gt=passedTestIDInfo[0]['test_id'],
+                                               subject_id=subject_id,
+                                               test_type=test_type)
+                if not nextTestID:
+                    return JsonResponse({'status': 3})
+                else:
+                    examTestID = nextTestID[0]['test_id']
+                    test_time = nextTestID[0]['test_totaltimes']
             else:
                 examTestID = failedTestIDInfo[0]['test_id']
+                test_time = failedTestIDInfo[0]['test_id__test_totaltimes']
         return JsonResponse({'examTestID':examTestID, 'test_time':test_time})
     else:
         return HttpResponse("Problem")
@@ -63,7 +86,7 @@ def user_test_id(request):
 def ques_info(request):
     if (request.method == "GET"):
         test_id = request.GET.get('test_id')
-        quesInfo = McqQuestion.objects.values('mcq_question_id', 'mcq_question', 'mcq_option1', 'mcq_option2',
+        quesInfo = McqQuestion.objects.values('id','mcq_question_id', 'mcq_question', 'mcq_option1', 'mcq_option2',
                                        'mcq_option3', 'mcq_option4').filter(test_id=test_id)
         return render(request, 'up_mcqExamList.html', {'quesInfo': quesInfo})
     else:
@@ -128,22 +151,26 @@ def get_user_result(request):
                                                is_passed=result_status, datetime=datetime.datetime.now(),
                                                test_id=Test.objects.get(pk=test_id), user_id=user_id)
         testTime = Test.objects.values('test_totaltimes').filter(test_id=next_test_id)
-        total_time = testTime[0]['test_totaltimes']
+
         if not delIfExist:
             userResult.save()
         else:
             delIfExist.delete()
             userResult.save()
 
-        result_list = []
-        result_stats = {}
-        result_stats['total_marks'] = total_marks
-        result_stats['gained_marks'] = gained_marks
-        result_stats['gained_percentage'] = gained_percentage
-        result_stats['result_status'] = result_status
-        result_stats['next_test_id'] = str(next_test_id)
-        result_stats['test_time'] = total_time
-        result_list.append(result_stats)
+        if not testTime:
+            result_list = []
+        else:
+            total_time = testTime[0]['test_totaltimes']
+            result_list = []
+            result_stats = {}
+            result_stats['total_marks'] = total_marks
+            result_stats['gained_marks'] = gained_marks
+            result_stats['gained_percentage'] = gained_percentage
+            result_stats['result_status'] = result_status
+            result_stats['next_test_id'] = str(next_test_id)
+            result_stats['test_time'] = total_time
+            result_list.append(result_stats)
 
         print(result_list)
         return JsonResponse({'result_list': result_list})

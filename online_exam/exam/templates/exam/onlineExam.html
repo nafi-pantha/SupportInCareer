@@ -62,9 +62,7 @@
                 <!--Home Section Start-->
                 <div id="home" class="tab-pane fade in active">
                     <h3 class="sectionTitle">Home</h3>
-                    {% for info in userInfoList %}
-                        Name: {{ info.user.username }}
-                    {% endfor %}
+                    {% include "homeSection.html" %}
                 </div>
                 <!--Home Section End-->
 

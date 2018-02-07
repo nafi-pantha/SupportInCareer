@@ -1,31 +1,36 @@
 <form class="form-horizontal" id="up_essayExamForm">
     {% csrf_token %}
-<div class="col-sm-12 slideWrap owl-carousel owl-theme essay_carousel">
-    {% for quesData in quesInfo %}
-    <div class="item">
-        <p>{{quesData.essay_question_id}}. {{quesData.essay_question}}</p>
-        <div class="ques">
-            <textarea class="col-sm-10 essayAns" data-qid="{{quesData.essay_question_id}}" name="ques{{quesData.essay_question_id}}"
-                      rows="5" id="word_count"></textarea>
-            <div class="after-amount col-sm-10">
-                Word: <span class="display_count">0</span>
-                Words Left: <span class="word_left">25</span>
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="slideWrap owl-carousel owl-theme essay_carousel">
+                {% for quesData in quesInfo %}
+                <div class="item">
+                    <p>{{quesData.essay_question_id}}. {{quesData.essay_question}}</p>
+                    <div class="ques">
+                        <textarea class="col-sm-11 essayAns vresize" data-qid="{{quesData.essay_question_id}}" name="ques{{quesData.essay_question_id}}"
+                                  rows="3" id="word_count"></textarea>
+                        <div class="after-amount col-sm-11">
+                            Word: <span class="display_count">0</span>
+                            Words Left: <span class="word_left">50</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
-    {% endfor %}
-</div>
 </form>
 <script>
     $(document).ready(function(){
         $('.essay_carousel').owlCarousel({
-            loop:true,
+            loop:false,
             margin:10,
             nav:true,
             dotsContainer: '#customDots',
             dots: true,
             mouseDrag:false,
             touchDrag:false,
+            pullDrag: false,
             responsive:{
                 0:{
                     items:1
@@ -40,15 +45,25 @@
         });
         $("textarea").on('keyup', function() {
             var words = this.value.match(/\S+/g).length;
-            if (words > 25) {
+            if (words > 50) {
                 // Split the string on first 200 words and rejoin on spaces
-                var trimmed = $(this).val().split(/\s+/, 25).join(" ");
+                var trimmed = $(this).val().split(/\s+/, 50).join(" ");
                 // Add a space at the end to keep new typing making new words
                 $(this).val(trimmed + " ");
             }
             else {
                 $(this).next('.after-amount').find('.display_count').text(words);
-                $(this).next('.after-amount').find('.word_left').text(25-words);
+                $(this).next('.after-amount').find('.word_left').text(50-words);
+            }
+        });
+        $('.essay_carousel').on('changed.owl.carousel', function(event) {
+            if(event.item.index+1==event.item.count){
+                $('#essayAnsSubmitBtn').prop('disabled',false);
+                $('#essayAnsSubmitBtn').removeClass('hidden');
+            }
+            else{
+                $('#essayAnsSubmitBtn').prop('disabled',true);
+                $('#essayAnsSubmitBtn').addClass('hidden');
             }
         });
     });

@@ -15,21 +15,19 @@
             </ul>
         </div>
 
-        <div class="col-md-offset-1 col-md-8 main_content">
+        <div class="col-md-offset-1 col-md-9 main_content">
             <div class="tab-content">
 
                 <!--Home Section Start-->
-                <div id="home" class="tab-pane fade in active">
+                <div id="home" class="tab-pane fade in active col-md-11">
                     <h3>Home</h3>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat.</p>
+                    {% include "homeSection.html" %}
                 </div>
                 <!--Home Section End-->
 
                 <!--User Profile Section Start-->
-                <div id="userProfile" class="tab-pane fade">
+                <div id="userProfile" class="tab-pane fade col-md-11">
                     <h3>User</h3>
-                    <p>Admin can update User Info in this section...</p>
                     {% include "profileSection.html" %}
                 </div>
                 <!--User Profile Section End-->
@@ -38,11 +36,9 @@
                 <div id="mcqExam" class="tab-pane fade">
                     <div class="col-md-8">
                         <h3>MCQ</h3>
-                        <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-                            explicabo.</p>
                         {% include "up_mcqExamSection.html" %}
                     </div>
-                    <div class="col-md-4 quesController">
+                    <div class="col-md-4 mcqQuesController">
                     </div>
                 </div>
                 <!--MCQ Exam Section End-->
@@ -51,17 +47,15 @@
                 <div id="essayExam" class="tab-pane fade">
                     <div class="col-md-8">
                         <h3>Essay</h3>
-                        <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-                            explicabo.</p>
                         {% include "up_essayExamSection.html" %}
                     </div>
-                    <div class="col-md-4 quesController">
+                    <div class="col-md-4 essayQuesController">
                     </div>
                 </div>
                 <!--Essay Exam Section End-->
 
                 <!--Result Section Start-->
-                <div id="result" class="tab-pane fade">
+                <div id="result" class="tab-pane fade col-md-11">
                     <h3>Result</h3>
                     {% include "up_resultSection.html" %}
                 </div>

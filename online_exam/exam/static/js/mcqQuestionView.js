@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+    //$(document).ajaxStart($.blockUI({ message: $('#throbber') })).ajaxStop($.unblockUI);
     $('#mcqQuesEditTbl').hide();
     $('#mcqSubmitBtn').prop('disabled',true);
 

@@ -1,11 +1,13 @@
 $(document).ready(function(){
-    $('#resultLink').on('click',function(){
+    /*$('#resultLink').on('click',function(){
         up_resultTestType();
-    });
+    });*/
 
-    $('#resultTestType').on('change',function(){
+    //$('#resultTestType').on('change',function(){
+    $('#resultLink').on('click',function(){
         $('#resultListTbl').DataTable({
             "destroy": true,
+            "language": { "emptyTable": "No result available or published right now!" },
             "ajax": {
                     "url": '/user_result/',
                     "data": {'test_type': function() {

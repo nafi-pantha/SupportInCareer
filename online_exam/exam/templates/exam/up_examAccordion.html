@@ -1,3 +1,5 @@
+<div id="mcqExamTimer" data-timer="">
+</div>
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     {% for testData in testInfo %}
     <div class="panel panel-default">
@@ -18,8 +20,8 @@
                     <div class="col-sm-6">Total Ques: {{testData.test_total_questions}}</div>
                 </div>
                 <div class="col-sm-12 owl-theme">
-                    <div class="owl-controls">
-                        <div id="customDots" class="owl-dots"></div>
+                    <div class="owl-controls row">
+                        <div class="owl-dots"></div>
                     </div>
                 </div>
                 <div class="user_mcqExamStats">
@@ -32,6 +34,4 @@
     {% endfor %}
 </div>
 
-<div id="mcqExamTimer" data-timer="">
 
-</div>

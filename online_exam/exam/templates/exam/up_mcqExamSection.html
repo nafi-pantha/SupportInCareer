@@ -1,18 +1,24 @@
-<form class="form-horizontal" id="up_mcqExamForm">
-    {% csrf_token %}
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="mcqExamSubjectList">Subject</label>
-        <div class="col-sm-6">
-            <select class="form-control" id="mcqExamSubjectList">
-                <option>---Please Select---</option>
-            </select>
-        </div>
+<div class="sectionBody">
+    <form class="form-horizontal" id="up_mcqExamForm">
+        {% csrf_token %}
+        <div class="form-group">
+            <!--<label class="control-label col-sm-2" for="mcqExamSubjectList">Subject</label>-->
+            <div class="col-sm-6">
+                <select class="form-control" id="mcqExamSubjectList">
+                    <option option selected="true" disabled="false">---Please Select---</option>
+                </select>
+            </div>
 
-        <div class="col-md-2">
-            <button type="button" id="mcqTestStartBtn" class="btn btn-primary" data-test="" data-time="">Start Test</button>
+            <div class="col-sm-2">
+                <button type="button" id="mcqTestStartBtn" class="btn btn-primary" disabled="true" data-test="" data-time="">Start Test
+                </button>
+            </div>
         </div>
-    </div>
-    <div class="col-sm-12 mcqExamQuesList">
-    </div>
-</form>
-<button type="button" class="btn btn-primary" id="mcqAnsSubmitBtn">Submit</button>
+        <div class="col-sm-12 mcqExamQuesList margin_top_20">
+        </div>
+    </form>
+</div>
+
+<div class="col-sm-3 margin_top_20">
+    <button type="button" class="btn btn-success hidden" id="mcqAnsSubmitBtn" disabled="true">Submit Answer</button>
+</div>

@@ -127,7 +127,10 @@ a {
     background-color: #6699FF;
     border-color: #6699FF;
 }
-.quesController{
+.mcqQuesController{
+    padding-top: 50px;
+}
+.essayQuesController{
     padding-top: 50px;
 }
 #customDots{
@@ -368,3 +371,15 @@ a.morelink {
     color: #6699FF;
     cursor: pointer;
 }
+.owl-theme .owl-nav {
+    margin-top: 30px;
+    float: left;
+}
+.owl-theme .owl-nav [class*="owl-"] {
+    background: #F0AD4E none repeat scroll 0% 0%;
+    border-radius: 0px;
+}
+#mcqAnsSubmitBtn{
+    margin-left: 5px;
+}
+

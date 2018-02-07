@@ -148,5 +148,16 @@
 		"fields": {
 			"test_time": 90
 		}
+	},
+	{
+		"model": "exam.subject",
+        "pk": 100,
+		"fields": {
+			"subject_name": "Type 1",
+            "mcq_total_test": 10,
+            "essay_total_test": 5,
+            "approver": null,
+            "datetime": "2018-02-08"
+		}
 	}
 ]
