@@ -2,6 +2,7 @@ import json
 
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse, JsonResponse
+from django.contrib.auth.decorators import login_required
 import datetime
 
 from exam.models import Subject
@@ -9,7 +10,7 @@ from exam.models import Test
 from exam.models import EssayQuestion
 from exam.models import EssaySummary
 
-
+@login_required
 def essayQuesPaperSubmit(request):
     if (request.method == "POST"):
         test_id=request.POST.get('test_id')
@@ -29,6 +30,7 @@ def essayQuesPaperSubmit(request):
     else:
         return HttpResponse("Problem")
 
+@login_required
 def isEssayQuesAvailable(request):
     if (request.method == "GET"):
         test_id = request.GET.get('test_id')
@@ -39,6 +41,7 @@ def isEssayQuesAvailable(request):
     else:
         return HttpResponse("Problem")
 
+@login_required
 def getEssayQuesData(request):
     if (request.method == "GET"):
         test_id = request.GET.get('test_id')
@@ -51,6 +54,7 @@ def getEssayQuesData(request):
     else:
         return HttpResponse("Problem")
 
+@login_required
 def essayQuesEdit(request):
     test_id=request.GET.get('test_id')
     essay_ques_id=request.GET.get('essay_ques_id')
@@ -67,6 +71,7 @@ def essayQuesEdit(request):
     else:
         return HttpResponse("Problem")
 
+@login_required
 def essaySummaryEdit(request):
     test_id=request.GET.get('test_id')
     essay_summary=request.GET.get('essay_summary')

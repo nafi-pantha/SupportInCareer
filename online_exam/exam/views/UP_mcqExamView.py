@@ -3,6 +3,7 @@ import json
 from django.core import serializers
 from django.db.models import F, Case, When, BooleanField, Value, Count
 from django.shortcuts import render, get_object_or_404, render_to_response
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
 import datetime
 
@@ -16,7 +17,7 @@ from exam.models import UserMcqAnswer
 
 from exam.models import AdminReview
 
-
+@login_required
 def test_info_list(request):
     if(request.method == "GET"):
         subject_id = request.GET.get('subject_id')
@@ -28,6 +29,7 @@ def test_info_list(request):
     else:
         return HttpResponse("Problem")
 
+@login_required
 def user_test_id(request):
     if (request.method == "GET"):
         subject_id = request.GET.get('subject_id')
@@ -83,6 +85,7 @@ def user_test_id(request):
     else:
         return HttpResponse("Problem")
 
+@login_required
 def ques_info(request):
     if (request.method == "GET"):
         test_id = request.GET.get('test_id')
@@ -92,7 +95,7 @@ def ques_info(request):
     else:
         return HttpResponse("Problem")
 
-
+@login_required
 def mcq_ans_submit(request):
     if (request.method == "POST"):
         test_id=request.POST.get('test_id')
@@ -116,6 +119,7 @@ def mcq_ans_submit(request):
     else:
         return HttpResponse("Problem")
 
+@login_required
 def get_user_result(request):
     if (request.method == "GET"):
         test_id = request.GET.get('test_id')

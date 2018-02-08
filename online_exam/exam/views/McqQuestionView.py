@@ -2,6 +2,7 @@ import json
 
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse, JsonResponse
+from django.contrib.auth.decorators import login_required
 import datetime
 
 from exam.models import Subject
@@ -12,6 +13,7 @@ from exam.models import McqQuestion
 def index(request):
     return render(request,'exam/onlineExam.html',{})
 
+@login_required
 def getAllTestList(request):
     if (request.method == "GET"):
         test_type = request.GET.get('test_type')
@@ -23,6 +25,7 @@ def getAllTestList(request):
     else:
         return HttpResponse("Problem")
 
+@login_required
 def getTestInfo(request):
     if(request.method == "GET"):
         test_type = request.GET.get('test_type')
@@ -34,6 +37,7 @@ def getTestInfo(request):
                                                                                                  test_id=test_id)
         return JsonResponse({'results': list(testInfo)})
 
+@login_required
 def mcqQuesPaperSubmit(request):
     if (request.method == "POST"):
         test_id=request.POST.get('test_id')
@@ -50,6 +54,7 @@ def mcqQuesPaperSubmit(request):
     else:
         return HttpResponse("Problem")
 
+@login_required
 def isMcqQuesAvailable(request):
     if (request.method == "GET"):
         test_id = request.GET.get('test_id')
@@ -61,6 +66,7 @@ def isMcqQuesAvailable(request):
     else:
         return HttpResponse("Problem")
 
+@login_required
 def getMcqQuesData(request):
     if (request.method == "GET"):
         test_id = request.GET.get('test_id')
@@ -72,6 +78,7 @@ def getMcqQuesData(request):
     else:
         return HttpResponse("Problem")
 
+@login_required
 def mcqQuesEdit(request):
     test_id=request.GET.get('test_id')
     mcq_ques_id=request.GET.get('mcq_ques_id')

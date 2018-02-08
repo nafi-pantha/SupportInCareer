@@ -4,6 +4,7 @@ import datetime
 from itertools import chain
 
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.db import connection
 from django.forms import model_to_dict
@@ -17,6 +18,7 @@ from exam.models import Test
 from exam.models import EssayQuestion
 
 
+@login_required
 def reviewUserList(request):
     if (request.method == "GET"):
         results = AdminReview.objects.filter(is_reviewed=False).values('user_id', 'user__user__username').distinct()
@@ -24,7 +26,7 @@ def reviewUserList(request):
     else:
         return HttpResponse("Problem")
 
-
+@login_required
 def getTestListReview(request):
     if (request.method == "GET"):
         user_id = request.GET.get('user_id')
@@ -35,6 +37,7 @@ def getTestListReview(request):
         return HttpResponse("Problem")
 
 
+@login_required
 def getUserAnswerReview(request):
     if (request.method == "GET"):
         user_id = request.GET.get('user_id')
@@ -55,6 +58,7 @@ def getUserAnswerReview(request):
     else:
         return HttpResponse("Problem")
 
+@login_required
 def getRatingMarks(request):
     if (request.method == "GET"):
         test_id = request.GET.get('test_id')
@@ -68,6 +72,7 @@ def getRatingMarks(request):
     else:
         return HttpResponse("Problem")
 
+@login_required
 def reviewSubmit(request):
     if (request.method == "POST"):
         test_id = request.POST.get('test_id')

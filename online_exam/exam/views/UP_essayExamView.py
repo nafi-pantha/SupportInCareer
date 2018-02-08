@@ -2,6 +2,7 @@ import json
 
 import datetime
 from django.http import HttpResponse, JsonResponse
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from exam.models import EssayQuestion
 from exam.models import UserEssayAnswer
@@ -10,7 +11,7 @@ from exam.models import Test
 from exam.models import AdminReview
 from exam.models import EssaySummary
 
-
+@login_required
 def essay_ques_info(request):
     if (request.method == "GET"):
         test_id = request.GET.get('test_id')
@@ -19,6 +20,7 @@ def essay_ques_info(request):
     else:
         return HttpResponse("Problem")
 
+@login_required
 def essay_summary_info(request):
     if (request.method == "GET"):
         test_id = request.GET.get('test_id')
@@ -28,7 +30,7 @@ def essay_summary_info(request):
         return HttpResponse("Problem")
 
 
-
+@login_required
 def essay_ans_submit(request):
     if (request.method == "POST"):
         test_id=request.POST.get('test_id')

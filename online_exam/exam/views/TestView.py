@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse, JsonResponse
+from django.contrib.auth.decorators import login_required
 import datetime
 
 from exam.models import Subject
@@ -17,6 +18,7 @@ def getAllSubjectList(request):
     else:
         return HttpResponse("Problem")
 
+@login_required
 def testInfoInsert(request):
     registered = False
     if(request.method=="POST"):
@@ -52,6 +54,7 @@ def testInfoInsert(request):
 
     return render(request,'exam/onlineExam.html',{'registered':registered})
 
+@login_required
 def testAvailableCheck(request):
     if (request.method == "GET"):
         test_id = request.GET.get('test_id')
@@ -63,6 +66,7 @@ def testAvailableCheck(request):
     else:
         return HttpResponse("Problem")
 
+@login_required
 def testNameCheck(request):
     if (request.method == "GET"):
         test_id = request.GET.get('test_id')

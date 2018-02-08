@@ -1,9 +1,10 @@
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse, JsonResponse
+from django.contrib.auth.decorators import login_required
 import datetime
 from exam.models import Subject
 
-
+@login_required
 def subjectInsert(request):
     print("Outside the if condition")
     if(request.method=="POST"):
@@ -35,6 +36,7 @@ def subjectInsert(request):
 
     return render(request,'exam/onlineExam.html',{})
 
+@login_required
 def subjectAvailableCheck(request):
     if (request.method == "GET"):
         subjectName = request.GET.get('subjectName')

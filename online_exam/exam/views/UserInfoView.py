@@ -47,6 +47,7 @@ def userInfoInsert(request):
 
     return render(request,'exam/onlineExam.html',{'registered':registered})
 
+@login_required
 def getUserList(request):
     r = []
     for user in User.objects.all():
@@ -60,6 +61,7 @@ def getUserList(request):
         })
     return JsonResponse(r, safe=False)
 
+@login_required
 def userUpdate(request):
     if(request.method=="GET"):
         user_id = request.GET.get('user_id')
@@ -119,6 +121,7 @@ def getPassChange(request):
     else:
         return HttpResponse("Problem")
 
+@login_required
 def getProfileUpdate(request):
     if(request.method=="POST"):
         first_name = request.POST.get('profileFirstName')

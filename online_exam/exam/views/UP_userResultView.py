@@ -1,10 +1,11 @@
 from django.db import connection
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 from exam.models import UserResult
 
 from exam.models import UserEssayAnswer
 
-
+@login_required
 def getResult(request):
     if(request.method=="GET"):
         current_user = request.user
@@ -20,6 +21,7 @@ def getResult(request):
     else:
         return JsonResponse({'status': 2})
 
+@login_required
 def getEssayResultDetails(request):
     if(request.method=="GET"):
         test_id = request.GET.get('test_id')
