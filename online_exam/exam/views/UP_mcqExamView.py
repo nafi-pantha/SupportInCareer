@@ -85,8 +85,12 @@ def user_test_id(request):
                     if not intialTestID:
                         examTestID = testInfo[0]['test_id']
                         reviewCheck = AdminReview.objects.values('test_id', 'is_reviewed').filter(test_id=examTestID)
-                        if not reviewCheck[0]['is_reviewed']:
-                            return JsonResponse({'status': 4})
+                        if reviewCheck:
+                            if not reviewCheck[0]['is_reviewed']:
+                                return JsonResponse({'status': 4})
+                            else:
+                                examTestID = testInfo[0]['test_id']
+                                test_time = testInfo[0]['test_totaltimes']
                         else:
                             examTestID = testInfo[0]['test_id']
                             test_time = testInfo[0]['test_totaltimes']
@@ -115,9 +119,13 @@ def user_test_id(request):
                                 test_time = nextTestID[0]['test_totaltimes']
                         else:
                             reviewCheck = AdminReview.objects.values('test_id', 'is_reviewed').filter(test_id=failedTestIDInfo[0]['test_id'])
-                            if not reviewCheck[0]['is_reviewed']:
-                                print(reviewCheck)
-                                return JsonResponse({'status': 4})
+                            if reviewCheck:
+                                if not reviewCheck[0]['is_reviewed']:
+                                    print(reviewCheck)
+                                    return JsonResponse({'status': 4})
+                                else:
+                                    examTestID = failedTestIDInfo[0]['test_id']
+                                    test_time = failedTestIDInfo[0]['test_id__test_totaltimes']
                             else:
                                 examTestID = failedTestIDInfo[0]['test_id']
                                 test_time = failedTestIDInfo[0]['test_id__test_totaltimes']
