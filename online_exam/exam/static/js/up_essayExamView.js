@@ -116,11 +116,20 @@ $(document).ready(function() {
             success: function(response) {
                 if(response.status==3){
                     swal("Success!", "Congratulations you have passed all in this subject!", "success");
+                    resetUPEssayExam();
                 }
                 else if(response.status==4){
                     statText = statText='Your previous paper is not reviewed yet!'+
                      ' Please wait to be reviewed and proceed to the next test!';
                     swal("Error!", statText, "error");
+                    resetUPEssayExam();
+                }
+                else if(response.status==5){
+                    swal("Error!", "Tests are not set yet for this subject!", "error");
+                    resetUPEssayExam();
+                }
+                else if(response.status==6){
+                    swal("Error!", "Test Questions are not set yet for this subject!", "error");
                     resetUPEssayExam();
                 }
                 else{

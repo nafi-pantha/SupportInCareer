@@ -41,6 +41,15 @@ $(document).ready(function(){
             success: function(response) {
                 if(response.status==3){
                     swal("Success!", "Congratulations you have passed all in this subject!", "success");
+                    resetUPMCQExam();
+                }
+                else if(response.status==5){
+                    swal("Error!", "Tests are not set yet for this subject!", "error");
+                    resetUPMCQExam();
+                }
+                else if(response.status==6){
+                    swal("Error!", "Test Questions are not set yet for this subject!", "error");
+                    resetUPMCQExam();
                 }
                 else{
                     $('#mcqTestStartBtn').data('test',response.examTestID);
@@ -71,6 +80,7 @@ $(document).ready(function(){
         var prevCollapseID=mcqExamTest_id.toString().substring(3, 5)=='01'?'01':(mcqExamTest_id-10).toString().substring(3, 5);
         if(!mcqExamTest_id){
             swal("Success!", "Congratulations you have passed all in this subject!", "success");
+            resetUPMCQExam();
         }
         else{
             $.ajax({

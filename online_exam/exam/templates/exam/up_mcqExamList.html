@@ -5,7 +5,7 @@
             <div class="slideWrap owl-carousel owl-theme mcq_carousel">
                 {% for quesData in quesInfo %}
                 <div class="item">
-                    <p class="margin_bot_20"><b>{{quesData.mcq_question_id}}. {{quesData.mcq_question}}</b></p>
+                    <p><pre><b>{{quesData.mcq_question_id}}. {{quesData.mcq_question}}</b></pre></p>
                     <div class="radio">
                         <label><input type="radio" data-qid="{{quesData.id}}" name="ques[{{quesData.mcq_question_id}}]" value="1">{{quesData.mcq_option1}}</label>
                     </div>

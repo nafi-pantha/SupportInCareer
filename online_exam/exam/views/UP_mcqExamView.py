@@ -43,45 +43,89 @@ def user_test_id(request):
             'test_id').filter(user_id=user_id,
                               test_id__subject_id=subject_id,
                               test_type=test_type)
-        # if testInfo:
-        #     test_time=testInfo[0]['test_totaltimes']
-
-        if not intialTestID:
+        if testInfo:
             if test_type == '1':
-                examTestID = testInfo[0]['test_id']
-                test_time = testInfo[0]['test_totaltimes']
-            else:
-                examTestID = testInfo[0]['test_id']
-                reviewCheck = AdminReview.objects.values('test_id','is_reviewed').filter(test_id=examTestID)
-                if not reviewCheck[0]['is_reviewed']:
-                    print(reviewCheck)
-                    return JsonResponse({'status': 4})
-        else:
-            failedTestIDInfo = UserResult.objects.select_related('test_id').select_related(
-                'test_id__subject_id').values(
-                'test_id', 'is_passed', 'test_id__test_totaltimes').filter(user_id=user_id,
-                                               test_id__subject_id=subject_id,
-                                               test_type=test_type,
-                                               is_passed=False).order_by('test_id')[:1]
-            if not failedTestIDInfo:
-                passedTestIDInfo = UserResult.objects.select_related('test_id').select_related(
-                    'test_id__subject_id').values(
-                    'test_id', 'is_passed').filter(user_id=user_id,
-                                                   test_id__subject_id=subject_id,
-                                                   test_type=test_type,
-                                                   is_passed=True).order_by('-test_id')[:1]
-                nextTestID = Test.objects.values('test_id', 'test_totaltimes').filter(test_id__gt=passedTestIDInfo[0]['test_id'],
-                                               subject_id=subject_id,
-                                               test_type=test_type)
-                if not nextTestID:
-                    return JsonResponse({'status': 3})
+                questionCheck = McqQuestion.objects.filter(test_id__subject_id=subject_id)
+                if questionCheck:
+                    if not intialTestID:
+                        examTestID = testInfo[0]['test_id']
+                        test_time = testInfo[0]['test_totaltimes']
+                    else:
+                        failedTestIDInfo = UserResult.objects.select_related('test_id').select_related(
+                            'test_id__subject_id').values(
+                            'test_id', 'is_passed', 'test_id__test_totaltimes').filter(user_id=user_id,
+                                                                                       test_id__subject_id=subject_id,
+                                                                                       test_type=test_type,
+                                                                                       is_passed=False).order_by('test_id')[:1]
+                        if not failedTestIDInfo:
+                            passedTestIDInfo = UserResult.objects.select_related('test_id').select_related(
+                                'test_id__subject_id').values(
+                                'test_id', 'is_passed').filter(user_id=user_id,
+                                                               test_id__subject_id=subject_id,
+                                                               test_type=test_type,
+                                                               is_passed=True).order_by('-test_id')[:1]
+                            nextTestID = Test.objects.values('test_id', 'test_totaltimes').filter(
+                                test_id__gt=passedTestIDInfo[0]['test_id'],
+                                subject_id=subject_id,
+                                test_type=test_type)
+                            if not nextTestID:
+                                return JsonResponse({'status': 3})
+                            else:
+                                examTestID = nextTestID[0]['test_id']
+                                test_time = nextTestID[0]['test_totaltimes']
+                        else:
+                            examTestID = failedTestIDInfo[0]['test_id']
+                            test_time = failedTestIDInfo[0]['test_id__test_totaltimes']
+                    return JsonResponse({'examTestID': examTestID, 'test_time': test_time})
                 else:
-                    examTestID = nextTestID[0]['test_id']
-                    test_time = nextTestID[0]['test_totaltimes']
+                    return JsonResponse({'status': 6})
             else:
-                examTestID = failedTestIDInfo[0]['test_id']
-                test_time = failedTestIDInfo[0]['test_id__test_totaltimes']
-        return JsonResponse({'examTestID':examTestID, 'test_time':test_time})
+                questionCheck = McqQuestion.objects.filter(test_id__subject_id=subject_id)
+                if questionCheck:
+                    if not intialTestID:
+                        examTestID = testInfo[0]['test_id']
+                        reviewCheck = AdminReview.objects.values('test_id', 'is_reviewed').filter(test_id=examTestID)
+                        if not reviewCheck[0]['is_reviewed']:
+                            return JsonResponse({'status': 4})
+                        else:
+                            examTestID = testInfo[0]['test_id']
+                            test_time = testInfo[0]['test_totaltimes']
+                    else:
+                        failedTestIDInfo = UserResult.objects.select_related('test_id').select_related(
+                            'test_id__subject_id').values(
+                            'test_id', 'is_passed', 'test_id__test_totaltimes').filter(user_id=user_id,
+                                                                                       test_id__subject_id=subject_id,
+                                                                                       test_type=test_type,
+                                                                                       is_passed=False).order_by('test_id')[:1]
+                        if not failedTestIDInfo:
+                            passedTestIDInfo = UserResult.objects.select_related('test_id').select_related(
+                                'test_id__subject_id').values(
+                                'test_id', 'is_passed').filter(user_id=user_id,
+                                                               test_id__subject_id=subject_id,
+                                                               test_type=test_type,
+                                                               is_passed=True).order_by('-test_id')[:1]
+                            nextTestID = Test.objects.values('test_id', 'test_totaltimes').filter(
+                                test_id__gt=passedTestIDInfo[0]['test_id'],
+                                subject_id=subject_id,
+                                test_type=test_type)
+                            if not nextTestID:
+                                return JsonResponse({'status': 3})
+                            else:
+                                examTestID = nextTestID[0]['test_id']
+                                test_time = nextTestID[0]['test_totaltimes']
+                        else:
+                            reviewCheck = AdminReview.objects.values('test_id', 'is_reviewed').filter(test_id=failedTestIDInfo[0]['test_id'])
+                            if not reviewCheck[0]['is_reviewed']:
+                                print(reviewCheck)
+                                return JsonResponse({'status': 4})
+                            else:
+                                examTestID = failedTestIDInfo[0]['test_id']
+                                test_time = failedTestIDInfo[0]['test_id__test_totaltimes']
+                    return JsonResponse({'examTestID': examTestID, 'test_time': test_time})
+                else:
+                    return JsonResponse({'status': 6})
+        else:
+            return JsonResponse({'status': 5})
     else:
         return HttpResponse("Problem")
 
