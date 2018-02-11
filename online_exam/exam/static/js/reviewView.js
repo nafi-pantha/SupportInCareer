@@ -60,7 +60,7 @@ $(document).ready(function(){
                     $.each(response,function(index,row){
                         $.each(row, function (key,value) {
                             trHTML+= '<tr id='+value.ques_id+'>'+
-                            '<td><span>'+value.ques_id+'</span><input type="text" class="form-control hidden" id="quesid" name="quesid" value="'+value.ques_id+'"></td>'+
+                            '<td><span>'+value.ques_sl_id+'</span><input type="text" class="form-control hidden" id="quesid" name="quesid" value="'+value.ques_id+'"></td>'+
                             '<td>'+value.ques+'</td>'+
                             '<td>'+value.user_answer+'</td>'+
                             /*'<td><input type="text" class="form-control reviewMark" id="reviewMark" name="mark"></td>'+*/

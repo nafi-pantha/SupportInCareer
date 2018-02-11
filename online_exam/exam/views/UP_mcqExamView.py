@@ -43,6 +43,7 @@ def user_test_id(request):
             'test_id').filter(user_id=user_id,
                               test_id__subject_id=subject_id,
                               test_type=test_type)
+
         if testInfo:
             if test_type == '1':
                 questionCheck = McqQuestion.objects.filter(test_id__subject_id=subject_id)
@@ -84,7 +85,8 @@ def user_test_id(request):
                 if questionCheck:
                     if not intialTestID:
                         examTestID = testInfo[0]['test_id']
-                        reviewCheck = AdminReview.objects.values('test_id', 'is_reviewed').filter(test_id=examTestID)
+                        reviewCheck = AdminReview.objects.values('test_id', 'is_reviewed').filter(test_id=examTestID, user_id=user_id)
+                        print(reviewCheck)
                         if reviewCheck:
                             if not reviewCheck[0]['is_reviewed']:
                                 return JsonResponse({'status': 4})
@@ -115,10 +117,21 @@ def user_test_id(request):
                             if not nextTestID:
                                 return JsonResponse({'status': 3})
                             else:
-                                examTestID = nextTestID[0]['test_id']
-                                test_time = nextTestID[0]['test_totaltimes']
+                                reviewCheck = AdminReview.objects.values('test_id', 'is_reviewed').filter(
+                                    test_id=nextTestID[0]['test_id'], user_id=user_id)
+                                print(reviewCheck)
+                                if reviewCheck:
+                                    print(reviewCheck)
+                                    if not reviewCheck[0]['is_reviewed']:
+                                        return JsonResponse({'status': 4})
+                                    else:
+                                        examTestID = nextTestID[0]['test_id']
+                                        test_time = nextTestID[0]['test_totaltimes']
+                                else:
+                                    examTestID = nextTestID[0]['test_id']
+                                    test_time = nextTestID[0]['test_totaltimes']
                         else:
-                            reviewCheck = AdminReview.objects.values('test_id', 'is_reviewed').filter(test_id=failedTestIDInfo[0]['test_id'])
+                            reviewCheck = AdminReview.objects.values('test_id', 'is_reviewed').filter(test_id=failedTestIDInfo[0]['test_id'], user_id=user_id)
                             if reviewCheck:
                                 if not reviewCheck[0]['is_reviewed']:
                                     print(reviewCheck)

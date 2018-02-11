@@ -74,7 +74,7 @@ $(document).ready(function(){
                         }
                   },
             "columns": [
-                { "data": "ques_id" },
+                { "data": "ques_sl_no" },
                 { "data": "ques" },
                 { "data": "actual_marks" },
                 { "data": "user_answer" },

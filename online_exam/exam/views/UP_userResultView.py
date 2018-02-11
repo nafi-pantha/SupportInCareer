@@ -29,14 +29,14 @@ def getEssayResultDetails(request):
 
         cursor = connection.cursor()
         cursor.execute(
-            """SELECT A.id, A.essay_question_id_id, B.essay_question, A.user_answer, \
+            """SELECT A.id, A.essay_question_id_id, B.essay_question_id, B.essay_question, A.user_answer, \
                 A.individual_mark, A.suggestions, B.essay_question_marks \
                 FROM exam_useressayanswer A \
                 INNER JOIN exam_essayquestion B on B.id = A.essay_question_id_id \
                 AND B.test_id_id=A.test_id_id WHERE user_id=%s and B.test_id_id=%s""", [user_id, test_id])
         rows = cursor.fetchall()
         result = []
-        keys = ('id', 'ques_id', 'ques', 'user_answer', 'gained_marks', 'suggestions', 'actual_marks')
+        keys = ('id', 'ques_id', 'ques_sl_no', 'ques', 'user_answer', 'gained_marks', 'suggestions', 'actual_marks')
         for row in rows:
             result.append(dict(zip(keys, row)))
         print(result)

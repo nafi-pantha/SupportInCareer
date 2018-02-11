@@ -45,13 +45,13 @@ def getUserAnswerReview(request):
 
         cursor = connection.cursor()
         cursor.execute(
-            """SELECT A.id, A.essay_question_id_id, B.essay_question, A.user_answer, B.essay_question_marks \
+            """SELECT A.id, A.essay_question_id_id, B.essay_question_id, B.essay_question, A.user_answer, B.essay_question_marks \
               FROM exam_useressayanswer A \
               INNER JOIN exam_essayquestion B on B.id = A.essay_question_id_id \
               AND B.test_id_id=A.test_id_id WHERE user_id=%s and B.test_id_id=%s""", [user_id, test_id])
         rows = cursor.fetchall()
         result = []
-        keys = ('id', 'ques_id', 'ques', 'user_answer')
+        keys = ('id', 'ques_id', 'ques_sl_id', 'ques', 'user_answer')
         for row in rows:
             result.append(dict(zip(keys, row)))
         print(result);
