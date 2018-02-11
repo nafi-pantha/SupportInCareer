@@ -15,7 +15,7 @@ from exam.models import EssaySummary
 def essay_ques_info(request):
     if (request.method == "GET"):
         test_id = request.GET.get('test_id')
-        quesInfo = EssayQuestion.objects.values('essay_question_id', 'essay_question', 'essay_question_marks').filter(test_id=test_id)
+        quesInfo = EssayQuestion.objects.values('id','essay_question_id', 'essay_question', 'essay_question_marks').filter(test_id=test_id)
         return render(request, 'up_essayExamList.html', {'quesInfo': quesInfo})
     else:
         return HttpResponse("Problem")

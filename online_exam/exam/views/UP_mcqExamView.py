@@ -177,7 +177,7 @@ def get_user_result(request):
         test_id = request.GET.get('test_id')
         user_id = request.GET.get('user_id')
         usedTime = request.GET.get('usedTime')
-        totalQues = Test.objects.values('test_totalmarks', 'test_totaltimes', 'test_total_questions').filter(test_type=1)
+        totalQues = Test.objects.values('test_totalmarks', 'test_totaltimes', 'test_total_questions').filter(test_type=1, test_id=test_id)
         answers = UserMcqAnswer.objects.filter(test_id=test_id, user=user_id).annotate(
             is_correct=Case(
                 When(user_answer=F('mcq_question_id__mcq_right_answer'),
@@ -194,7 +194,7 @@ def get_user_result(request):
             gained_marks = answers[0]['right_answer']
         gained_percentage=(gained_marks/total_marks)*(100)
 
-        if gained_percentage >= 80.0:
+        if gained_percentage >= 84.0:
             result_status=1
             next_test_id=int(test_id)+10
         else:

@@ -32,7 +32,7 @@ def getEssayResultDetails(request):
             """SELECT A.id, A.essay_question_id_id, B.essay_question, A.user_answer, \
                 A.individual_mark, A.suggestions, B.essay_question_marks \
                 FROM exam_useressayanswer A \
-                INNER JOIN exam_essayquestion B on B.essay_question_id= A.essay_question_id_id \
+                INNER JOIN exam_essayquestion B on B.id = A.essay_question_id_id \
                 AND B.test_id_id=A.test_id_id WHERE user_id=%s and B.test_id_id=%s""", [user_id, test_id])
         rows = cursor.fetchall()
         result = []
