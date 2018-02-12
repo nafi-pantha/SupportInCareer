@@ -93,6 +93,9 @@ a {
 .padding_bot_20{
     padding-bottom: 20px;
 }
+.padding_bot_50{
+    padding-bottom: 50px;
+}
 .main_menu{
     /*margin-top: 20px;*/
     padding-left: 0px;
@@ -348,6 +351,13 @@ a.morelink {
     text-align: right;
     font-size: 1.25rem;
 }
+.copyright a{
+    color: #FFFFFF;
+}
+.copyright a:hover{
+    color: #6699FF;
+    cursor: pointer;
+}
 .design {
     color: #FFFFFF;
     line-height: 30px;
@@ -386,4 +396,7 @@ a.morelink {
 }
 .essayExamQuesList{
     margin-left: -15px;
+}
+.swal-wide{
+    width:850px !important;
 }

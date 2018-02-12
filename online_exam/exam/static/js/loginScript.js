@@ -11,9 +11,23 @@ $(document).ready(function(){
     });
     $('#registerLink').on('click' ,function(){
         $('.card').addClass('flipped');
+        var $this = $(this);
+        if($this.data('clicked')) {
+            resetRegSection();
+        }
+        else {
+            $this.data('clicked', true);
+        }
     });
 
     $('#loginLink').on('click' ,function(){
+        var $this = $(this);
+        if($this.data('clicked')) {
+            resetLoginSection();
+        }
+        else {
+            $this.data('clicked', true);
+        }
         $('.card').removeClass('flipped');
     });
 
@@ -102,12 +116,8 @@ $(document).ready(function(){
                 digits: true,
                 minlength: 11
             },
-            messages: {
-                email: {
-                    required: 'Please enter an email address',
-                    email: 'Please enter a <em>valid</em> email address',
-                    remote: $.validator.format("{0} is already associated with an account")
-                }
+            termsConditions: {
+                required: true
             }
         },submitHandler: function(form) {
             $.ajax({
@@ -125,6 +135,7 @@ $(document).ready(function(){
                             html: msgText,
                             showCloseButton: true,
                         });
+                        resetRegSection();
                     }
                     else{
                         swal({
@@ -135,9 +146,18 @@ $(document).ready(function(){
                             timer: 2000,
                             toast:true
                         });
+                        resetRegSection();
                     }
                 }
             });
+        },
+        messages: {
+            email: {
+                required: 'Please enter an email address',
+                email: 'Please enter a <em>valid</em> email address',
+                remote: $.validator.format("{0} is already associated with an account")
+            },
+            termsConditions: "Please indicate that you accept the Terms and Conditions"
         }
     });
 
@@ -167,6 +187,7 @@ $(document).ready(function(){
                             timer: 2000,
                             toast:true
                         });
+                        resetLoginSection();
                     }
                 }
             });
@@ -239,6 +260,30 @@ $(document).ready(function(){
         $('#newPass').val('');
         $('#newPassConfirm').val('');
         $('#changePassModal').modal('hide');
+        $(":input").closest('.form-group').removeClass('has-success');
+    }
+
+    $('.termsConditionsLink').on('click',function(){
+        termText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+        swal({
+            title: 'Terms and Conditions',
+            text: termText,
+            type: "info",
+            customClass: 'swal-wide',
+            showConfirmButton:true
+        });
+    });
+
+    function resetRegSection(){
+        var validator = $( "#regFrom" ).validate();
+        validator.resetForm();
+        $("input[type=text]").val("");
+        $(":input").closest('.form-group').removeClass('has-success');
+    }
+    function resetLoginSection(){
+        var validator = $( "#loginForm" ).validate();
+        validator.resetForm();
+        $("input[type=text]").val("");
         $(":input").closest('.form-group').removeClass('has-success');
     }
 });
