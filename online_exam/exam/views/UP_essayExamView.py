@@ -45,16 +45,28 @@ def essay_ans_submit(request):
                 UserEssayAnswer(user_id=user_id, test_id=Test.objects.get(pk=test_id),
                               essay_question_id=EssayQuestion.objects.get(pk=value['ques']),
                               user_answer=value['ans'],datetime=datetime.datetime.now()).save()
-            AdminReview(user_id=user_id, test_id=Test.objects.get(pk=test_id), is_reviewed=0, spend_time=usedTime,
+            delIfExistReview = AdminReview.objects.filter(user_id=user_id,test_id=test_id)
+            if not delIfExistReview:
+                AdminReview(user_id=user_id, test_id=Test.objects.get(pk=test_id), is_reviewed=0, spend_time=usedTime,
                         approver="Null", datetime=datetime.datetime.now()).save()
+            else:
+                delIfExistReview.delete()
+                AdminReview(user_id=user_id, test_id=Test.objects.get(pk=test_id), is_reviewed=0, spend_time=usedTime,
+                            approver="Null", datetime=datetime.datetime.now()).save()
         else:
             delIfExist.delete()
             for value in list:
                 UserEssayAnswer(user_id=user_id, test_id=Test.objects.get(pk=test_id),
                                 essay_question_id=EssayQuestion.objects.get(pk=value['ques']),
                                 user_answer=value['ans'],datetime=datetime.datetime.now()).save()
-            AdminReview(user_id=user_id, test_id=Test.objects.get(pk=test_id), is_reviewed=0, spend_time=usedTime,
-                        approver="Null", datetime=datetime.datetime.now()).save()
+            delIfExistReview = AdminReview.objects.filter(user_id=user_id, test_id=test_id)
+            if not delIfExistReview:
+                AdminReview(user_id=user_id, test_id=Test.objects.get(pk=test_id), is_reviewed=0, spend_time=usedTime,
+                            approver="Null", datetime=datetime.datetime.now()).save()
+            else:
+                delIfExistReview.delete()
+                AdminReview(user_id=user_id, test_id=Test.objects.get(pk=test_id), is_reviewed=0, spend_time=usedTime,
+                            approver="Null", datetime=datetime.datetime.now()).save()
         return JsonResponse({'status': '1'})
     else:
         return HttpResponse("Problem")
