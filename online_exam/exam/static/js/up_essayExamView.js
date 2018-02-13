@@ -85,7 +85,7 @@ $(document).ready(function() {
                         });
                     }
                     if(total <= 0){
-                        var time=(((mcqExamTest_time*60)-($('#mcqExamTimer').TimeCircles().getTime()))/60).toFixed(2);
+                        var time=(((essayExamTest_time*60)-($('#mcqExamTimer').TimeCircles().getTime()))/60).toFixed(2);
                         $('#mcqExamTimer').TimeCircles().destroy();
                         get_ans_submit(time);
                     }
