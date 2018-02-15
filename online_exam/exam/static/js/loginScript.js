@@ -127,8 +127,7 @@ $(document).ready(function(){
                 success: function(response) {
                     if(response.status=='1'){
                         msgText='<p>Please login to your email to activate the account</p>'+
-                                '<p>If you face any problem during activation or login please contact our admins.</p>'+
-                                '<p>Contact: 01727210244</p>';
+                                '<p>If you face any problem during activation or login please contact our admins.</p>';
                         swal({
                             title: 'Account created successfully!!!',
                             type: 'success',
@@ -264,7 +263,7 @@ $(document).ready(function(){
     }
 
     $('.termsConditionsLink').on('click',function(){
-        termText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+        termText = 'This site is developed only for self-study or practice and any kind of commercial use is strictly prohibited.The authority of supportincareer reserves all rights of editions & deletions of all information of this site in any time without showing any cause or notice to anyone';
         swal({
             title: 'Terms and Conditions',
             text: termText,

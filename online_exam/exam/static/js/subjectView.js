@@ -104,6 +104,7 @@ $(document).ready(function(){
                                 .val(row.mcq_total_test)
                         );
                     });
+                    $("#essayTotalTest").find('option').not(':first').remove();
                     $.each(response.essayResults,function(index,row){
                         $("#essayTotalTest")
                         .append(

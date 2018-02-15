@@ -188,7 +188,7 @@ $(document).ready(function(){
                              '<tr><td>Status: </td><td>'+passStatus+'</td></tr></table>';
                     if(response.result_list[0].result_status==0){
                         swal({
-                            title: 'Sorry!!! Please try again...',
+                            title: 'Thank You!!! Please try again...',
                             type: 'error',
                             html: statText,
                             showCloseButton: true,
