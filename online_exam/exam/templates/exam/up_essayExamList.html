@@ -11,7 +11,7 @@
                                   rows="3" id="word_count"></textarea>
                         <div class="after-amount col-sm-11">
                             Word: <span class="display_count">0</span>
-                            Words Left: <span class="word_left">50</span>
+                            Words Left: <span class="word_left">100</span>
                         </div>
                     </div>
                 </div>
@@ -45,15 +45,15 @@
         });
         $("textarea").on('keyup', function() {
             var words = this.value.match(/\S+/g).length;
-            if (words > 50) {
+            if (words > 100) {
                 // Split the string on first 200 words and rejoin on spaces
-                var trimmed = $(this).val().split(/\s+/, 50).join(" ");
+                var trimmed = $(this).val().split(/\s+/, 100).join(" ");
                 // Add a space at the end to keep new typing making new words
                 $(this).val(trimmed + " ");
             }
             else {
                 $(this).next('.after-amount').find('.display_count').text(words);
-                $(this).next('.after-amount').find('.word_left').text(50-words);
+                $(this).next('.after-amount').find('.word_left').text(100-words);
             }
         });
         $('.essay_carousel').on('changed.owl.carousel', function(event) {
