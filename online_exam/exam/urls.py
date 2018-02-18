@@ -71,8 +71,8 @@ urlpatterns = [
     url(r'^test_ques_no/$',views.getTestQuesNo,name='test_ques_no'),
 
     #email verification
-    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        views.activate, name='activate'),
+    # url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+    #     views.activate, name='activate'),
     #password reset
     url(r'^password_reset/$', auth_views.password_reset,
         {'template_name':'exam/password_reset_form.html',

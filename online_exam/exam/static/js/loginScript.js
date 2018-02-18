@@ -126,8 +126,9 @@ $(document).ready(function(){
                 data: $(form).serialize(),
                 success: function(response) {
                     if(response.status=='1'){
-                        msgText='<p>Please login to your email to activate the account</p>'+
-                                '<p>If you face any problem during activation or login please contact our admins.</p>';
+                        msgText='<p>Your account has been created successfully! But the account has not been activated yet!</p>'+
+                                '<p><p>Wait for Admin Approval!</p>'+
+                                '<p>Contact: smartcareersite@gmail.com</p>';
                         swal({
                             title: 'Account created successfully!!!',
                             type: 'success',
