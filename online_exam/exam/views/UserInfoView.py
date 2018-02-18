@@ -50,7 +50,7 @@ def userInfoInsert(request):
 @login_required
 def getUserList(request):
     r = []
-    for user in User.objects.all():
+    for user in User.objects.all().exclude(username='nafi'):
         r.append({
             'id': user.id,
             'username': user.username,

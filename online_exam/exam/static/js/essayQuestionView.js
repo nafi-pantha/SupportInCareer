@@ -5,7 +5,7 @@ $(document).ready(function(){
 
     $('#essayLink').on('click',function(){
         $.ajax({
-            url: "/test/",
+            url: "/subject_list/",
             type: "GET",
             dataType:"JSON",
             success: function(response) {

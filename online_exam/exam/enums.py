@@ -1,11 +1,16 @@
-from django.utils.translation import gettext as _
 from enumerify.enum import Enum
 
-class DaysChoice(Enum):
-    MONDAY = 0
-    TUESDAY = 1
-    WEDNESDAY = 2
-    THURSDAY = 3
-    FRIDAY = 4
-    SATURDAY = 5
-    SUNDAY = 6
+class ResponseMsg(Enum):
+    INSERT_SUCCESS = "Successfully Inserted!"
+    UPDATE_SUCCESS = "Successfully Updated!"
+    TRANSC_FAILED = "Please contact with the authorities!"
+    HTTP_ERROR_MSG = "Something went wrong while processing your request. Please contact with the authorities!"
+    BOOL_TRUE = "true"
+
+    #Subject Section
+    SUBJECT_USED = "This subject has already been used!"
+
+class ResponseStatusInt(Enum):
+    SUCCESS = 1
+    FAILURE = 0
+

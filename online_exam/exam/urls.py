@@ -10,11 +10,11 @@ urlpatterns = [
     url(r'^user_update/$',views.userUpdate,name='user_update'),
 
     #Subject Section
+    url(r'^subject_list/$',views.getAllSubjectList,name='test'),
     url(r'^subject_insert/$',views.subjectInsert,name='subject_insert'),
     url(r'^subjectname_Check/$',views.subjectAvailableCheck,name='subjectname_Check'),
 
     #Test Section
-    url(r'^test/$',views.getAllSubjectList,name='test'),
     url(r'^test_submit/$',views.testInfoInsert,name='test_submit'),
     url(r'^test_info/$',views.getTestInfo,name='test_info'),
     url(r'^test_available_check/$',views.testAvailableCheck,name='test_available_check'),

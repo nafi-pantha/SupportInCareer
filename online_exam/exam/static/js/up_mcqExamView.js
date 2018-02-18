@@ -7,7 +7,7 @@ $(document).ready(function(){
         else {
             $this.data('clicked', true);
             $.ajax({
-                url: "/test/",
+                url: "/subject_list/",
                 type: "GET",
                 dataType:"JSON",
                 success: function(response) {

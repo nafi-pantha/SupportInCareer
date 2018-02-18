@@ -3,7 +3,7 @@ $(document).ready(function(){
     $('#testLink').on('click',function(){
         getTestType();
         $.ajax({
-            url: "/test/",
+            url: "/subject_list/",
             type: "GET",
             dataType:"JSON",
             success: function(response) {
