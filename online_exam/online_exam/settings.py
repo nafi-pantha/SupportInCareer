@@ -136,6 +136,6 @@ LOGIN_REDIRECT_URL = 'home'
 # email verification
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'sajib.pantha@gmail.com'
-EMAIL_HOST_PASSWORD = '1104010123'
+EMAIL_HOST_USER = 'smartcareersite@gmail.com'
+EMAIL_HOST_PASSWORD = 'smart.career8188'
 EMAIL_PORT = 587
