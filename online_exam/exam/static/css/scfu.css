@@ -264,7 +264,7 @@ a.morelink {
 	outline: none;
 }
 
-.morecontent span {
+.essayExamQuesSummary .morecontent{
 	display: none;
 }
 .comment {

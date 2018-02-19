@@ -193,16 +193,20 @@ $(document).ready(function() {
         var content = $('.essayExamQuesSummary').html();
         if(content.length > 250) {
             var c = content.substr(0, showChar);
-            var h = content.substr(showChar-1, content.length - showChar);
-            var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="#" class="morelink">' + moretext + '</a></span>';
+            var h = content.substr(showChar, content.length - showChar);
+            var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span></span>'+
+                        '<a href="" class="morelink">' + moretext + '</a>';
             $('.essayExamQuesSummary').html(html);
         }
-        $(".morelink").click(function(){
+        $(".morelink").on('click', function(e){
+            e.preventDefault();
             if($(this).hasClass("less")) {
                 $(this).removeClass("less");
+                $('.moreellipses').show();
                 $(this).html(moretext);
             } else {
                 $(this).addClass("less");
+                $('.moreellipses').hide();
                 $(this).html(lesstext);
             }
             $(this).parent().prev().toggle();

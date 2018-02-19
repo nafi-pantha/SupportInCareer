@@ -16,6 +16,8 @@ from exam.models import UserResult
 from exam.models import UserMcqAnswer
 
 from exam.models import AdminReview
+from exam.models import EssayQuestion
+
 
 @login_required
 def test_info_list(request):
@@ -81,7 +83,7 @@ def user_test_id(request):
                 else:
                     return JsonResponse({'status': 6})
             else:
-                questionCheck = McqQuestion.objects.filter(test_id__subject_id=subject_id)
+                questionCheck = EssayQuestion.objects.filter(test_id__subject_id=subject_id)
                 if questionCheck:
                     if not intialTestID:
                         examTestID = testInfo[0]['test_id']
